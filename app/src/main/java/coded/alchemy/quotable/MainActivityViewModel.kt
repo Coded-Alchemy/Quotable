@@ -7,10 +7,20 @@ import coded.alchemy.quotable.data.QuoteResponse
 import coded.alchemy.quotable.network.QuotableApi
 import kotlinx.coroutines.launch
 
+/**
+ * MainActivityViewModel.kt
+ * @author Taji Abdullah
+ *
+ * @property quoteResponse
+ * */
 class MainActivityViewModel: ViewModel() {
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
 
+    /**
+     * Calls the [QuotableApi] to obta
+     * */
     fun getQuoteResponse() = viewModelScope.launch {
-        quoteResponse.value = QuotableApi.create().getQuotes()
+        val page = 2
+        quoteResponse.value = QuotableApi.create().getQuotes(page)
     }
 }

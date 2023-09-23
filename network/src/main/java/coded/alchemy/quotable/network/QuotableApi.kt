@@ -7,10 +7,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface QuotableApi {
-    @GET("quotes?page=1/")
-    suspend fun getQuotes(): QuoteResponse
+    @GET("quotes")
+    suspend fun getQuotes(@Query("page") page: Int): QuoteResponse
 
     companion object {
         private const val BASE_URL = "https://api.quotable.io/"

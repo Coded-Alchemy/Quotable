@@ -11,13 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
+    private lateinit var viewModel: MainActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         setContent {
             QuotableTheme {
                 // A surface container using the 'background' color from the theme
@@ -30,7 +33,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        val viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+
         viewModel.getQuoteResponse()
         viewModel.quoteResponse.observe(this) { response ->
             for (quote in response.results) {

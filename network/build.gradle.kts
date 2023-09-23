@@ -41,6 +41,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     // Test dependencies
     testImplementation("junit:junit:4.13.2")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1") // MockWebServer for mocking server responses
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1") // For testing coroutines
+
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
