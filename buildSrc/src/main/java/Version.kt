@@ -3,9 +3,9 @@
  * */
 object Version {
     const val appCompat = "1.6.1"
-    const val coreKtx = "1.9.0"
-    const val lifecycleRuntimeKtx = "2.6.1"
-    const val composeActivity = "1.7.0"
+    const val coreKtx = "1.12.0"
+    const val lifecycleRuntimeKtx = "2.6.2"
+    const val composeActivity = "1.7.2"
     const val composeBom = "2023.03.00"
     const val composeUi = "ui"
     const val composeGraphics = "ui-graphics"
