@@ -1,6 +1,7 @@
 package coded.alchemy.quotable
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 
 class MainActivity : ComponentActivity() {
+    private val logTag = this::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,6 +27,15 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                 }
+            }
+        }
+
+        val viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        viewModel.getQuoteResponse()
+        viewModel.quoteResponse.observe(this) { response ->
+            for (quote in response.results) {
+                Log.d(logTag, quote._id)
+                Log.d(logTag, quote.content)
             }
         }
     }
