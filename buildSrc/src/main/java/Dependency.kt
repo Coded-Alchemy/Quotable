@@ -16,6 +16,8 @@ object Dependency {
     const val navigation = "androidx.navigation:navigation-compose:${Version.navigation}"
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
+    const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.logInterceptor}"
     // Hilt
     const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.hilt}"

@@ -7,4 +7,6 @@ object TestDependency {
     const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
     const val composeBom = Dependency.composeBom
     const val composeUi = "androidx.compose.ui:${Version.composeUiTest}"
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer}"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.testCoroutines}"
 }

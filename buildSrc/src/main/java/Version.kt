@@ -1,5 +1,7 @@
 /**
  * Object to store version numbers of dependencies.
+ *
+ * @author Taji Abdullah
  * */
 object Version {
     const val appCompat = "1.6.1"
@@ -21,4 +23,7 @@ object Version {
     const val retrofit = "2.9.0"
     const val protoBuf = "0.9.4"
     const val hilt = "2.44"
+    const val logInterceptor = "4.10.0"
+    const val mockWebServer = "4.9.1"
+    const val testCoroutines = "1.6.4"
 }

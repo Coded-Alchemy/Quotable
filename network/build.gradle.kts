@@ -1,25 +1,25 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id(Plugin.androidLibrary)
+    id(Plugin.kotlinAndroid)
 }
 
 android {
-    namespace = "coded.alchemy.quotable.network"
-    compileSdk = 33
+    namespace = "${Config.nameSpace}.network"
+    compileSdk = Config.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Config.minSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        testInstrumentationRunner = Config.testInstrumentationRunner
+        consumerProguardFiles(Config.proGuardConsumer)
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(Config.proGuardFile),
+                Config.proGuardRules
             )
         }
     }
@@ -28,7 +28,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Config.jvmTarget
     }
 }
 
@@ -36,14 +36,12 @@ dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":data")))
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(Dependency.retrofit)
+    implementation(Dependency.gsonConverter)
+    implementation(Dependency.logInterceptor)
     // Test dependencies
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1") // MockWebServer for mocking server responses
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1") // For testing coroutines
-
-
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(TestDependency.jUnit)
+    testImplementation(TestDependency.mockWebServer) // MockWebServer for mocking server responses
+    testImplementation(TestDependency.coroutines) // For testing coroutines
+    androidTestImplementation(TestDependency.androidJUnit)
 }
