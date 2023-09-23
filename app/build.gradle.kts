@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "coded.alchemy.quotable"
+    namespace = Config.nameSpace
     compileSdk = 34
 
     defaultConfig {
