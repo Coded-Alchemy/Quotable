@@ -1,4 +1,4 @@
-package coded.alchemy.quotable
+package coded.alchemy.quotable.data
 
 import coded.alchemy.quotable.data.Quote
 import org.junit.Test
@@ -12,13 +12,13 @@ import org.junit.Before
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class QuoteUnitTest {
-    private lateinit var quote1: Quote
-    private lateinit var quote2: Quote
-    private lateinit var quote3: Quote
+    private lateinit var quote1: coded.alchemy.quotable.data.Quote
+    private lateinit var quote2: coded.alchemy.quotable.data.Quote
+    private lateinit var quote3: coded.alchemy.quotable.data.Quote
 
     @Before
     fun initTest() {
-        quote1 = Quote(
+        quote1 = coded.alchemy.quotable.data.Quote(
             _id = "1",
             author = "Author 1",
             content = "Content 1",
@@ -28,7 +28,7 @@ class QuoteUnitTest {
             date_added = "2023-09-21",
             date_modified = "2023-09-21"
         )
-        quote2 = Quote(
+        quote2 = coded.alchemy.quotable.data.Quote(
             _id = "2",
             author = "Author 2",
             content = "Content 2",
