@@ -40,6 +40,7 @@ dependencies {
     implementation(Dependency.roomRuntime)
     implementation(Dependency.roomKtx)
     implementation(Dependency.roomPaging)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     ksp(Dependency.roomCompiler)
     testImplementation(TestDependency.jUnit)
     testImplementation("org.testng:testng:6.9.6")
