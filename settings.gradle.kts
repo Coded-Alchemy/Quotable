@@ -17,3 +17,4 @@ rootProject.name = "Quotable"
 include(":app")
 include(":data")
 include(":network")
+include(":database")
