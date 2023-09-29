@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import coded.alchemy.qoutable.database.data.Quote
 
 @Dao
 interface QuoteDao {

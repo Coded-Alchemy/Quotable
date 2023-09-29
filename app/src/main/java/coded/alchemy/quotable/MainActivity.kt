@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import coded.alchemy.qoutable.database.QuotableDatabase
+import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +22,32 @@ class MainActivity : ComponentActivity() {
     private lateinit var viewModel: MainActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val database = Room.databaseBuilder(
+            applicationContext,
+            QuotableDatabase::class.java, QuotableDatabase::class.java.simpleName
+        ).build()
+
+        val quoteList = mutableListOf<Quote>()
+
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        viewModel.getQuoteResponse()
+        viewModel.quoteResponse.observe(this) { response ->
+            for (quote in response.results) {
+                quoteList.add(quote)
+                Log.d(logTag, quote._id)
+                Log.d(logTag, quote.content)
+            }
+        }
+
+//        database.quoteDao().insertAll(quoteList)
+//        Log.d(logTag, database.quoteDao().getAll().toString())
+
+
+
+
+
+
         setContent {
             QuotableTheme {
                 // A surface container using the 'background' color from the theme
@@ -28,17 +55,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting(getString(R.string.app_name))
                 }
-            }
-        }
-
-
-        viewModel.getQuoteResponse()
-        viewModel.quoteResponse.observe(this) { response ->
-            for (quote in response.results) {
-                Log.d(logTag, quote._id)
-                Log.d(logTag, quote.content)
             }
         }
     }

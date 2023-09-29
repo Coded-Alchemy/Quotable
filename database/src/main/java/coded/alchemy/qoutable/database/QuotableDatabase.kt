@@ -2,10 +2,9 @@ package coded.alchemy.qoutable.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import coded.alchemy.qoutable.database.data.Quote
 
 @Database(entities = [Quote::class], version = 1)
-@TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class QuotableDatabase : RoomDatabase() {
     abstract fun quoteDao(): QuoteDao
 }

@@ -1,4 +1,4 @@
-package coded.alchemy.qoutable.database
+package coded.alchemy.qoutable.database.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -21,11 +21,10 @@ import androidx.room.PrimaryKey
  * */
 @Entity
 data class Quote(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey val uid: Long,
     @ColumnInfo(name = "id") val _id: String,
     @ColumnInfo(name = "author") val author: String,
     @ColumnInfo(name = "content") val content: String,
-    @ColumnInfo(name = "tags") val tags: List<String>?,
     @ColumnInfo(name = "author_slug") val author_slug: String?,
     @ColumnInfo(name = "length") val length: Int?,
     @ColumnInfo(name = "date_added") val date_added: String?,

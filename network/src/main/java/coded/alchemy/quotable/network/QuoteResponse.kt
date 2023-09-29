@@ -1,4 +1,7 @@
-package coded.alchemy.quotable.data
+package coded.alchemy.quotable.network
+
+import coded.alchemy.qoutable.database.data.Quote
+
 /**
  * QuoteResponse.kt
  * @author Taji Abdullah
