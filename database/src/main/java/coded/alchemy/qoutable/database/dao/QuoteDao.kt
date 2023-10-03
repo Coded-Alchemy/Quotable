@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteWithTags
 import coded.alchemy.qoutable.database.data.Tag
@@ -11,18 +12,45 @@ import coded.alchemy.qoutable.database.data.Tag
 @Dao
 interface QuoteDao {
 
+    /**
+     * Add a [Quote] to the database.
+     * */
     @Insert
     suspend fun insertQuote(vararg quote: Quote)
 
+    /**
+     * Retrieve a [Quote] from the database.
+     * */
     @Query("SELECT * FROM quote WHERE quoteId = :id")
-    fun getQuoteById(id: Int): Quote
+    suspend fun getQuoteById(id: Long): Quote
 
+    /**
+     * Add a [Tag] to the database.
+     * */
     @Insert
     suspend fun insertTag(vararg tag: Tag)
 
-    @Transaction
-    @Query("SELECT * FROM Quote")
-    suspend fun getUsersWithPlaylistsAndSongs(): List<QuoteWithTags>
+    /**
+     * Retrieve a [Tag] from the database.
+     * */
+    @Query("SELECT * FROM tag WHERE tagId = :id")
+    suspend fun getTagById(id: Long): Tag
+
+    /**
+     * Add a [Author] to the database.
+     * */
+    @Insert
+    suspend fun insertAuthor(vararg author: Author)
+
+    /**
+     * Retrieve a [Author] from the database.
+     * */
+    @Query("SELECT * FROM author WHERE authorId = :id")
+    suspend fun getAuthorById(id: Long): Author
+
+//    @Transaction
+//    @Query("SELECT * FROM Quote")
+//    suspend fun getUsersWithPlaylistsAndSongs(): List<QuoteWithTags>
 
 //    @Update
 //    suspend fun updateQuotes(vararg quotes: Quote)
