@@ -46,7 +46,7 @@ class DataBaseTest {
             date_modified = null
         )
         dao.insertQuote(quote)
-        val storedQuote = dao.loadQuoteId(234)
+        val storedQuote = dao.getQuoteById(234)
         assertThat(storedQuote, equalTo(quote))
     }
 }

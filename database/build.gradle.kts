@@ -43,5 +43,7 @@ dependencies {
     testImplementation(TestDependency.jUnit)
     testImplementation("org.testng:testng:6.9.6")
     testImplementation(TestDependency.room)
+    testImplementation(TestDependency.coroutines)
     androidTestImplementation(TestDependency.androidJUnit)
+    androidTestImplementation("androidx.test:runner:1.5.2")
 }

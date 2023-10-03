@@ -1,15 +1,12 @@
 package coded.alchemy.qoutable.database.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteWithTags
 import coded.alchemy.qoutable.database.data.Tag
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface QuoteDao {
@@ -18,7 +15,7 @@ interface QuoteDao {
     suspend fun insertQuote(vararg quote: Quote)
 
     @Query("SELECT * FROM quote WHERE quoteId = :id")
-    fun loadQuoteId(id: Int): Flow<Quote>
+    fun getQuoteById(id: Int): Quote
 
     @Insert
     suspend fun insertTag(vararg tag: Tag)
