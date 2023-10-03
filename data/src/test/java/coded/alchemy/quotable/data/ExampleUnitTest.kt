@@ -1,4 +1,4 @@
-package coded.alchemy.qoutable.database
+package coded.alchemy.quotable.data
 
 import org.junit.Test
 

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,13 +35,18 @@ class MainActivity : ComponentActivity() {
         viewModel.getQuoteResponse()
         viewModel.quoteResponse.observe(this) { response ->
             for (quote in response.results) {
-                quoteList.add(quote)
                 Log.d(logTag, quote._id)
                 Log.d(logTag, quote.content)
+
+                QuoteRepository.getInstance(database.quoteDao()).insertQuote(quote)
+
+
+
+                quoteList.add(quote)
             }
         }
 
-//        database.quoteDao().insertAll(quoteList)
+
 //        Log.d(logTag, database.quoteDao().getAll().toString())
 
 

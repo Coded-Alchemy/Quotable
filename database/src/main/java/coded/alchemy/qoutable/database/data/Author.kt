@@ -5,7 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Tag(
-    @PrimaryKey @ColumnInfo(name = "tagId") val tagId: Long,
+data class Author(
+    @PrimaryKey @ColumnInfo(name = "id") val authorId: Long,
     @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "slug") val slug: String
 )
