@@ -2,6 +2,7 @@ plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
     id(Plugin.ksp)
+    id(Plugin.ktLint)
 }
 
 android {
