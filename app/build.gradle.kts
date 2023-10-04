@@ -63,7 +63,7 @@ dependencies {
     implementation(Dependency.composeGraphics)
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
-    implementation("androidx.room:room-ktx:2.5.2")
+    implementation(Dependency.roomKtx)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)

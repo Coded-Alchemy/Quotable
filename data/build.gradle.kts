@@ -8,7 +8,7 @@ android {
     compileSdk = Config.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Config.minSdk
 
         testInstrumentationRunner = Config.testInstrumentationRunner
         consumerProguardFiles(Config.proGuardConsumer)
