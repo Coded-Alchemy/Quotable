@@ -33,6 +33,7 @@ object Dependency {
     const val composeGraphics = "androidx.compose.ui:${Version.composeGraphics}"
     const val composeUiPreview = "androidx.compose.ui:${Version.composeUiPreview}"
     const val composeMaterial = "androidx.compose.material3:${Version.composeMaterial}"
+    // Navigation
     const val navigation = "androidx.navigation:navigation-compose:${Version.navigation}"
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"

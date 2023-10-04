@@ -64,7 +64,9 @@ dependencies {
     implementation(Dependency.composeGraphics)
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
+    // Added app dependencies
     implementation(Dependency.roomKtx)
+    implementation(Dependency.navigation)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)
