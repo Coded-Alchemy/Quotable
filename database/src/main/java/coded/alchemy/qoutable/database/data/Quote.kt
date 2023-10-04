@@ -1,10 +1,10 @@
-package coded.alchemy.quotable.data
+package coded.alchemy.qoutable.database.data
 
 /**
- * Quote.kt
+ * QuoteEntity.kt
  * @author Taji Abdullah
  *
- * This class represents Quote data.
+ * This class represents QuoteEntity data.
  * @property _id
  * @property author
  * @property content
@@ -19,8 +19,8 @@ data class Quote(
     val author: String,
     val content: String,
     val tags: List<String>,
-    val author_slug: String,
+    val authorSlug: String,
     val length: Int,
-    val date_added: String,
-    val date_modified: String
+    val dateAdded: String,
+    val dateModified: String
 )

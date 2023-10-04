@@ -58,7 +58,7 @@ class QuotableApiUnitTest {
                     {
                         "_id": "1",
                         "author": "Author 1",
-                        "content": "Quote 1",
+                        "content": "QuoteEntity 1",
                         "tags": [],
                         "authorSlug": "author-1",
                         "length": 42,
@@ -68,7 +68,7 @@ class QuotableApiUnitTest {
                     {
                         "_id": "2",
                         "author": "Author 2",
-                        "content": "Quote 2",
+                        "content": "QuoteEntity 2",
                         "tags": ["Tag1", "Tag2"],
                         "authorSlug": "author-2",
                         "length": 55,

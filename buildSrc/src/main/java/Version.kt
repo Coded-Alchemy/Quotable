@@ -26,4 +26,5 @@ object Version {
     const val logInterceptor = "4.10.0"
     const val mockWebServer = "4.9.1"
     const val testCoroutines = "1.6.4"
+    const val room = "2.5.2"
 }

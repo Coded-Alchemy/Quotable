@@ -34,7 +34,7 @@ android {
 
 dependencies {
     // Module dependency
-    implementation(project(mapOf("path" to ":data")))
+    implementation(project(mapOf("path" to ":database")))
     // Retrofit
     implementation(Dependency.retrofit)
     implementation(Dependency.gsonConverter)

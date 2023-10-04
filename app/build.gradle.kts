@@ -52,6 +52,7 @@ android {
 dependencies {
     // Module dependencies
     implementation(project(mapOf("path" to ":data")))
+    implementation(project(mapOf("path" to ":database")))
     implementation(project(mapOf("path" to ":network")))
     // Default app dependencies
     implementation(Dependency.coreKtx)
@@ -62,6 +63,7 @@ dependencies {
     implementation(Dependency.composeGraphics)
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
+    implementation("androidx.room:room-ktx:2.5.2")
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)

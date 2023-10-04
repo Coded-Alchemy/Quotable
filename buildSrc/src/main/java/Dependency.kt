@@ -2,6 +2,10 @@
  * Object to store dependencies.
  * */
 object Dependency {
+    //    object Version {
+//
+//    }
+
     const val appCompat = "androidx.appcompat:appcompat:${Version.appCompat}"
     // ktx
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtx}"
@@ -21,4 +25,9 @@ object Dependency {
     // Hilt
     const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.hilt}"
+    // Room
+    const val roomRuntime = "androidx.room:room-runtime:${Version.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Version.room}"
+    const val roomPaging = "androidx.room:room-paging:${Version.room}"
 }

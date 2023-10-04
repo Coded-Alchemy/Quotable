@@ -1,7 +1,5 @@
 package coded.alchemy.quotable.network
 
-import coded.alchemy.quotable.data.Quote
-import coded.alchemy.quotable.data.QuoteResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
