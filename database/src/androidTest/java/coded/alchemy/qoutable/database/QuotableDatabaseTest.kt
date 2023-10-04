@@ -6,7 +6,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
-import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.AuthorWithTaggedQuotes
+import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.QuoteWithTags
 import coded.alchemy.qoutable.database.data.Tag
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
@@ -37,15 +39,15 @@ class QuotableDatabaseTest {
     }
 
     /**
-     * Test [Quote] storage in the database.
+     * Test [QuoteEntity] storage in the database.
      * */
     @Test
     @Throws(Exception::class)
     fun storeQuote() = runBlocking {
         val id = 234L
 
-        // Create a Quote object and store it in the database.
-        val quote = Quote(
+        // Create a QuoteEntity object and store it in the database.
+        val quoteEntity = QuoteEntity(
             quoteId = id,
             authorId = 345,
             content = "yo yo yo",
@@ -53,11 +55,11 @@ class QuotableDatabaseTest {
             date_added = null,
             date_modified = null
         )
-        dao.insertQuote(quote)
+        dao.insertQuote(quoteEntity)
 
-        // Test the stored Quote object is the same as expected.
+        // Test the stored QuoteEntity object is the same as expected.
         val storedQuote = dao.getQuoteById(id)
-        assertThat(storedQuote, equalTo(quote))
+        assertThat(storedQuote, equalTo(quoteEntity))
     }
 
     /**
@@ -69,7 +71,7 @@ class QuotableDatabaseTest {
         val id = 546L
 
         // Create a Tag object and store it in the database.
-        val tag = Tag(tagId = id, name = "TestTag")
+        val tag = Tag(tagId = id, content = "TestTag")
         dao.insertTag(tag)
 
         // Test the stored Tag object is the same as expected.
@@ -92,5 +94,56 @@ class QuotableDatabaseTest {
         // Test the stored Tag object is the same as expected.
         val storedAuthor = dao.getAuthorById(id)
         assertThat(storedAuthor, equalTo(author))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun storeStuff() = runBlocking {
+        val authorId = 55L
+        val author = Author(authorId = authorId, name = "Test Driven", slug = "test_driven")
+
+        // Quotes
+        val quoteEntity1 = QuoteEntity(
+            quoteId = 55,
+            authorId = authorId,
+//            author = "Author 1",
+            content = "Content 1",
+//            tags = listOf("Tag1", "Tag2"),
+//            author_slug = "author1-slug",
+            length = 100,
+            date_added = "2023-09-21",
+            date_modified = "2023-09-21"
+        )
+        val quoteEntity2 = QuoteEntity(
+            quoteId = 56,
+            authorId = authorId,
+//            author = "Author 2",
+            content = "Content 2",
+//            tags = listOf("Tag3", "Tag4"),
+//            author_slug = "author2-slug",
+            length = 200,
+            date_added = "2023-09-22",
+            date_modified = "2023-09-22"
+        )
+
+
+        // Tags
+        val tag1 = Tag(tagId = 1, content = "TestTag1")
+        val tag2 = Tag(tagId = 2, content = "TestTag2")
+        val tagList = listOf(tag1, tag2)
+
+
+        val quoteWithTags1 = QuoteWithTags(quoteEntity1, tagList)
+        val quoteWithTags2 = QuoteWithTags(quoteEntity2, tagList)
+        val quoteWithTagsList = listOf(quoteWithTags1, quoteWithTags2)
+
+        val authorWithTaggedQuotes = AuthorWithTaggedQuotes(author = author, quoteWithTagsList)
+
+        dao.insertSomeStuff(authorWithTaggedQuotes)
+
+        val storedAuthor = dao.getAuthorById(55)
+
+        assertThat(storedAuthor, equalTo(author))
+
     }
 }

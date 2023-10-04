@@ -7,10 +7,10 @@ class TagTest {
 
     @Test
     fun `test author instantiation`() {
-        val tag = Tag(tagId = 56, name = "TestTag")
+        val tag = Tag(tagId = 56, content = "TestTag")
 
         Assert.assertNotNull(tag)
         Assert.assertEquals(56, tag.tagId)
-        Assert.assertEquals("TestTag", tag.name)
+        Assert.assertEquals("TestTag", tag.content)
     }
 }

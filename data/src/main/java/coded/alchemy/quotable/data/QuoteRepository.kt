@@ -1,7 +1,8 @@
 package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.QuoteDao
-import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.Author
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
 
 /**
@@ -15,14 +16,19 @@ import coded.alchemy.qoutable.database.data.Tag
 class QuoteRepository(private val dao: QuoteDao) {
 
     /**
-     * Insert a [Quote] into the database.
+     * Insert a [QuoteEntity] into the database.
      * */
-    suspend fun insertQuote(quote: Quote) = dao.insertQuote(quote)
+    suspend fun insertQuote(quoteEntity: QuoteEntity) = dao.insertQuote(quoteEntity)
 
     /**
      * Insert a [Tag] into the database.
      * */
     suspend fun insertTag(tag: Tag) = dao.insertTag(tag)
+
+    /**
+     * Insert a [Author] into the database.
+     * */
+    suspend fun insertAuthor(author: Author) = dao.insertAuthor(author)
 
     companion object {
         // For Singleton instantiation

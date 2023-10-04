@@ -1,6 +1,7 @@
 package coded.alchemy.quotable.network
 
 import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.QuoteEntity
 
 /**
  * QuoteResponse.kt
@@ -12,7 +13,7 @@ import coded.alchemy.qoutable.database.data.Quote
  * @property page
  * @property totalPages
  * @property lastItemIndex
- * @property results is a list of [Quote] objects
+ * @property results is a list of [QuoteEntity] objects
  * */
 data class QuoteResponse(
     val count: Int,

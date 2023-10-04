@@ -1,14 +1,10 @@
 package coded.alchemy.qoutable.database.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 /**
- * Quote.kt
+ * QuoteEntity.kt
+ * @author Taji Abdullah
  *
- * This class represents Quote data.
- *
+ * This class represents QuoteEntity data.
  * @property _id
  * @property author
  * @property content
@@ -17,15 +13,14 @@ import androidx.room.PrimaryKey
  * @property length
  * @property date_added
  * @property date_modified
- * @author Taji Abdullah
  * */
-@Entity
 data class Quote(
-    @PrimaryKey @ColumnInfo(name = "quoteId") val quoteId: Long,
-    @ColumnInfo(name = "authorId") val authorId: Long,
-    @ColumnInfo(name = "content") val content: String,
-//    @ColumnInfo(name = "author_slug") val author_slug: String?,
-    @ColumnInfo(name = "length") val length: Int?,
-    @ColumnInfo(name = "date_added") val date_added: String?,
-    @ColumnInfo(name = "date_modified") val date_modified: String?
+    val _id: String,
+    val author: String,
+    val content: String,
+    val tags: List<String>,
+    val authorSlug: String,
+    val length: Int,
+    val dateAdded: String,
+    val dateModified: String
 )

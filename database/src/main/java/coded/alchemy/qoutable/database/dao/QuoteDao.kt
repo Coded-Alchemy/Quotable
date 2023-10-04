@@ -2,32 +2,31 @@ package coded.alchemy.qoutable.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import coded.alchemy.qoutable.database.data.Author
-import coded.alchemy.qoutable.database.data.Quote
-import coded.alchemy.qoutable.database.data.QuoteWithTags
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
 
 @Dao
 interface QuoteDao {
 
     /**
-     * Add a [Quote] to the database.
+     * Add a [QuoteEntity] to the database.
      * */
-    @Insert
-    suspend fun insertQuote(vararg quote: Quote)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertQuote(vararg quoteEntity: QuoteEntity)
 
     /**
-     * Retrieve a [Quote] from the database.
+     * Retrieve a [QuoteEntity] from the database.
      * */
-    @Query("SELECT * FROM quote WHERE quoteId = :id")
-    suspend fun getQuoteById(id: Long): Quote
+    @Query("SELECT * FROM quoteEntity WHERE quoteId = :id")
+    suspend fun getQuoteById(id: Long): QuoteEntity
 
     /**
      * Add a [Tag] to the database.
      * */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTag(vararg tag: Tag)
 
     /**
@@ -39,7 +38,7 @@ interface QuoteDao {
     /**
      * Add a [Author] to the database.
      * */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAuthor(vararg author: Author)
 
     /**
@@ -48,22 +47,23 @@ interface QuoteDao {
     @Query("SELECT * FROM author WHERE authorId = :id")
     suspend fun getAuthorById(id: Long): Author
 
+
 //    @Transaction
-//    @Query("SELECT * FROM Quote")
+//    @Query("SELECT * FROM QuoteEntity")
 //    suspend fun getUsersWithPlaylistsAndSongs(): List<QuoteWithTags>
 
 //    @Update
-//    suspend fun updateQuotes(vararg quotes: Quote)
+//    suspend fun updateQuotes(vararg quoteEntities: QuoteEntity)
 //
 //    @Delete
-//    suspend fun delete(vararg quotes: Quote)
+//    suspend fun delete(vararg quoteEntities: QuoteEntity)
 //
-//    @Query("SELECT * FROM quote")
-//    suspend fun getAll(): List<Quote>
+//    @Query("SELECT * FROM quoteEntity")
+//    suspend fun getAll(): List<QuoteEntity>
 //
-//    @Query("SELECT * FROM quote WHERE uid IN (:quoteIds)")
-//    suspend fun loadAllByIds(quoteIds: IntArray): List<Quote>
+//    @Query("SELECT * FROM quoteEntity WHERE uid IN (:quoteIds)")
+//    suspend fun loadAllByIds(quoteIds: IntArray): List<QuoteEntity>
 //
-//    @Query("SELECT * FROM quote WHERE author LIKE :author")
-//    suspend fun findByAuthor(author: String): List<Quote>
+//    @Query("SELECT * FROM quoteEntity WHERE author LIKE :author")
+//    suspend fun findByAuthor(author: String): List<QuoteEntity>
 }

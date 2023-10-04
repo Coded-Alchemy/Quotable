@@ -1,11 +1,10 @@
 package coded.alchemy.qoutable.database.data
 
 import androidx.room.Embedded
-import androidx.room.Junction
 import androidx.room.Relation
 
 data class QuoteWithTags(
-    @Embedded val quote: Quote,
+    @Embedded val quoteEntity: QuoteEntity,
     @Relation(
         parentColumn = "quoteId",
         entityColumn = "tagId",

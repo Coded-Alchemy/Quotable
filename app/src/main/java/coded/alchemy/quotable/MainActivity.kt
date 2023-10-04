@@ -14,7 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
+import coded.alchemy.qoutable.database.data.Author
+import coded.alchemy.qoutable.database.data.AuthorWithTaggedQuotes
 import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.QuoteWithTags
+import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 
@@ -29,30 +34,38 @@ class MainActivity : ComponentActivity() {
             QuotableDatabase::class.java, QuotableDatabase::class.java.simpleName
         ).build()
 
-        val quoteList = mutableListOf<Quote>()
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         viewModel.getQuoteResponse()
         viewModel.quoteResponse.observe(this) { response ->
+            Log.d(logTag, response.toString())
+
             for (quote in response.results) {
-                Log.d(logTag, quote._id)
-                Log.d(logTag, quote.content)
 
-                QuoteRepository.getInstance(database.quoteDao()).insertQuote(quote)
+                val quoteEntity = QuoteEntity(
+                    quoteId = quote._id,
+                    authorId = null,
+                    content = quote.content,
+                    author_slug = quote.authorSlug,
+                    length = quote.length.toLong(),
+                    date_added = quote.dateAdded,
+                    date_modified = quote.dateModified
+                )
 
+                val author = Author(name = quote.author, slug = quote.authorSlug, authorId = null)
 
+                viewModel.storeQuote(dao = database.quoteDao(), quoteEntity = quoteEntity)
+                viewModel.storeAuthor(dao = database.quoteDao(), author = author)
 
-                quoteList.add(quote)
+                for (content in quote.tags) {
+                    viewModel.storeTag(
+                        dao = database.quoteDao(),
+                        tag = Tag(tagId = null, quoteId = quote._id, content = content)
+                    )
+                }
+
             }
         }
-
-
-//        Log.d(logTag, database.quoteDao().getAll().toString())
-
-
-
-
-
 
         setContent {
             QuotableTheme {
