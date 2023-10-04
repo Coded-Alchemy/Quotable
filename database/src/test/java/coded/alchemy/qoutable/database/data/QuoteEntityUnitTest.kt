@@ -18,23 +18,19 @@ class QuoteEntityUnitTest {
     @Before
     fun initTest() {
         quoteEntity1 = QuoteEntity(
-            quoteId = 1,
+            quoteId = "1",
             authorId = 1,
-//            author = "Author 1",
             content = "Content 1",
-//            tags = listOf("Tag1", "Tag2"),
-//            author_slug = "author1-slug",
+            author_slug = "author1-slug",
             length = 100,
             date_added = "2023-09-21",
             date_modified = "2023-09-21"
         )
         quoteEntity2 = QuoteEntity(
-            quoteId = 2,
+            quoteId = "2",
             authorId = 2,
-//            author = "Author 2",
             content = "Content 2",
-//            tags = listOf("Tag3", "Tag4"),
-//            author_slug = "author2-slug",
+            author_slug = "author2-slug",
             length = 200,
             date_added = "2023-09-22",
             date_modified = "2023-09-22"

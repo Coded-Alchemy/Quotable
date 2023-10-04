@@ -44,21 +44,22 @@ class QuotableDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun storeQuote() = runBlocking {
-        val id = 234L
+        val id = "234L"
 
         // Create a QuoteEntity object and store it in the database.
         val quoteEntity = QuoteEntity(
             quoteId = id,
             authorId = 345,
             content = "yo yo yo",
-            length = null,
+            author_slug = "author1-slug",
+            length = 45,
             date_added = null,
             date_modified = null
         )
         dao.insertQuote(quoteEntity)
 
         // Test the stored QuoteEntity object is the same as expected.
-        val storedQuote = dao.getQuoteById(id)
+        val storedQuote = dao.getQuoteById(id.toLong())
         assertThat(storedQuote, equalTo(quoteEntity))
     }
 
@@ -71,7 +72,7 @@ class QuotableDatabaseTest {
         val id = 546L
 
         // Create a Tag object and store it in the database.
-        val tag = Tag(tagId = id, content = "TestTag")
+        val tag = Tag(tagId = id, content = "TestTag", quoteId = "45654")
         dao.insertTag(tag)
 
         // Test the stored Tag object is the same as expected.
@@ -104,23 +105,23 @@ class QuotableDatabaseTest {
 
         // Quotes
         val quoteEntity1 = QuoteEntity(
-            quoteId = 55,
+            quoteId = "55",
             authorId = authorId,
 //            author = "Author 1",
             content = "Content 1",
 //            tags = listOf("Tag1", "Tag2"),
-//            author_slug = "author1-slug",
+            author_slug = "author1-slug",
             length = 100,
             date_added = "2023-09-21",
             date_modified = "2023-09-21"
         )
         val quoteEntity2 = QuoteEntity(
-            quoteId = 56,
+            quoteId = "56",
             authorId = authorId,
 //            author = "Author 2",
             content = "Content 2",
 //            tags = listOf("Tag3", "Tag4"),
-//            author_slug = "author2-slug",
+            author_slug = "author2-slug",
             length = 200,
             date_added = "2023-09-22",
             date_modified = "2023-09-22"
@@ -128,8 +129,8 @@ class QuotableDatabaseTest {
 
 
         // Tags
-        val tag1 = Tag(tagId = 1, content = "TestTag1")
-        val tag2 = Tag(tagId = 2, content = "TestTag2")
+        val tag1 = Tag(tagId = 1, content = "TestTag1", quoteId = "56")
+        val tag2 = Tag(tagId = 2, content = "TestTag2", quoteId = "57")
         val tagList = listOf(tag1, tag2)
 
 
@@ -139,7 +140,6 @@ class QuotableDatabaseTest {
 
         val authorWithTaggedQuotes = AuthorWithTaggedQuotes(author = author, quoteWithTagsList)
 
-        dao.insertSomeStuff(authorWithTaggedQuotes)
 
         val storedAuthor = dao.getAuthorById(55)
 
