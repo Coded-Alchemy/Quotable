@@ -7,6 +7,7 @@ object Plugin {
         const val androidLibrary = androidApp
         const val kotlinAndroid = "1.8.10"
         const val ksp = "1.8.10-1.0.9"
+        const val ktLint = "7.1.0"
     }
 
     const val androidApp = "com.android.application"
@@ -17,4 +18,5 @@ object Plugin {
     const val protoBuf = "com.google.protobuf"
     const val ksp = "com.google.devtools.ksp"
     const val hilt = "com.google.dagger.hilt.android"
+    const val ktLint = "org.jlleitschuh.gradle.ktlint"
 }
