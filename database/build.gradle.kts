@@ -38,12 +38,13 @@ dependencies {
     implementation(Dependency.roomRuntime)
     implementation(Dependency.roomKtx)
     implementation(Dependency.roomPaging)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    implementation(Dependency.serialization)
     ksp(Dependency.roomCompiler)
+    // Test Dependencies
     testImplementation(TestDependency.jUnit)
-    testImplementation("org.testng:testng:6.9.6")
+    testImplementation(TestDependency.testNg)
     testImplementation(TestDependency.room)
     testImplementation(TestDependency.coroutines)
     androidTestImplementation(TestDependency.androidJUnit)
-    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation(TestDependency.testRunner)
 }
