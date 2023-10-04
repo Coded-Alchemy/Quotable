@@ -4,4 +4,5 @@ plugins {
     id(Plugin.androidLibrary) version Plugin.Version.androidLibrary apply false
     id(Plugin.kotlinAndroid) version Plugin.Version.kotlinAndroid apply false
     id(Plugin.ksp) version Plugin.Version.ksp apply false
+    id(Plugin.ktLint) version Plugin.Version.ktLint apply false
 }
