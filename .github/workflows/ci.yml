@@ -31,7 +31,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+          
       # Run KtLint Formatting
       - name: Run ktlint format
         run: ./gradlew ktlintFormat
