@@ -67,6 +67,7 @@ dependencies {
     // Added app dependencies
     implementation(Dependency.roomKtx)
     implementation(Dependency.navigation)
+    implementation(Dependency.navRunTime)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)

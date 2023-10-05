@@ -1,4 +1,4 @@
-package coded.alchemy.quotable
+package coded.alchemy.quotable.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
-import coded.alchemy.qoutable.database.data.AuthorWithTaggedQuotes
-import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.data.QuoteRepository

@@ -4,24 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.Author
-import coded.alchemy.qoutable.database.data.AuthorWithTaggedQuotes
-import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.qoutable.database.data.QuoteWithTags
 import coded.alchemy.qoutable.database.data.Tag
-import coded.alchemy.quotable.data.QuoteRepository
+import coded.alchemy.quotable.compose.QuotableApp
 import coded.alchemy.quotable.ui.theme.QuotableTheme
+import coded.alchemy.quotable.viewModel.MainActivityViewModel
 
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
@@ -69,30 +60,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             QuotableTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting(getString(R.string.app_name))
-                }
+                QuotableApp()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    QuotableTheme {
-        Greeting("Android")
     }
 }
