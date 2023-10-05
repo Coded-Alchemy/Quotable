@@ -9,7 +9,7 @@ data class TagWithQuotes(
     @Relation(
         parentColumn = "tagId",
         entityColumn = "quoteID",
-        associateBy = Junction(QuoteTagRef::class)
+        associateBy = Junction(QuoteTagRef::class),
     )
-    val quoteEntities: List<QuoteEntity>
+    val quoteEntities: List<QuoteEntity>,
 )

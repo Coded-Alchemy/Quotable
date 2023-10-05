@@ -10,5 +10,5 @@ data class QuoteWithTags(
         entityColumn = "tagId",
 //        associateBy = Junction(QuoteTagRef::class)
     )
-    val tags: List<Tag>
+    val tags: List<Tag>,
 )
