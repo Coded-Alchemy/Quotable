@@ -1,7 +1,10 @@
+
 plugins {
     id(Plugin.androidApp)
     id(Plugin.kotlinAndroid)
     id(Plugin.ktLint)
+    id(Plugin.ksp)
+    id(Plugin.hilt)
 }
 
 android {
@@ -65,6 +68,8 @@ dependencies {
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
     implementation(Dependency.roomKtx)
+    implementation("com.google.dagger:hilt-android:2.44.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.44.2")
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)
@@ -73,4 +78,8 @@ dependencies {
     androidTestImplementation(TestDependency.composeUi)
     debugImplementation(DebugDependency.composeUiTooling)
     debugImplementation(DebugDependency.composeTestManifest)
+}
+
+ksp {
+//    correctErrorTypes = true
 }

@@ -18,7 +18,9 @@ import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.ui.theme.QuotableTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
     private lateinit var viewModel: MainActivityViewModel
