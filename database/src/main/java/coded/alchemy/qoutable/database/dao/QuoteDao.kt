@@ -23,6 +23,9 @@ interface QuoteDao {
     @Query("SELECT * FROM quoteEntity WHERE quoteId = :id")
     suspend fun getQuoteById(id: Long): QuoteEntity
 
+    @Query("SELECT * FROM quoteEntity")
+    suspend fun getQuotes(): List<QuoteEntity>
+
     /**
      * Add a [Tag] to the database.
      * */

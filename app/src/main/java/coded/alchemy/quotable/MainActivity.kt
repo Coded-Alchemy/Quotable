@@ -17,6 +17,7 @@ import coded.alchemy.quotable.viewModel.MainActivityViewModel
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var list: List<QuoteEntity>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,10 +59,15 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        viewModel.getQuotes(database.quoteDao())
+        viewModel.quoteList.observe(this) { quoteList ->
+            list = quoteList
+        }
+
         setContent {
-            QuotableTheme {
-                QuotableApp()
-            }
+                QuotableTheme {
+//                    QuotableApp(list)
+                }
         }
     }
 }

@@ -1,6 +1,7 @@
 package coded.alchemy.quotable.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,7 @@ import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * MainActivityViewModel.kt
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 class MainActivityViewModel: ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
+    val quoteList: MutableLiveData<List<QuoteEntity>> = MutableLiveData()
 
     /**
      * Calls the [QuotableApi] to obta
@@ -37,6 +40,16 @@ class MainActivityViewModel: ViewModel() {
         Log.d(logTag, "storeQuote: $quoteEntity")
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
     }
+
+    fun getQuotes(dao: QuoteDao): LiveData<List<QuoteEntity>>  {
+        viewModelScope.launch {
+            val quotes = QuoteRepository.getInstance(dao).getQuotes()
+            Log.d(logTag, "getQuotes: $quotes")
+            quoteList.postValue(quotes)
+        }
+        return quoteList
+    }
+
 
     fun storeAuthor(dao: QuoteDao, author: Author) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeAuthor: $author")
