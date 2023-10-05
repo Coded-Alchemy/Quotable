@@ -48,6 +48,28 @@ android {
             excludes += Config.excludes
         }
     }
+    testOptions {
+        managedDevices {
+            devices {
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api30").apply {
+                    device = "Pixel 2"  // Use device profiles you typically see in Android Studio.
+                    apiLevel = 30   // Use only API levels 27 and higher.
+                    systemImageSource = "aosp"  // To include Google services, use "google".
+                }
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("nexus9api30").apply {
+                    device = "Nexus 9"
+                    apiLevel = 30
+                    systemImageSource = "aosp"
+                }
+                groups {
+                    maybeCreate("phoneAndTablet").apply {
+                        targetDevices.add(devices["pixel2api30"])
+                        targetDevices.add(devices["nexus9api30"])
+                    }
+                }
+            }
+        }
+    }
 }
 
 dependencies {
