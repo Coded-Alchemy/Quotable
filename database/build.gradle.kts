@@ -21,7 +21,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile(Config.proGuardFile),
-                Config.proGuardRules,
+                Config.proGuardRules
             )
         }
     }

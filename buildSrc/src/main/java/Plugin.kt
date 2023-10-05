@@ -7,7 +7,7 @@ object Plugin {
         const val androidLibrary = androidApp
         const val kotlinAndroid = "1.8.10"
         const val ksp = "1.8.10-1.0.9"
-        const val ktLint = "7.1.0"
+        const val ktLint = "11.3.1"
     }
 
     const val androidApp = "com.android.application"

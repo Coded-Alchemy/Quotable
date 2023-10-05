@@ -38,7 +38,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeQuote(
         dao: QuoteDao,
-        quoteEntity: QuoteEntity,
+        quoteEntity: QuoteEntity
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeQuote: $quoteEntity")
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
@@ -55,7 +55,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeAuthor(
         dao: QuoteDao,
-        author: Author,
+        author: Author
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeAuthor: $author")
         QuoteRepository.getInstance(dao).insertAuthor(author)
@@ -63,7 +63,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeTag(
         dao: QuoteDao,
-        tag: Tag,
+        tag: Tag
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeTag: $tag")
         QuoteRepository.getInstance(dao).insertTag(tag)

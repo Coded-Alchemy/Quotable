@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             Room.databaseBuilder(
                 applicationContext,
                 QuotableDatabase::class.java,
-                QuotableDatabase::class.java.simpleName,
+                QuotableDatabase::class.java.simpleName
             ).build()
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         author_slug = quote.authorSlug,
                         length = quote.length.toLong(),
                         date_added = quote.dateAdded,
-                        date_modified = quote.dateModified,
+                        date_modified = quote.dateModified
                     )
 
                 val author = Author(name = quote.author, slug = quote.authorSlug, authorId = null)
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 for (content in quote.tags) {
                     viewModel.storeTag(
                         dao = database.quoteDao(),
-                        tag = Tag(tagId = null, quoteId = quote._id, content = content),
+                        tag = Tag(tagId = null, quoteId = quote._id, content = content)
                     )
                 }
             }

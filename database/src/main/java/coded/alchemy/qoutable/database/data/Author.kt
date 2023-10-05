@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Author(
-    @PrimaryKey @ColumnInfo(name = "authorId") val authorId: Long?,
+    @PrimaryKey
+    @ColumnInfo(name = "authorId")
+    val authorId: Long?,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "slug") val slug: String,
+    @ColumnInfo(name = "slug") val slug: String
 )

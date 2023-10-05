@@ -26,7 +26,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile(Config.proGuardFile),
-                Config.proGuardRules,
+                Config.proGuardRules
             )
         }
     }
@@ -52,9 +52,9 @@ android {
         managedDevices {
             devices {
                 maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api30").apply {
-                    device = "Pixel 2"  // Use device profiles you typically see in Android Studio.
-                    apiLevel = 30   // Use only API levels 27 and higher.
-                    systemImageSource = "aosp"  // To include Google services, use "google".
+                    device = "Pixel 2" // Use device profiles you typically see in Android Studio.
+                    apiLevel = 30 // Use only API levels 27 and higher.
+                    systemImageSource = "aosp" // To include Google services, use "google".
                 }
                 maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("nexus9api30").apply {
                     device = "Nexus 9"

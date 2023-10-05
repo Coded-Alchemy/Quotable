@@ -28,7 +28,8 @@ class QuotableDatabaseTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db =
             Room.inMemoryDatabaseBuilder(
-                context, QuotableDatabase::class.java,
+                context,
+                QuotableDatabase::class.java
             ).build()
         dao = db.quoteDao()
     }
@@ -57,7 +58,7 @@ class QuotableDatabaseTest {
                     author_slug = "author1-slug",
                     length = 45,
                     date_added = null,
-                    date_modified = null,
+                    date_modified = null
                 )
             dao.insertQuote(quoteEntity)
 

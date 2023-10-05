@@ -17,7 +17,7 @@ fun QuotableApp(quoteEntities: List<QuoteEntity>) {
 @Composable
 fun QuotableNavHost(
     navController: NavHostController,
-    quoteEntities: List<QuoteEntity>,
+    quoteEntities: List<QuoteEntity>
 ) {
     val quoteListScreen = "quoteListScreen"
 
