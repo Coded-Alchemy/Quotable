@@ -14,7 +14,6 @@ import coded.alchemy.qoutable.database.data.Tag
  * @author Taji Abdullah
  * */
 class QuoteRepository(private val dao: QuoteDao) {
-
     /**
      * Insert a [QuoteEntity] into the database.
      * */

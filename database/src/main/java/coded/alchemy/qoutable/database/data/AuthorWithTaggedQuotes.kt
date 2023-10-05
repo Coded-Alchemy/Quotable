@@ -7,7 +7,7 @@ data class AuthorWithTaggedQuotes(
     @Embedded val author: Author,
     @Relation(
         parentColumn = "authorId",
-        entityColumn = "quoteId"
+        entityColumn = "quoteId",
     )
-    val quotes: List<QuoteWithTags>
+    val quotes: List<QuoteWithTags>,
 )

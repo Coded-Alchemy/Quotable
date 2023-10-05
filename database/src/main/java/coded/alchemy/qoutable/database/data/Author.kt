@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class Author(
     @PrimaryKey @ColumnInfo(name = "authorId") val authorId: Long?,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "slug") val slug: String
+    @ColumnInfo(name = "slug") val slug: String,
 )

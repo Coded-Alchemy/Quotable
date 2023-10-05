@@ -4,7 +4,6 @@ import org.junit.Assert
 import org.junit.Test
 
 class TagTest {
-
     @Test
     fun `test author instantiation`() {
         val tag = Tag(tagId = 56, content = "TestTag", quoteId = "fhdhifd")

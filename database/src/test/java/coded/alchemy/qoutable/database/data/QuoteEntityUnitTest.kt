@@ -1,9 +1,9 @@
 package coded.alchemy.qoutable.database.data
 
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Test
 
 /**
  * Unit test for the [QuoteEntity] class.
@@ -17,24 +17,26 @@ class QuoteEntityUnitTest {
 
     @Before
     fun initTest() {
-        quoteEntity1 = QuoteEntity(
-            quoteId = "1",
-            authorId = 1,
-            content = "Content 1",
-            author_slug = "author1-slug",
-            length = 100,
-            date_added = "2023-09-21",
-            date_modified = "2023-09-21"
-        )
-        quoteEntity2 = QuoteEntity(
-            quoteId = "2",
-            authorId = 2,
-            content = "Content 2",
-            author_slug = "author2-slug",
-            length = 200,
-            date_added = "2023-09-22",
-            date_modified = "2023-09-22"
-        )
+        quoteEntity1 =
+            QuoteEntity(
+                quoteId = "1",
+                authorId = 1,
+                content = "Content 1",
+                author_slug = "author1-slug",
+                length = 100,
+                date_added = "2023-09-21",
+                date_modified = "2023-09-21",
+            )
+        quoteEntity2 =
+            QuoteEntity(
+                quoteId = "2",
+                authorId = 2,
+                content = "Content 2",
+                author_slug = "author2-slug",
+                length = 200,
+                date_added = "2023-09-22",
+                date_modified = "2023-09-22",
+            )
         quoteEntity3 = quoteEntity1
     }
 

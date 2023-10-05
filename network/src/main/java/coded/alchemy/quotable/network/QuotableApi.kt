@@ -9,7 +9,9 @@ import retrofit2.http.Query
 
 interface QuotableApi {
     @GET("quotes")
-    suspend fun getQuotes(@Query("page") page: Int): QuoteResponse
+    suspend fun getQuotes(
+        @Query("page") page: Int,
+    ): QuoteResponse
 
     companion object {
         private const val BASE_URL = "https://api.quotable.io/"
@@ -17,9 +19,10 @@ interface QuotableApi {
         fun create(): QuotableApi {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
+            val client =
+                OkHttpClient.Builder()
+                    .addInterceptor(logger)
+                    .build()
 
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)

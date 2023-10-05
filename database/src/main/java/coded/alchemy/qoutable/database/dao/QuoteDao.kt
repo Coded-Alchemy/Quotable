@@ -10,7 +10,6 @@ import coded.alchemy.qoutable.database.data.Tag
 
 @Dao
 interface QuoteDao {
-
     /**
      * Add a [QuoteEntity] to the database.
      * */
@@ -46,7 +45,6 @@ interface QuoteDao {
      * */
     @Query("SELECT * FROM author WHERE authorId = :id")
     suspend fun getAuthorById(id: Long): Author
-
 
 //    @Transaction
 //    @Query("SELECT * FROM QuoteEntity")

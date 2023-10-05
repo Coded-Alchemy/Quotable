@@ -27,5 +27,5 @@ data class QuoteEntity(
     @ColumnInfo(name = "author_slug") val author_slug: String?,
     @ColumnInfo(name = "length") val length: Long,
     @ColumnInfo(name = "date_added") val date_added: String?,
-    @ColumnInfo(name = "date_modified") val date_modified: String?
+    @ColumnInfo(name = "date_modified") val date_modified: String?,
 )

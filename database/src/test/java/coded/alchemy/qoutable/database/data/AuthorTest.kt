@@ -9,7 +9,6 @@ import org.junit.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class AuthorTest {
-
     @Test
     fun `test author instantiation`() {
         val author = Author(authorId = 456, name = "Test Driven", slug = "test_driven")
