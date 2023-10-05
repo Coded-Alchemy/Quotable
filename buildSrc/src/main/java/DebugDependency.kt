@@ -2,7 +2,6 @@
  * Object that stores debug dependencies.
  * */
 object DebugDependency {
-
     object Version {
         const val composeUiTooling = "ui-tooling"
         const val composeTestManifest = "ui-test-manifest"

@@ -9,10 +9,10 @@ package coded.alchemy.qoutable.database.data
  * @property author
  * @property content
  * @property tags
- * @property author_slug
+ * @property authorSlug
  * @property length
- * @property date_added
- * @property date_modified
+ * @property dateAdded
+ * @property dateModified
  * */
 data class Quote(
     val _id: String,
@@ -22,5 +22,5 @@ data class Quote(
     val authorSlug: String,
     val length: Int,
     val dateAdded: String,
-    val dateModified: String
+    val dateModified: String,
 )

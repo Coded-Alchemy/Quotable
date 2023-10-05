@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
  *
  * @property quoteResponse
  * */
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel : ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
     val quoteList: MutableLiveData<List<QuoteEntity>> = MutableLiveData()
@@ -30,13 +30,17 @@ class MainActivityViewModel: ViewModel() {
     /**
      * Calls the [QuotableApi] to obta
      * */
-    fun getQuoteResponse() = viewModelScope.launch {
-        val page = 2
-        quoteResponse.value = QuotableApi.create().getQuotes(page)
-        Log.d(logTag, "getQuoteResponse: ${quoteResponse.value}")
-    }
+    fun getQuoteResponse() =
+        viewModelScope.launch {
+            val page = 2
+            quoteResponse.value = QuotableApi.create().getQuotes(page)
+            Log.d(logTag, "getQuoteResponse: ${quoteResponse.value}")
+        }
 
-    fun storeQuote(dao: QuoteDao, quoteEntity: QuoteEntity) = viewModelScope.launch(Dispatchers.IO) {
+    fun storeQuote(
+        dao: QuoteDao,
+        quoteEntity: QuoteEntity,
+    ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeQuote: $quoteEntity")
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
     }
@@ -56,7 +60,10 @@ class MainActivityViewModel: ViewModel() {
         QuoteRepository.getInstance(dao).insertAuthor(author)
     }
 
-    fun storeTag(dao: QuoteDao, tag: Tag) = viewModelScope.launch(Dispatchers.IO) {
+    fun storeTag(
+        dao: QuoteDao,
+        tag: Tag,
+    ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeTag: $tag")
         QuoteRepository.getInstance(dao).insertTag(tag)
     }

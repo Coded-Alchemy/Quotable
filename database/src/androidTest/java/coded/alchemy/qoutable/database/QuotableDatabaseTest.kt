@@ -28,8 +28,10 @@ class QuotableDatabaseTest {
     @Before
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-            context, QuotableDatabase::class.java).build()
+        db =
+            Room.inMemoryDatabaseBuilder(
+                context, QuotableDatabase::class.java,
+            ).build()
         dao = db.quoteDao()
     }
 
@@ -44,59 +46,63 @@ class QuotableDatabaseTest {
      * */
     @Test
     @Throws(Exception::class)
-    fun storeQuote() = runBlocking {
-        val id = "234"
+    fun storeQuote() =
+        runBlocking {
+            val id = "234L"
 
-        // Create a QuoteEntity object and store it in the database.
-        val quoteEntity = QuoteEntity(
-            quoteId = id,
-            authorId = 345,
-            content = "yo yo yo",
-            author_slug = "author1-slug",
-            length = 45,
-            date_added = null,
-            date_modified = null
-        )
-        dao.insertQuote(quoteEntity)
+            // Create a QuoteEntity object and store it in the database.
+            val quoteEntity =
+                QuoteEntity(
+                    quoteId = id,
+                    authorId = 345,
+                    content = "yo yo yo",
+                    author_slug = "author1-slug",
+                    length = 45,
+                    date_added = null,
+                    date_modified = null,
+                )
+            dao.insertQuote(quoteEntity)
 
-        // Test the stored QuoteEntity object is the same as expected.
-        val storedQuote = dao.getQuoteById(id.toLong())
-        assertThat(storedQuote, equalTo(quoteEntity))
-    }
+            // Test the stored QuoteEntity object is the same as expected.
+            val storedQuote = dao.getQuoteById(id.toLong())
+            assertThat(storedQuote, equalTo(quoteEntity))
+        }
 
     /**
      * Test [Tag] storage in the database.
      * */
     @Test
     @Throws(Exception::class)
-    fun storeTag() = runBlocking {
-        val id = 546L
+    fun storeTag() =
+        runBlocking {
+            val id = 546L
 
-        // Create a Tag object and store it in the database.
-        val tag = Tag(tagId = id, content = "TestTag", quoteId = "45654")
-        dao.insertTag(tag)
+            // Create a Tag object and store it in the database.
+            val tag = Tag(tagId = id, content = "TestTag", quoteId = "45654")
+            dao.insertTag(tag)
 
-        // Test the stored Tag object is the same as expected.
-        val storedTag = dao.getTagById(id)
-        assertThat(storedTag, equalTo(tag))
-    }
+            // Test the stored Tag object is the same as expected.
+            val storedTag = dao.getTagById(id)
+            assertThat(storedTag, equalTo(tag))
+        }
 
     /**
      * Test [Author] storage in the database.
      * */
     @Test
     @Throws(Exception::class)
-    fun storeAuthor() = runBlocking {
-        val id = 432L
+    fun storeAuthor() =
+        runBlocking {
+            val id = 432L
 
-        // Create a Tag object and store it in the database.
-        val author = Author(authorId = id, name = "Test Driven", slug = "test_driven")
-        dao.insertAuthor(author)
+            // Create a Tag object and store it in the database.
+            val author = Author(authorId = id, name = "Test Driven", slug = "test_driven")
+            dao.insertAuthor(author)
 
-        // Test the stored Tag object is the same as expected.
-        val storedAuthor = dao.getAuthorById(id)
-        assertThat(storedAuthor, equalTo(author))
-    }
+            // Test the stored Tag object is the same as expected.
+            val storedAuthor = dao.getAuthorById(id)
+            assertThat(storedAuthor, equalTo(author))
+        }
 
     @Test
     @Throws(Exception::class)

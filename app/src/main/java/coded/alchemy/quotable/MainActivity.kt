@@ -18,14 +18,16 @@ class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var list: List<QuoteEntity>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val database = Room.databaseBuilder(
-            applicationContext,
-            QuotableDatabase::class.java, QuotableDatabase::class.java.simpleName
-        ).build()
-
+        val database =
+            Room.databaseBuilder(
+                applicationContext,
+                QuotableDatabase::class.java,
+                QuotableDatabase::class.java.simpleName,
+            ).build()
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         viewModel.getQuoteResponse()
@@ -33,16 +35,16 @@ class MainActivity : ComponentActivity() {
             Log.d(logTag, response.toString())
 
             for (quote in response.results) {
-
-                val quoteEntity = QuoteEntity(
-                    quoteId = quote._id,
-                    authorId = null,
-                    content = quote.content,
-                    author_slug = quote.authorSlug,
-                    length = quote.length.toLong(),
-                    date_added = quote.dateAdded,
-                    date_modified = quote.dateModified
-                )
+                val quoteEntity =
+                    QuoteEntity(
+                        quoteId = quote._id,
+                        authorId = null,
+                        content = quote.content,
+                        author_slug = quote.authorSlug,
+                        length = quote.length.toLong(),
+                        date_added = quote.dateAdded,
+                        date_modified = quote.dateModified,
+                    )
 
                 val author = Author(name = quote.author, slug = quote.authorSlug, authorId = null)
 
@@ -52,10 +54,9 @@ class MainActivity : ComponentActivity() {
                 for (content in quote.tags) {
                     viewModel.storeTag(
                         dao = database.quoteDao(),
-                        tag = Tag(tagId = null, quoteId = quote._id, content = content)
+                        tag = Tag(tagId = null, quoteId = quote._id, content = content),
                     )
                 }
-
             }
         }
 
