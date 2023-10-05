@@ -36,6 +36,6 @@ android {
 dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":database")))
-    testImplementation(TestDependency.jUnit)
+    testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
 }

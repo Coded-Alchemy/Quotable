@@ -69,7 +69,7 @@ dependencies {
     implementation(Dependency.navigation)
     implementation(Dependency.navRunTime)
     // Test Dependencies
-    testImplementation(TestDependency.jUnit)
+    testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
     androidTestImplementation(TestDependency.espressoCore)
     androidTestImplementation(platform(TestDependency.composeBom))

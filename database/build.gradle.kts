@@ -42,8 +42,8 @@ dependencies {
     implementation(Dependency.serialization)
     ksp(Dependency.roomCompiler)
     // Test Dependencies
-    testImplementation(TestDependency.jUnit)
-    testImplementation(TestDependency.testNg)
+    testImplementation(TestDependency.J_UNIT)
+    testImplementation(TestDependency.TEST_NG)
     testImplementation(TestDependency.room)
     testImplementation(TestDependency.coroutines)
     androidTestImplementation(TestDependency.androidJUnit)

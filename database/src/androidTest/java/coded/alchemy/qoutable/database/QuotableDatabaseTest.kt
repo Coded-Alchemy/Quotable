@@ -6,9 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
-import coded.alchemy.qoutable.database.data.AuthorWithTaggedQuotes
 import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.qoutable.database.data.QuoteWithTags
 import coded.alchemy.qoutable.database.data.Tag
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
@@ -106,16 +104,17 @@ class QuotableDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getQuotes() = runBlocking {
-        val list = dao.getQuotes()
+    fun getQuotes() =
+        runBlocking {
+            val list = dao.getQuotes()
 
-        Assert.assertNotNull(list)
-        Assert.assertNotNull(list.isNotEmpty())
+            Assert.assertNotNull(list)
+            Assert.assertNotNull(list.isNotEmpty())
 
 //        val quote =
 //
 //        Assert.assertEquals(234, quote.quoteId)
-    }
+        }
 
 //    @Test
 //    @Throws(Exception::class)
@@ -127,9 +126,9 @@ class QuotableDatabaseTest {
 //        val quoteEntity1 = QuoteEntity(
 //            quoteId = "55",
 //            authorId = authorId,
-////            author = "Author 1",
+// //            author = "Author 1",
 //            content = "Content 1",
-////            tags = listOf("Tag1", "Tag2"),
+// //            tags = listOf("Tag1", "Tag2"),
 //            author_slug = "author1-slug",
 //            length = 100,
 //            date_added = "2023-09-21",
@@ -138,9 +137,9 @@ class QuotableDatabaseTest {
 //        val quoteEntity2 = QuoteEntity(
 //            quoteId = "56",
 //            authorId = authorId,
-////            author = "Author 2",
+// //            author = "Author 2",
 //            content = "Content 2",
-////            tags = listOf("Tag3", "Tag4"),
+// //            tags = listOf("Tag3", "Tag4"),
 //            author_slug = "author2-slug",
 //            length = 200,
 //            date_added = "2023-09-22",

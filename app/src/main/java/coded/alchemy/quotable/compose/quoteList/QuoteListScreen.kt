@@ -23,7 +23,7 @@ import coded.alchemy.quotable.ui.theme.QuotableTheme
 fun QuoteListScreen(quoteEntities: List<QuoteEntity>) {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
     ) {
         QuoteList(quoteEntities)
     }
@@ -40,9 +40,12 @@ fun QuoteList(quoteEntities: List<QuoteEntity>) {
 
 @Composable
 fun QuoteListItem(quoteEntity: QuoteEntity) {
-    Card(modifier = Modifier
-        .padding(all = 10.dp)
-        .fillMaxWidth()) {
+    Card(
+        modifier =
+            Modifier
+                .padding(all = 10.dp)
+                .fillMaxWidth(),
+    ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
             Text(quoteEntity.content, fontSize = 25.sp, fontWeight = FontWeight.W700, modifier = Modifier.padding(10.dp))
 //            Text(student.credits.toString(), color = Color.Gray, modifier = Modifier.padding(10.dp))
@@ -50,12 +53,14 @@ fun QuoteListItem(quoteEntity: QuoteEntity) {
     }
 }
 
-
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(
+    name: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

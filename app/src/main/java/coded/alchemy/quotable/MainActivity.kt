@@ -10,7 +10,6 @@ import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
-import coded.alchemy.quotable.compose.QuotableApp
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.MainActivityViewModel
 
@@ -66,9 +65,9 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-                QuotableTheme {
+            QuotableTheme {
 //                    QuotableApp(list)
-                }
+            }
         }
     }
 }

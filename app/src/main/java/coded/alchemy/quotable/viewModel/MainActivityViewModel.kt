@@ -14,7 +14,6 @@ import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * MainActivityViewModel.kt
@@ -45,7 +44,7 @@ class MainActivityViewModel : ViewModel() {
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
     }
 
-    fun getQuotes(dao: QuoteDao): LiveData<List<QuoteEntity>>  {
+    fun getQuotes(dao: QuoteDao): LiveData<List<QuoteEntity>> {
         viewModelScope.launch {
             val quotes = QuoteRepository.getInstance(dao).getQuotes()
             Log.d(logTag, "getQuotes: $quotes")
@@ -54,8 +53,10 @@ class MainActivityViewModel : ViewModel() {
         return quoteList
     }
 
-
-    fun storeAuthor(dao: QuoteDao, author: Author) = viewModelScope.launch(Dispatchers.IO) {
+    fun storeAuthor(
+        dao: QuoteDao,
+        author: Author,
+    ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeAuthor: $author")
         QuoteRepository.getInstance(dao).insertAuthor(author)
     }
