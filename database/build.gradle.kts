@@ -1,8 +1,9 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
-    id(Plugin.ksp)
+//    id(Plugin.ksp)
     id(Plugin.ktLint)
+    kotlin("kapt") version "1.9.10"
 }
 
 android {
@@ -30,7 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Config.jvmTarget
     }
 }
 
@@ -40,7 +41,7 @@ dependencies {
     implementation(Dependency.roomKtx)
     implementation(Dependency.roomPaging)
     implementation(Dependency.serialization)
-    ksp(Dependency.roomCompiler)
+    kapt(Dependency.roomCompiler)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     testImplementation(TestDependency.testNg)

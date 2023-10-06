@@ -12,7 +12,7 @@ object Config {
     const val proGuardFile = "proguard-android-optimize.txt"
     const val proGuardRules = "proguard-rules.pro"
     const val proGuardConsumer = "consumer-rules.pro"
-    const val jvmTarget = "1.8"
+    const val jvmTarget = "17"
     const val kotlinCompilerExtensionVersion = "1.4.3"
     const val excludes = "/META-INF/{AL2.0,LGPL2.1}"
 }

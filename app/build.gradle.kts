@@ -3,8 +3,10 @@ plugins {
     id(Plugin.androidApp)
     id(Plugin.kotlinAndroid)
     id(Plugin.ktLint)
-    id(Plugin.ksp)
+//    id(Plugin.ksp)
     id(Plugin.hilt)
+    kotlin("kapt") version "1.9.10"
+
 }
 
 android {
@@ -34,8 +36,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = Config.jvmTarget
@@ -69,7 +71,7 @@ dependencies {
     implementation(Dependency.composeMaterial)
     implementation(Dependency.roomKtx)
     implementation("com.google.dagger:hilt-android:2.44.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.44.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.44.2")
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)
@@ -80,6 +82,6 @@ dependencies {
     debugImplementation(DebugDependency.composeTestManifest)
 }
 
-ksp {
-//    correctErrorTypes = true
+kapt {
+    correctErrorTypes = true
 }
