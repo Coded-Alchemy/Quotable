@@ -1,9 +1,9 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
-//    id(Plugin.ksp)
+    id(Plugin.ksp)
     id(Plugin.ktLint)
-    kotlin("kapt") version "1.9.10"
+//    kotlin(Plugin.KAPT) version "1.9.10"
 }
 
 android {
@@ -41,7 +41,7 @@ dependencies {
     implementation(Dependency.roomKtx)
     implementation(Dependency.roomPaging)
     implementation(Dependency.serialization)
-    kapt(Dependency.roomCompiler)
+    ksp(Dependency.roomCompiler)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     testImplementation(TestDependency.testNg)

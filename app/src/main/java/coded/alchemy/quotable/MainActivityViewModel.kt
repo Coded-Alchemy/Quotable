@@ -11,8 +11,10 @@ import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * MainActivityViewModel.kt
@@ -20,7 +22,8 @@ import kotlinx.coroutines.launch
  *
  * @property quoteResponse
  * */
-class MainActivityViewModel : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
 
