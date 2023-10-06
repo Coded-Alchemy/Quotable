@@ -6,22 +6,52 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import coded.alchemy.qoutable.database.QuotableDatabase
+import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
+import coded.alchemy.quotable.compose.QuotableApp
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.MainActivityViewModel
 
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
     private lateinit var viewModel: MainActivityViewModel
-    private lateinit var list: List<QuoteEntity>
-
+    private lateinit var list: MutableList<QuoteEntity>
+    private lateinit var database: QuotableDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(logTag, "onCreate: ")
+        initialization()
+        storeData((database).quoteDao())
+    }
 
-        val database =
+    override fun onStart() {
+        super.onStart()
+        Log.i(logTag, "onStart: ")
+        viewModel.getQuotes(database.quoteDao())
+        viewModel.quoteList.observe(this) { quoteList ->
+            Log.d(logTag, "Observe quote: $quoteList")
+            for (quote in quoteList) {
+                list.add(quote)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(logTag, "onResume: ")
+        setContent {
+            QuotableTheme {
+                QuotableApp(viewModel)
+            }
+        }
+    }
+
+    private fun initialization() {
+        database =
             Room.databaseBuilder(
                 applicationContext,
                 QuotableDatabase::class.java,
@@ -29,7 +59,13 @@ class MainActivity : ComponentActivity() {
             ).build()
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+
+        list = mutableListOf()
+    }
+
+    private fun storeData(dao: QuoteDao) {
         viewModel.getQuoteResponse()
+
         viewModel.quoteResponse.observe(this) { response ->
             Log.d(logTag, response.toString())
 
@@ -47,26 +83,15 @@ class MainActivity : ComponentActivity() {
 
                 val author = Author(name = quote.author, slug = quote.authorSlug, authorId = null)
 
-                viewModel.storeQuote(dao = database.quoteDao(), quoteEntity = quoteEntity)
-                viewModel.storeAuthor(dao = database.quoteDao(), author = author)
+                viewModel.storeQuote(dao = dao, quoteEntity = quoteEntity)
+                viewModel.storeAuthor(dao = dao, author = author)
 
                 for (content in quote.tags) {
                     viewModel.storeTag(
-                        dao = database.quoteDao(),
+                        dao = dao,
                         tag = Tag(tagId = null, quoteId = quote._id, content = content)
                     )
                 }
-            }
-        }
-
-        viewModel.getQuotes(database.quoteDao())
-        viewModel.quoteList.observe(this) { quoteList ->
-            list = quoteList
-        }
-
-        setContent {
-            QuotableTheme {
-//                    QuotableApp(list)
             }
         }
     }

@@ -3,6 +3,7 @@ package coded.alchemy.quotable.viewModel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coded.alchemy.qoutable.database.dao.QuoteDao
@@ -13,6 +14,8 @@ import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -21,10 +24,17 @@ import kotlinx.coroutines.launch
  *
  * @property quoteResponse
  * */
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel(private val state: SavedStateHandle) : ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
-    val quoteList: MutableLiveData<List<QuoteEntity>> = MutableLiveData()
+//    val quoteList: MutableLiveData<List<QuoteEntity>> = MutableLiveData()
+
+    private val _quoteEntityList = MutableStateFlow<List<QuoteEntity>?>(emptyList())
+    val quoteEntityStateData = _quoteEntityList.asStateFlow()
+
+    init {
+        // TODO: Call to get data
+    }
 
     /**
      * Calls the [QuotableApi] to obta
@@ -44,13 +54,12 @@ class MainActivityViewModel : ViewModel() {
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
     }
 
-    fun getQuotes(dao: QuoteDao): LiveData<List<QuoteEntity>> {
+    fun getQuotes(dao: QuoteDao) {
         viewModelScope.launch {
             val quotes = QuoteRepository.getInstance(dao).getQuotes()
             Log.d(logTag, "getQuotes: $quotes")
-            quoteList.postValue(quotes)
+            _quoteEntityList.value = quotes
         }
-        return quoteList
     }
 
     fun storeAuthor(

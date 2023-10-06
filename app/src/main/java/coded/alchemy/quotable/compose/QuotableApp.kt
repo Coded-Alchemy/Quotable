@@ -7,23 +7,24 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
+import coded.alchemy.quotable.viewModel.MainActivityViewModel
 
 @Composable
-fun QuotableApp(quoteEntities: List<QuoteEntity>) {
+fun QuotableApp(viewModel: MainActivityViewModel) {
     val navController = rememberNavController()
-    QuotableNavHost(navController = navController, quoteEntities = quoteEntities)
+    QuotableNavHost(navController = navController, viewModel)
 }
 
 @Composable
 fun QuotableNavHost(
     navController: NavHostController,
-    quoteEntities: List<QuoteEntity>
+    viewModel: MainActivityViewModel
 ) {
     val quoteListScreen = "quoteListScreen"
 
     NavHost(navController = navController, startDestination = quoteListScreen) {
         composable(quoteListScreen) {
-            QuoteListScreen(quoteEntities)
+            QuoteListScreen(viewModel)
         }
     }
 }

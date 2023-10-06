@@ -12,20 +12,23 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.ui.theme.QuotableTheme
+import coded.alchemy.quotable.viewModel.MainActivityViewModel
 
 @Composable
-fun QuoteListScreen(quoteEntities: List<QuoteEntity>) {
+fun QuoteListScreen(viewModel: MainActivityViewModel) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(quoteEntities)
+        Greeting(name = "ihjfihdnf fejeje")
+        viewModel.quoteList.value?.let { QuoteList(it) }
     }
 }
 
@@ -47,8 +50,8 @@ fun QuoteListItem(quoteEntity: QuoteEntity) {
             .fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
-            Text(quoteEntity.content, fontSize = 25.sp, fontWeight = FontWeight.W700, modifier = Modifier.padding(10.dp))
-//            Text(student.credits.toString(), color = Color.Gray, modifier = Modifier.padding(10.dp))
+            Text(quoteEntity.content, fontSize = 25.sp, color = Color.Black, fontWeight = FontWeight.W700, modifier = Modifier.padding(10.dp))
+            quoteEntity.author_slug?.let { Text(it, color = Color.Gray, modifier = Modifier.padding(10.dp)) }
         }
     }
 }
