@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface QuotableApi {
     @GET("quotes")
     suspend fun getQuotes(
-        @Query("page") page: Int,
+        @Query("page") page: Int
     ): QuoteResponse
 
     companion object {
