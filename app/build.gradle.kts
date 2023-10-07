@@ -1,7 +1,10 @@
 plugins {
-    id(Plugin.androidApp)
+    id(Plugin.ANDROID_APP)
     id(Plugin.kotlinAndroid)
-    id(Plugin.ktLint)
+    id(Plugin.KT_LINT)
+//    id(Plugin.ksp)
+    id(Plugin.HILT)
+    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
@@ -31,8 +34,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = Config.jvmTarget
@@ -90,6 +93,9 @@ dependencies {
     implementation(Dependency.roomKtx)
     implementation(Dependency.navigation)
     implementation(Dependency.navRunTime)
+    implementation(Dependency.HILT)
+    implementation(Dependency.HILT_COMPOSE)
+    kapt(Dependency.HILT_COMPILER)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
@@ -98,4 +104,10 @@ dependencies {
     androidTestImplementation(TestDependency.composeUi)
     debugImplementation(DebugDependency.composeUiTooling)
     debugImplementation(DebugDependency.composeTestManifest)
+    kaptTest(TestDependency.HILT_COMPILER)
+    kaptAndroidTest(TestDependency.HILT_COMPILER)
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -1,7 +1,9 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
-    id(Plugin.ktLint)
+    id(Plugin.KT_LINT)
+    id(Plugin.HILT)
+    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
@@ -25,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = Config.jvmTarget
@@ -36,6 +38,9 @@ android {
 dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":database")))
+    implementation(Dependency.HILT)
+    kapt(Dependency.HILT_COMPILER)
+    // Test dependencies
     testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
 }

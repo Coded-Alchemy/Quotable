@@ -24,4 +24,5 @@ object TestDependency {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.testCoroutines}"
     const val room = "androidx.room:room-testing:${Dependency.Version.room}"
     const val testRunner = "androidx.test:runner:${Version.testRunner}"
+    const val HILT_COMPILER = Dependency.HILT_COMPILER
 }

@@ -4,6 +4,8 @@ import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * QuoteRepository.kt
@@ -13,7 +15,8 @@ import coded.alchemy.qoutable.database.data.Tag
  * @param dao
  * @author Taji Abdullah
  * */
-class QuoteRepository(private val dao: QuoteDao) {
+@Singleton
+class QuoteRepository @Inject constructor(private val dao: QuoteDao) {
     /**
      * Insert a [QuoteEntity] into the database.
      * */

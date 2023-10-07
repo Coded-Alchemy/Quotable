@@ -1,7 +1,7 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
-    id(Plugin.ktLint)
+    id(Plugin.KT_LINT)
 }
 
 android {
@@ -25,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = Config.jvmTarget
