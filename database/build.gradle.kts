@@ -3,6 +3,7 @@ plugins {
     id(Plugin.kotlinAndroid)
     id(Plugin.ksp)
     id(Plugin.ktLint)
+//    kotlin(Plugin.KAPT) version "1.9.10"
 }
 
 android {
@@ -30,7 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Config.jvmTarget
     }
 }
 

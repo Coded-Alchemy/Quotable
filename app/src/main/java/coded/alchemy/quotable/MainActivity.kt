@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,10 +19,12 @@ import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.ui.theme.QuotableTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val logTag = this::class.java.simpleName
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 QuotableDatabase::class.java.simpleName,
             ).build()
 
-        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         viewModel.getQuoteResponse()
         viewModel.quoteResponse.observe(this) { response ->
             Log.d(logTag, response.toString())
