@@ -5,7 +5,7 @@ plugins {
     id(Plugin.ktLint)
 //    id(Plugin.ksp)
     id(Plugin.HILT)
-    kotlin(Plugin.KAPT) version "1.9.10"
+    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
@@ -69,9 +69,9 @@ dependencies {
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
     implementation(Dependency.roomKtx)
-    implementation("com.google.dagger:hilt-android:2.44.2")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.44.2")
+    implementation(Dependency.HILT)
+    implementation(Dependency.HILT_COMPOSE)
+    kapt(Dependency.HILT_COMPILER)
     // Test Dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)
@@ -80,8 +80,8 @@ dependencies {
     androidTestImplementation(TestDependency.composeUi)
     debugImplementation(DebugDependency.composeUiTooling)
     debugImplementation(DebugDependency.composeTestManifest)
-    kaptTest("com.google.dagger:hilt-android-compiler:2.44.2")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
+    kaptTest(TestDependency.HILT_COMPILER)
+    kaptAndroidTest(TestDependency.HILT_COMPILER)
 }
 
 kapt {

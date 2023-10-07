@@ -2,6 +2,8 @@ plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
     id(Plugin.ktLint)
+    id(Plugin.HILT)
+    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
@@ -36,6 +38,9 @@ android {
 dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":database")))
+    implementation(Dependency.HILT)
+    kapt(Dependency.HILT_COMPILER)
+    // Test dependencies
     testImplementation(TestDependency.jUnit)
     androidTestImplementation(TestDependency.androidJUnit)
 }
