@@ -11,8 +11,10 @@ import coded.alchemy.qoutable.database.data.Tag
 import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * MainActivityViewModel.kt
@@ -20,7 +22,8 @@ import kotlinx.coroutines.launch
  *
  * @property quoteResponse
  * */
-class MainActivityViewModel : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
 
@@ -36,7 +39,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeQuote(
         dao: QuoteDao,
-        quoteEntity: QuoteEntity,
+        quoteEntity: QuoteEntity
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeQuote: $quoteEntity")
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
@@ -44,7 +47,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeAuthor(
         dao: QuoteDao,
-        author: Author,
+        author: Author
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeAuthor: $author")
         QuoteRepository.getInstance(dao).insertAuthor(author)
@@ -52,7 +55,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun storeTag(
         dao: QuoteDao,
-        tag: Tag,
+        tag: Tag
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeTag: $tag")
         QuoteRepository.getInstance(dao).insertTag(tag)

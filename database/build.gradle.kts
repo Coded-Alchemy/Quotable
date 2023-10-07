@@ -2,7 +2,8 @@ plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
     id(Plugin.ksp)
-    id(Plugin.ktLint)
+    id(Plugin.KT_LINT)
+//    kotlin(Plugin.KAPT) version "1.9.10"
 }
 
 android {
@@ -21,7 +22,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile(Config.proGuardFile),
-                Config.proGuardRules,
+                Config.proGuardRules
             )
         }
     }
@@ -30,7 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = Config.jvmTarget
     }
 }
 

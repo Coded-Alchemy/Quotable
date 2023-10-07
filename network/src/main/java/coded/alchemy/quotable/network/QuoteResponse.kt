@@ -21,5 +21,5 @@ data class QuoteResponse(
     val page: Int,
     val totalPages: Int,
     val lastItemIndex: Int,
-    val results: List<Quote>,
+    val results: List<Quote>
 )

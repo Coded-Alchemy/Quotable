@@ -16,7 +16,8 @@ object Dependency {
         const val navigation = "2.7.1"
         const val retrofit = "2.9.0"
         const val logInterceptor = "4.10.0"
-        const val hilt = "2.44"
+        const val HILT = "2.44.2"
+        const val HILT_COMPOSE = "1.0.0"
         const val room = "2.5.2"
     }
 
@@ -44,8 +45,9 @@ object Dependency {
     const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.logInterceptor}"
 
     // Hilt
-    const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
-    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.hilt}"
+    const val HILT = "com.google.dagger:hilt-android:${Version.HILT}"
+    const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Version.HILT}"
+    const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Version.HILT_COMPOSE}"
 
     // Room
     const val roomRuntime = "androidx.room:room-runtime:${Version.room}"

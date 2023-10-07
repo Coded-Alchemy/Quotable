@@ -22,5 +22,5 @@ data class Quote(
     val authorSlug: String,
     val length: Int,
     val dateAdded: String,
-    val dateModified: String,
+    val dateModified: String
 )
