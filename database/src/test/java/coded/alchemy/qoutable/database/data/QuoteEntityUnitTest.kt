@@ -25,7 +25,7 @@ class QuoteEntityUnitTest {
                 author_slug = "author1-slug",
                 length = 100,
                 date_added = "2023-09-21",
-                date_modified = "2023-09-21",
+                date_modified = "2023-09-21"
             )
         quoteEntity2 =
             QuoteEntity(
@@ -35,7 +35,7 @@ class QuoteEntityUnitTest {
                 author_slug = "author2-slug",
                 length = 200,
                 date_added = "2023-09-22",
-                date_modified = "2023-09-22",
+                date_modified = "2023-09-22"
             )
         quoteEntity3 = quoteEntity1
     }

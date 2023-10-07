@@ -1,7 +1,7 @@
 plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
-    id(Plugin.ktLint)
+    id(Plugin.KT_LINT)
     id(Plugin.HILT)
     kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
@@ -22,7 +22,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile(Config.proGuardFile),
-                Config.proGuardRules,
+                Config.proGuardRules
             )
         }
     }

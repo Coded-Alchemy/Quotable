@@ -7,8 +7,8 @@ data class QuoteWithTags(
     @Embedded val quoteEntity: QuoteEntity,
     @Relation(
         parentColumn = "quoteId",
-        entityColumn = "tagId",
+        entityColumn = "tagId"
 //        associateBy = Junction(QuoteTagRef::class)
     )
-    val tags: List<Tag>,
+    val tags: List<Tag>
 )

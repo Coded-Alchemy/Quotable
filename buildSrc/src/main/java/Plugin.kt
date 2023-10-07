@@ -8,7 +8,7 @@ object Plugin {
         const val kotlinAndroid = "1.8.10"
         const val ksp = "1.9.10-1.0.13"
         const val HILT = "2.44.2"
-        const val ktLint = "7.1.0"
+        const val KT_LINT = "11.6.0"
         const val KAPT = "1.9.10"
     }
 
@@ -20,6 +20,6 @@ object Plugin {
     const val protoBuf = "com.google.protobuf"
     const val ksp = "com.google.devtools.ksp"
     const val HILT = "com.google.dagger.hilt.android"
-    const val ktLint = "org.jlleitschuh.gradle.ktlint"
+    const val KT_LINT = "org.jlleitschuh.gradle.ktlint"
     const val KAPT = "kapt"
 }

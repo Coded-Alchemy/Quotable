@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.Author
@@ -33,7 +32,7 @@ class MainActivity : ComponentActivity() {
             Room.databaseBuilder(
                 applicationContext,
                 QuotableDatabase::class.java,
-                QuotableDatabase::class.java.simpleName,
+                QuotableDatabase::class.java.simpleName
             ).build()
 
 //        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
@@ -50,7 +49,7 @@ class MainActivity : ComponentActivity() {
                         author_slug = quote.authorSlug,
                         length = quote.length.toLong(),
                         date_added = quote.dateAdded,
-                        date_modified = quote.dateModified,
+                        date_modified = quote.dateModified
                     )
 
                 val author = Author(name = quote.author, slug = quote.authorSlug, authorId = null)
@@ -61,7 +60,7 @@ class MainActivity : ComponentActivity() {
                 for (content in quote.tags) {
                     viewModel.storeTag(
                         dao = database.quoteDao(),
-                        tag = Tag(tagId = null, quoteId = quote._id, content = content),
+                        tag = Tag(tagId = null, quoteId = quote._id, content = content)
                     )
                 }
             }
@@ -72,7 +71,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting(getString(R.string.app_name))
                 }
@@ -84,11 +83,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(
     name: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Text(
         text = "Hello $name!",
-        modifier = modifier,
+        modifier = modifier
     )
 }
 
