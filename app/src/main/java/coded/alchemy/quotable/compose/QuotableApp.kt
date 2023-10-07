@@ -5,7 +5,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
 import coded.alchemy.quotable.viewModel.MainActivityViewModel
 

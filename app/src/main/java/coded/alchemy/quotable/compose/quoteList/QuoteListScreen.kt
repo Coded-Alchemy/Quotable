@@ -28,7 +28,7 @@ fun QuoteListScreen(viewModel: MainActivityViewModel) {
         color = MaterialTheme.colorScheme.background
     ) {
         Greeting(name = "ihjfihdnf fejeje")
-        viewModel.quoteList.value?.let { QuoteList(it) }
+//        viewModel.value?.let { QuoteList(it) }
     }
 }
 

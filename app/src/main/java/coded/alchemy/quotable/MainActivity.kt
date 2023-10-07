@@ -4,16 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
@@ -41,12 +33,12 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         Log.i(logTag, "onStart: ")
         viewModel.getQuotes(database.quoteDao())
-        viewModel.quoteList.observe(this) { quoteList ->
-            Log.d(logTag, "Observe quote: $quoteList")
-            for (quote in quoteList) {
-                list.add(quote)
-            }
-        }
+//        viewModel.quoteList.observe(this) { quoteList ->
+//            Log.d(logTag, "Observe quote: $quoteList")
+//            for (quote in quoteList) {
+//                list.add(quote)
+//            }
+//        }
     }
 
     override fun onResume() {
@@ -64,10 +56,10 @@ class MainActivity : ComponentActivity() {
             Room.databaseBuilder(
                 applicationContext,
                 QuotableDatabase::class.java,
-                QuotableDatabase::class.java.simpleName,
+                QuotableDatabase::class.java.simpleName
             ).build()
 
-//        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         list = mutableListOf()
     }
