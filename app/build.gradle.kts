@@ -1,4 +1,3 @@
-
 plugins {
     id(Plugin.ANDROID_APP)
     id(Plugin.kotlinAndroid)
