@@ -40,9 +40,13 @@ dependencies {
     implementation(Dependency.retrofit)
     implementation(Dependency.gsonConverter)
     implementation(Dependency.logInterceptor)
+
+    implementation("androidx.paging:paging-runtime:3.2.1")
+
     // Test dependencies
     testImplementation(TestDependency.jUnit)
     testImplementation(TestDependency.mockWebServer) // MockWebServer for mocking server responses
     testImplementation(TestDependency.coroutines) // For testing coroutines
+    testImplementation("androidx.paging:paging-common:3.2.1")
     androidTestImplementation(TestDependency.androidJUnit)
 }
