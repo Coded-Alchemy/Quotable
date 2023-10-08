@@ -40,7 +40,7 @@ dependencies {
     implementation(Dependency.retrofit)
     implementation(Dependency.gsonConverter)
     implementation(Dependency.logInterceptor)
-
+    implementation(Dependency.roomRuntime)
     implementation("androidx.paging:paging-runtime:3.2.1")
 
     // Test dependencies
