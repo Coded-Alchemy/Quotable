@@ -2,6 +2,7 @@ plugins {
     id(Plugin.androidLibrary)
     id(Plugin.kotlinAndroid)
     id(Plugin.KT_LINT)
+    id(Plugin.ksp)
 }
 
 android {
@@ -41,6 +42,8 @@ dependencies {
     implementation(Dependency.gsonConverter)
     implementation(Dependency.logInterceptor)
     implementation(Dependency.roomRuntime)
+    implementation(Dependency.roomKtx)
+    ksp(Dependency.roomCompiler)
     implementation("androidx.paging:paging-runtime:3.2.1")
 
     // Test dependencies
@@ -48,5 +51,6 @@ dependencies {
     testImplementation(TestDependency.mockWebServer) // MockWebServer for mocking server responses
     testImplementation(TestDependency.coroutines) // For testing coroutines
     testImplementation("androidx.paging:paging-common:3.2.1")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation(TestDependency.androidJUnit)
 }

@@ -8,30 +8,51 @@ import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.network.QuotableApi
 import androidx.paging.RemoteMediator
 import coded.alchemy.qoutable.database.data.Author
+import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.concurrent.TimeUnit
+import androidx.room.withTransaction
+
 
 private const val STARTING_PAGE_INDEX = 1
 
 @OptIn(ExperimentalPagingApi::class)
 class RemoteMediator(
+    private val query: String,
     private val database: QuotableDatabase,
     private val quotableApi: QuotableApi
 ) : RemoteMediator<Int, QuoteEntity>() {
 
     private val dao = database.quoteDao()
+    private val remoteKeyDao = database.remoteKeyDao()
+
+//    override suspend fun initialize(): InitializeAction {
+//        val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
+//        return if (System.currentTimeMillis() - database.lastUpdated() <= cacheTimeout) {
+//            // Cached data is up-to-date, so there is no need to re-fetch
+//            // from the network.
+//            InitializeAction.SKIP_INITIAL_REFRESH
+//        } else {
+//            // Need to refresh cached data from network; returning
+//            // LAUNCH_INITIAL_REFRESH here will also block RemoteMediator's
+//            // APPEND and PREPEND from running until REFRESH succeeds.
+//            InitializeAction.LAUNCH_INITIAL_REFRESH
+//        }
+//    }
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, QuoteEntity>
     ): MediatorResult {
         return try {
-            // The network load method takes an optional after=<user.id>
-            // parameter. For every page after the first, pass the last user
-            // ID to let it continue from where it left off. For REFRESH,
-            // pass null to load the first page.
+            // The network load method takes an optional String
+            // parameter. For every page after the first, pass the String
+            // token returned from the previous page to let it continue
+            // from where it left off. For REFRESH, pass null to load the
+            // first page.
             val loadKey = when (loadType) {
                 LoadType.REFRESH -> null
                 // In this example, you never need to prepend, since REFRESH
@@ -41,15 +62,23 @@ class RemoteMediator(
                     return MediatorResult.Success(endOfPaginationReached = true)
 
                 LoadType.APPEND -> {
-                    // You must explicitly check if the last item is null when
-                    // appending, since passing null to networkService is only
-                    // valid for initial load. If lastItem is null it means no
-                    // items were loaded after the initial REFRESH and there are
-                    // no more items to load.
-                    val lastItem = state.lastItemOrNull()
-                        ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    // Query remoteKeyDao for the next RemoteKey.
+                    val remoteKey = database.withTransaction {
+                        remoteKeyDao.remoteKeyByQuery(query)
+                    }
 
-                    lastItem.quoteId
+                    // You must explicitly check if the page key is null when
+                    // appending, since null is only valid for initial load.
+                    // If you receive null for APPEND, that means you have
+                    // reached the end of pagination and there are no more
+                    // items to load.
+                    if (remoteKey.nextKey == null) {
+                        return MediatorResult.Success(
+                            endOfPaginationReached = true
+                        )
+                    }
+
+                    remoteKey.nextKey
                 }
             }
 
@@ -59,35 +88,21 @@ class RemoteMediator(
             // thread.
             val response = quotableApi.getQuotes(STARTING_PAGE_INDEX)
 
-            withContext(Dispatchers.IO) {
+            database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
+                    remoteKeyDao.deleteByQuery(query)
 //                    dao.deleteByQuery(query)
                 }
 
-                // Insert new users into database, which invalidates the
+                // Update RemoteKey for this query.
+                remoteKeyDao.insertOrReplace(
+                    RemoteKey(query, response.page)
+                )
+
+                // Insert into database, which invalidates the
                 // current PagingData, allowing Paging to present the updates
                 // in the DB.
-                for (quote in response.results) {
-                    val quoteEntity =
-                        QuoteEntity(
-                            quoteId = quote._id,
-                            authorId = null,
-                            content = quote.content,
-                            author_slug = quote.authorSlug,
-                            length = quote.length.toLong(),
-                            date_added = quote.dateAdded,
-                            date_modified = quote.dateModified
-                        )
-                    dao.insertQuote(quoteEntity)
-
-                    val author =
-                        Author(name = quote.author, slug = quote.authorSlug, authorId = null)
-                    dao.insertAuthor(author)
-
-                    for (content in quote.tags) {
-                        dao.insertTag(Tag(tagId = null, quoteId = quote._id, content = content))
-                    }
-                }
+                loadDatabase(response.results)
             }
 
             MediatorResult.Success(endOfPaginationReached = false)
@@ -95,6 +110,30 @@ class RemoteMediator(
             MediatorResult.Error(e)
         } catch (e: HttpException) {
             MediatorResult.Error(e)
+        }
+    }
+
+    private suspend fun loadDatabase(quoteList: List<Quote>) {
+        for (quote in quoteList) {
+            val quoteEntity =
+                QuoteEntity(
+                    quoteId = quote._id,
+                    authorId = null,
+                    content = quote.content,
+                    author_slug = quote.authorSlug,
+                    length = quote.length.toLong(),
+                    date_added = quote.dateAdded,
+                    date_modified = quote.dateModified
+                )
+            dao.insertQuote(quoteEntity)
+
+            val author =
+                Author(name = quote.author, slug = quote.authorSlug, authorId = null)
+            dao.insertAuthor(author)
+
+            for (content in quote.tags) {
+                dao.insertTag(Tag(tagId = null, quoteId = quote._id, content = content))
+            }
         }
     }
 }
