@@ -22,6 +22,8 @@ class QuoteRepository @Inject constructor(private val dao: QuoteDao) {
      * */
     suspend fun insertQuote(quoteEntity: QuoteEntity) = dao.insertQuote(quoteEntity)
 
+    suspend fun getQuotes() = dao.getQuotes()
+
     /**
      * Insert a [Tag] into the database.
      * */

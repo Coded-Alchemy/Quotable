@@ -4,8 +4,8 @@
  * */
 object TestDependency {
     object Version {
-        const val jUnit = "4.13.2"
-        const val testNG = "6.9.6"
+        const val J_UNIT = "4.13.2"
+        const val TEST_NG = "6.9.6"
         const val androidJUnit = "1.1.5"
         const val espressoCore = "3.5.1"
         const val composeUiTest = "ui-test-junit4"
@@ -14,8 +14,8 @@ object TestDependency {
         const val testRunner = "1.5.2"
     }
 
-    const val jUnit = "junit:junit:${Version.jUnit}"
-    const val testNg = "org.testng:testng:${Version.testNG}"
+    const val J_UNIT = "junit:junit:${Version.J_UNIT}"
+    const val TEST_NG = "org.testng:testng:${Version.TEST_NG}"
     const val androidJUnit = "androidx.test.ext:junit:${Version.androidJUnit}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
     const val composeBom = Dependency.composeBom

@@ -41,7 +41,7 @@ dependencies {
     implementation(Dependency.gsonConverter)
     implementation(Dependency.logInterceptor)
     // Test dependencies
-    testImplementation(TestDependency.jUnit)
+    testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.mockWebServer) // MockWebServer for mocking server responses
     testImplementation(TestDependency.coroutines) // For testing coroutines
     androidTestImplementation(TestDependency.androidJUnit)

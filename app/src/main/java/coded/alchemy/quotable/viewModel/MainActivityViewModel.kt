@@ -1,4 +1,4 @@
-package coded.alchemy.quotable
+package coded.alchemy.quotable.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +13,8 @@ import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +28,14 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
     val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
+//    val quoteList: MutableLiveData<List<QuoteEntity>> = MutableLiveData()
+
+    private val _quoteEntityList = MutableStateFlow<List<QuoteEntity>?>(emptyList())
+    val quoteEntityStateData = _quoteEntityList.asStateFlow()
+
+    init {
+        // TODO: Call to get data
+    }
 
     /**
      * Calls the [QuotableApi] to obta
@@ -43,6 +53,14 @@ class MainActivityViewModel @Inject constructor() : ViewModel() {
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(logTag, "storeQuote: $quoteEntity")
         QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
+    }
+
+    fun getQuotes(dao: QuoteDao) {
+        viewModelScope.launch {
+            val quotes = QuoteRepository.getInstance(dao).getQuotes()
+            Log.d(logTag, "getQuotes: $quotes")
+            _quoteEntityList.value = quotes
+        }
     }
 
     fun storeAuthor(
