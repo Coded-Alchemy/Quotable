@@ -31,7 +31,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
-      - run: ./gradlew build --no-daemon
+      - run: |
+          ./gradlew ktlintFormat
+          ./gradlew build --no-daemon
 
       # Run KtLint Formatting
 #      - name: Run ktlint format
