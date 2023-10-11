@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.ui.theme.QuotableTheme
-import coded.alchemy.quotable.viewModel.MainActivityViewModel
+import coded.alchemy.quotable.viewModel.QuoteListViewModel
 
 @Composable
-fun QuoteListScreen(viewModel: MainActivityViewModel) {
+fun QuoteListScreen(viewModel: QuoteListViewModel) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
