@@ -51,6 +51,28 @@ android {
             excludes += Config.excludes
         }
     }
+    testOptions {
+        managedDevices {
+            devices {
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api30").apply {
+                    device = "Pixel 2" // Use device profiles you typically see in Android Studio.
+                    apiLevel = 30 // Use only API levels 27 and higher.
+                    systemImageSource = "aosp" // To include Google services, use "google".
+                }
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("nexus9api30").apply {
+                    device = "Nexus 9"
+                    apiLevel = 30
+                    systemImageSource = "aosp"
+                }
+                groups {
+                    maybeCreate("phoneAndTablet").apply {
+                        targetDevices.add(devices["pixel2api30"])
+                        targetDevices.add(devices["nexus9api30"])
+                    }
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -67,13 +89,16 @@ dependencies {
     implementation(Dependency.composeGraphics)
     implementation(Dependency.composeUiPreview)
     implementation(Dependency.composeMaterial)
+    // Added app dependencies
     implementation(Dependency.roomKtx)
+    implementation(Dependency.navigation)
+    implementation(Dependency.navRunTime)
     implementation(Dependency.HILT)
     implementation(Dependency.HILT_COMPOSE)
     kapt(Dependency.HILT_COMPILER)
     implementation("androidx.paging:paging-compose:3.3.0-alpha02")
     // Test Dependencies
-    testImplementation(TestDependency.jUnit)
+    testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
     androidTestImplementation(TestDependency.espressoCore)
     androidTestImplementation(platform(TestDependency.composeBom))

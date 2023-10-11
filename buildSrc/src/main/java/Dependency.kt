@@ -14,6 +14,7 @@ object Dependency {
         const val composeUiPreview = "ui-tooling-preview"
         const val composeMaterial = "material3"
         const val navigation = "2.7.1"
+        const val navRunTime = "2.7.3"
         const val retrofit = "2.9.0"
         const val logInterceptor = "4.10.0"
         const val HILT = "2.44.2"
@@ -37,7 +38,10 @@ object Dependency {
     const val composeGraphics = "androidx.compose.ui:${Version.composeGraphics}"
     const val composeUiPreview = "androidx.compose.ui:${Version.composeUiPreview}"
     const val composeMaterial = "androidx.compose.material3:${Version.composeMaterial}"
+
+    // Navigation
     const val navigation = "androidx.navigation:navigation-compose:${Version.navigation}"
+    const val navRunTime = "androidx.navigation:navigation-runtime-ktx:${Version.navRunTime}"
 
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
