@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = Config.jvmTarget
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
