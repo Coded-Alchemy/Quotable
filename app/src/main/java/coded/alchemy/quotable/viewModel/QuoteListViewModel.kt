@@ -24,14 +24,14 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
 //    val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
 
-    val flow = Pager(
-        // Configure how data is loaded by passing additional properties to
-        // PagingConfig, such as prefetchDistance.
-        PagingConfig(pageSize = 20)
-    ) {
-        QuotablePagingSource(QuotableApi.create())
-    }.flow
-        .cachedIn(viewModelScope)
+//    val flow = Pager(
+//        // Configure how data is loaded by passing additional properties to
+//        // PagingConfig, such as prefetchDistance.
+//        PagingConfig(pageSize = 20)
+//    ) {
+//        QuotablePagingSource(QuotableApi.create())
+//    }.flow
+//        .cachedIn(viewModelScope)
 
 
     fun getFlow() : Flow<PagingData<Quote>> {
