@@ -3,19 +3,17 @@ package coded.alchemy.quotable.network.paging
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
-import coded.alchemy.qoutable.database.QuotableDatabase
-import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.quotable.network.QuotableApi
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
+import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
+import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.concurrent.TimeUnit
-import androidx.room.withTransaction
-
 
 private const val STARTING_PAGE_INDEX = 1
 

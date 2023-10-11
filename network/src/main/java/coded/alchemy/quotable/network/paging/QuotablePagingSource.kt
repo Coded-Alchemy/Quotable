@@ -8,7 +8,7 @@ import retrofit2.HttpException
 
 private const val STARTING_PAGE_INDEX = 1
 class QuotablePagingSource(
-    private val quotableApi: QuotableApi,
+    private val quotableApi: QuotableApi
 ) : PagingSource<Int, Quote>() {
     override fun getRefreshKey(state: PagingState<Int, Quote>): Int? {
         return state.anchorPosition?.let { anchorPosition ->

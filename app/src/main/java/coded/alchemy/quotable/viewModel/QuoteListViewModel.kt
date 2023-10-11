@@ -33,8 +33,7 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
 //    }.flow
 //        .cachedIn(viewModelScope)
 
-
-    fun getFlow() : Flow<PagingData<Quote>> {
+    fun getFlow(): Flow<PagingData<Quote>> {
         return Pager(
             config = PagingConfig(
                 pageSize = QuotablePagingSource.networkPageSize,
