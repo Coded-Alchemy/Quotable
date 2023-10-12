@@ -57,13 +57,13 @@ class QuotableDatabaseTest {
                     content = "yo yo yo",
                     author_slug = "author1-slug",
                     length = 45,
-                    date_added = null,
-                    date_modified = null
+                    date_added = "10/23/1970",
+                    date_modified = "12/05/2025"
                 )
             dao.insertQuote(quoteEntity)
 
             // Test the stored QuoteEntity object is the same as expected.
-            val storedQuote = dao.getQuoteById(id.toLong())
+            val storedQuote = dao.getQuoteById(id)
             assertThat(storedQuote, equalTo(quoteEntity))
         }
 
