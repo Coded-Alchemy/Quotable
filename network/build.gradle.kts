@@ -50,7 +50,8 @@ dependencies {
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.mockWebServer) // MockWebServer for mocking server responses
     testImplementation(TestDependency.coroutines) // For testing coroutines
-    testImplementation("androidx.paging:paging-common:3.1.1")
+    testImplementation("androidx.paging:paging-common:3.2.1")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation(TestDependency.androidJUnit)
 }

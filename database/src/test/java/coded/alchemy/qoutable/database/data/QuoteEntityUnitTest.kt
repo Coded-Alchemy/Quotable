@@ -8,7 +8,7 @@ import org.junit.Test
 /**
  * Unit test for the [QuoteEntity] class.
  *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * @author Taji Abdullah
  */
 class QuoteEntityUnitTest {
     private lateinit var quoteEntity1: QuoteEntity
@@ -48,7 +48,7 @@ class QuoteEntityUnitTest {
     @Test
     fun `quote contains expected values`() {
         assertEquals("1", quoteEntity1.quoteId)
-//        assertEquals("author1-slug", quoteEntity1.author_slug)
+        assertEquals("author1-slug", quoteEntity1.author_slug)
     }
 
     @Test

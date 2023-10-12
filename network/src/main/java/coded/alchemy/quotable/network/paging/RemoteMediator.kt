@@ -116,7 +116,6 @@ class RemoteMediator(
             val quoteEntity =
                 QuoteEntity(
                     quoteId = quote._id,
-                    authorId = null,
                     content = quote.content,
                     author_slug = quote.authorSlug,
                     length = quote.length.toLong(),
@@ -126,11 +125,11 @@ class RemoteMediator(
             dao.insertQuote(quoteEntity)
 
             val author =
-                Author(name = quote.author, slug = quote.authorSlug, authorId = null)
+                Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
             dao.insertAuthor(author)
 
             for (content in quote.tags) {
-                dao.insertTag(Tag(tagId = null, quoteId = quote._id, content = content))
+                dao.insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
             }
         }
     }
