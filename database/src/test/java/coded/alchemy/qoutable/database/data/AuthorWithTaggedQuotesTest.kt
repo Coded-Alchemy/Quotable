@@ -4,6 +4,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
+/**
+ * Unit test for the [AuthorWithTaggedQuotes] class.
+ *
+ * @author Taji Abdullah
+ */
 class AuthorWithTaggedQuotesTest {
     @Test
     fun testAuthorWithTaggedQuotesProperties() {

@@ -3,6 +3,11 @@ package coded.alchemy.qoutable.database.data
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+/**
+ * Unit test for the [Quote] class.
+ *
+ * @author Taji Abdullah
+ */
 class QuoteTest {
     @Test
     fun testQuoteProperties() {
