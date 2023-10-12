@@ -1,11 +1,11 @@
 package coded.alchemy.quotable.compose.quoteList
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,32 +17,44 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coded.alchemy.qoutable.database.data.QuoteEntity
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.quotable.ui.theme.QuotableTheme
-import coded.alchemy.quotable.viewModel.MainActivityViewModel
+import coded.alchemy.quotable.viewModel.QuoteListViewModel
+
+const val TAG = "QuoteListScreen"
 
 @Composable
-fun QuoteListScreen(viewModel: MainActivityViewModel) {
+fun QuoteListScreen(viewModel: QuoteListViewModel) {
+    val articleList = viewModel.getFlow().collectAsLazyPagingItems()
+
+    Log.d(TAG, "QuoteListScreen: $articleList")
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Greeting(name = "ihjfihdnf fejeje")
-//        viewModel.value?.let { QuoteList(it) }
+        QuoteList(articleList = articleList)
     }
 }
 
 @Composable
-fun QuoteList(quoteEntities: List<QuoteEntity>) {
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-        quoteEntities.forEach { quoteEntity ->
-            QuoteListItem(quoteEntity)
+fun QuoteList(articleList: LazyPagingItems<Quote>) {
+    LazyColumn {
+        items(
+            count = articleList.itemCount
+        ) { index ->
+            val article = articleList[index]
+            article?.let { item ->
+                QuoteListItem(item)
+            }
         }
     }
 }
 
 @Composable
-fun QuoteListItem(quoteEntity: QuoteEntity) {
+fun QuoteListItem(quoteEntity: Quote) {
     Card(
         modifier =
         Modifier
@@ -51,7 +63,7 @@ fun QuoteListItem(quoteEntity: QuoteEntity) {
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
             Text(quoteEntity.content, fontSize = 25.sp, color = Color.Black, fontWeight = FontWeight.W700, modifier = Modifier.padding(10.dp))
-            quoteEntity.author_slug?.let { Text(it, color = Color.Gray, modifier = Modifier.padding(10.dp)) }
+            quoteEntity.author?.let { Text(it, color = Color.Gray, modifier = Modifier.padding(10.dp)) }
         }
     }
 }

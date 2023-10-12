@@ -96,6 +96,7 @@ dependencies {
     implementation(Dependency.HILT)
     implementation(Dependency.HILT_COMPOSE)
     kapt(Dependency.HILT_COMPILER)
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.androidJUnit)
