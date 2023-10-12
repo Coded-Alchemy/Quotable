@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.network.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import coded.alchemy.qoutable.database.data.Quote
@@ -7,6 +8,7 @@ import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 
 private const val STARTING_PAGE_INDEX = 1
+private const val LOG_TAG = "QuotablePagingSource"
 class QuotablePagingSource(
     private val quotableApi: QuotableApi
 ) : PagingSource<Int, Quote>() {
@@ -24,6 +26,7 @@ class QuotablePagingSource(
         val page = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = quotableApi.getQuotes(page)
+            Log.d(LOG_TAG, "load: $response")
             LoadResult.Page(
                 data = response.results,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,
