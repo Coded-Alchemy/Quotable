@@ -6,6 +6,13 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.RemoteKey
 
+/**
+ * RemoteKeyDao.kt
+ *
+ * This interface provides [RemoteKey] database functionality.
+ *
+ * @author Taji Abdullah
+ */
 @Dao
 interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

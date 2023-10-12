@@ -4,7 +4,7 @@
  * */
 object TestDependency {
     object Version {
-        const val J_UNIT = "4.13.2"
+        const val J_UNIT = "4.12"
         const val TEST_NG = "6.9.6"
         const val androidJUnit = "1.1.5"
         const val espressoCore = "3.5.1"

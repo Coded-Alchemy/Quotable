@@ -6,8 +6,16 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
 
+/**
+ * RemoteKeyDao.kt
+ *
+ * This interface provides [QuoteEntity] database functionality.
+ *
+ * @author Taji Abdullah
+ */
 @Dao
 interface QuoteDao {
     /**
