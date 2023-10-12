@@ -40,5 +40,5 @@ jobs:
         run: ./gradlew test
 
       # Run Instrumented Tests on phone managed by gradle
-      #- name: Run UI Tests
-        #run: ./gradlew pixel2api30DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+      - name: Run UI Tests
+        run: ./gradlew pixel2api30DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
