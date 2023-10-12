@@ -23,24 +23,10 @@ import javax.inject.Inject
 @HiltViewModel
 class QuoteListViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
-    val testInfo = "This is view model text."
-
-
-
-//    val quoteResponse: MutableLiveData<QuoteResponse> = MutableLiveData()
-
-//    val flow = Pager(
-//        // Configure how data is loaded by passing additional properties to
-//        // PagingConfig, such as prefetchDistance.
-//        PagingConfig(pageSize = 20)
-//    ) {
-//        QuotablePagingSource(QuotableApi.create())
-//    }.flow
-//        .cachedIn(viewModelScope)
 
     fun getFlow(): Flow<PagingData<Quote>> {
         Log.d(logTag, "getFlow:")
-        val p =  Pager(
+        val p = Pager(
             config = PagingConfig(
                 pageSize = QuotablePagingSource.networkPageSize,
                 initialLoadSize = QuotablePagingSource.initialLoad,
@@ -54,38 +40,4 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
         Log.d(logTag, "getFlow: $p")
         return p
     }
-
-    /**
-     * Calls the [QuotableApi] to obta
-     * */
-//    fun getQuoteResponse() =
-//        viewModelScope.launch {
-//            val page = 2
-//            quoteResponse.value = QuotableApi.create().getQuotes(page)
-//            Log.d(logTag, "getQuoteResponse: ${quoteResponse.value}")
-//        }
-
-//    fun storeQuote(
-//        dao: QuoteDao,
-//        quoteEntity: QuoteEntity
-//    ) = viewModelScope.launch(Dispatchers.IO) {
-//        Log.d(logTag, "storeQuote: $quoteEntity")
-//        QuoteRepository.getInstance(dao).insertQuote(quoteEntity)
-//    }
-
-//    fun storeAuthor(
-//        dao: QuoteDao,
-//        author: Author
-//    ) = viewModelScope.launch(Dispatchers.IO) {
-//        Log.d(logTag, "storeAuthor: $author")
-//        QuoteRepository.getInstance(dao).insertAuthor(author)
-//    }
-
-//    fun storeTag(
-//        dao: QuoteDao,
-//        tag: Tag
-//    ) = viewModelScope.launch(Dispatchers.IO) {
-//        Log.d(logTag, "storeTag: $tag")
-//        QuoteRepository.getInstance(dao).insertTag(tag)
-//    }
 }

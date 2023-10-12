@@ -2,19 +2,15 @@ package coded.alchemy.quotable.network.paging
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadType
 import androidx.paging.PagingConfig
 import androidx.paging.PagingState
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.network.QuotableApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 
 @ExperimentalPagingApi
 @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
