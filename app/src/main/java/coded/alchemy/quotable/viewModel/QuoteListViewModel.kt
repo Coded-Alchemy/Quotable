@@ -16,9 +16,8 @@ import javax.inject.Inject
 
 /**
  * QuoteListViewModel.kt
- * @author Taji Abdullah
  *
- * @property quoteResponse
+ * @author Taji Abdullah
  * */
 @HiltViewModel
 class QuoteListViewModel @Inject constructor() : ViewModel() {
@@ -26,7 +25,7 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
 
     fun getFlow(): Flow<PagingData<Quote>> {
         Log.d(logTag, "getFlow:")
-        val p = Pager(
+        val pagingQuoteData = Pager(
             config = PagingConfig(
                 pageSize = QuotablePagingSource.networkPageSize,
                 initialLoadSize = QuotablePagingSource.initialLoad,
@@ -37,7 +36,7 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
             pagingSourceFactory = { QuotablePagingSource(QuotableApi.create()) }
         ).flow
             .cachedIn(viewModelScope)
-        Log.d(logTag, "getFlow: $p")
-        return p
+        Log.d(logTag, "getFlow: $pagingQuoteData")
+        return pagingQuoteData
     }
 }

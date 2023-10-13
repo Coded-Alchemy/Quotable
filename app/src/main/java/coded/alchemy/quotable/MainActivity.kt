@@ -15,12 +15,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: QuoteListViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             QuotableTheme {
-                QuoteListScreen(viewModel)
+                QuoteListScreen()
             }
         }
     }
