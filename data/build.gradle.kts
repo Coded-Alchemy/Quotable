@@ -43,6 +43,6 @@ dependencies {
     // Test dependencies
     testImplementation(TestDependency.TEST_RUNNER)
     testImplementation(TestDependency.J_UNIT)
-    testImplementation("org.mockito:mockito-core:4.2.0")
+    testImplementation(TestDependency.MOCKITO)
     androidTestImplementation(TestDependency.ANDROID_JUNIT)
 }

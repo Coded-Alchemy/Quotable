@@ -50,7 +50,7 @@ dependencies {
     testImplementation(TestDependency.TEST_NG)
     testImplementation(TestDependency.ROOM)
     testImplementation(TestDependency.TEST_COROUTINES)
-    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation(TestDependency.CORE_TESTING)
     androidTestImplementation(TestDependency.ANDROID_JUNIT)
     androidTestImplementation(TestDependency.TEST_RUNNER)
 }

@@ -44,14 +44,14 @@ dependencies {
     implementation(Dependency.ROOM_RUNTIME)
     implementation(Dependency.ROOM_KTX)
     ksp(Dependency.ROOM_COMPILER)
-    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation(Dependency.PAGING_RUNTIME)
 
     // Test dependencies
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.MOCK_WEB_SERVER) // MockWebServer for mocking server responses
     testImplementation(TestDependency.TEST_COROUTINES) // For testing coroutines
-    testImplementation("androidx.paging:paging-common:3.2.1")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    testImplementation("org.testng:testng:6.9.6")
+    testImplementation(TestDependency.PAGING_COMMON)
+    testImplementation(TestDependency.CORE_TESTING)
+    testImplementation(TestDependency.TEST_NG)
     androidTestImplementation(TestDependency.ANDROID_JUNIT)
 }

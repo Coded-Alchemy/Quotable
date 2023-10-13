@@ -12,6 +12,8 @@ object TestDependency {
         const val MOCK_WEB_SERVER = "4.9.1"
         const val TEST_COROUTINES = "1.6.4"
         const val TEST_RUNNER = "1.5.2"
+        const val CORE_TESTING = "2.2.0"
+        const val MOCKITO = "4.2.0"
     }
 
     const val J_UNIT = "junit:junit:${Version.J_UNIT}"
@@ -25,4 +27,7 @@ object TestDependency {
     const val ROOM = "androidx.room:room-testing:${Dependency.Version.ROOM}"
     const val TEST_RUNNER = "androidx.test:runner:${Version.TEST_RUNNER}"
     const val HILT_COMPILER = Dependency.HILT_COMPILER
+    const val PAGING_COMMON = "androidx.paging:paging-common:${Dependency.Version.PAGING}"
+    const val CORE_TESTING = "androidx.arch.core:core-testing:${Version.CORE_TESTING}"
+    const val MOCKITO = "org.mockito:mockito-core:${Version.MOCKITO}"
 }

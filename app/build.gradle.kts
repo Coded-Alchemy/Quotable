@@ -96,15 +96,15 @@ dependencies {
     implementation(Dependency.HILT)
     implementation(Dependency.HILT_COMPOSE)
     kapt(Dependency.HILT_COMPILER)
-    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+    implementation(Dependency.PAGING_COMPOSE)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     androidTestImplementation(TestDependency.ANDROID_JUNIT)
     androidTestImplementation(TestDependency.ESPRESSO_CORE)
     androidTestImplementation(platform(TestDependency.COMPOSE_BOM))
     androidTestImplementation(TestDependency.COMPOSE_UI)
-    debugImplementation(DebugDependency.composeUiTooling)
-    debugImplementation(DebugDependency.composeTestManifest)
+    debugImplementation(DebugDependency.COMPOSE_UI_TOOLING)
+    debugImplementation(DebugDependency.COMPOSE_TEST_MANIFEST)
     kaptTest(TestDependency.HILT_COMPILER)
     kaptAndroidTest(TestDependency.HILT_COMPILER)
 }

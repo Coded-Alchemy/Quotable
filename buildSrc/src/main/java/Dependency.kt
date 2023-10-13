@@ -20,6 +20,8 @@ object Dependency {
         const val HILT = "2.44.2"
         const val HILT_COMPOSE = "1.0.0"
         const val ROOM = "2.5.2"
+        const val PAGING = "3.2.1"
+        const val PAGING_COMPOSE = "3.3.0-alpha02"
     }
 
     const val APP_COMPAT = "androidx.appcompat:appcompat:${Version.APP_COMPAT}"
@@ -58,4 +60,8 @@ object Dependency {
     const val ROOM_COMPILER = "androidx.room:room-compiler:${Version.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${Version.ROOM}"
     const val ROOM_PAGING = "androidx.room:room-paging:${Version.ROOM}"
+
+    // Paging
+    const val PAGING_RUNTIME = "androidx.paging:paging-runtime:${Version.PAGING}"
+    const val PAGING_COMPOSE = "androidx.paging:paging-compose:${Version.PAGING_COMPOSE}"
 }
