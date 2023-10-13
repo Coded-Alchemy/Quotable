@@ -21,13 +21,11 @@ import androidx.room.PrimaryKey
  * */
 @Entity
 data class QuoteEntity(
-    @PrimaryKey
-    @ColumnInfo(name = "quoteId")
-    val quoteId: String,
-    @ColumnInfo(name = "authorId") val authorId: Long?,
-    @ColumnInfo(name = "content") val content: String,
-    @ColumnInfo(name = "author_slug") val author_slug: String?,
-    @ColumnInfo(name = "length") val length: Long,
-    @ColumnInfo(name = "date_added") val date_added: String?,
-    @ColumnInfo(name = "date_modified") val date_modified: String?
+    @PrimaryKey @ColumnInfo(name = "quoteId") val quoteId: String = "",
+    @ColumnInfo(name = "authorId") val authorId: Long = Long.MIN_VALUE,
+    @ColumnInfo(name = "content") val content: String = "",
+    @ColumnInfo(name = "author_slug") val author_slug: String = "",
+    @ColumnInfo(name = "length") val length: Long = Long.MIN_VALUE,
+    @ColumnInfo(name = "date_added") val date_added: String = "",
+    @ColumnInfo(name = "date_modified") val date_modified: String = ""
 )

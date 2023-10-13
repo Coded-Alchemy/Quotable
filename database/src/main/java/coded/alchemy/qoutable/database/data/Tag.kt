@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Tag(
     @PrimaryKey
     @ColumnInfo(name = "tagId")
-    val tagId: Long?,
-    @ColumnInfo(name = "quoteId") val quoteId: String,
-    @ColumnInfo(name = "content") val content: String
+    val tagId: Long = Long.MIN_VALUE,
+    @ColumnInfo(name = "quoteId") val quoteId: String = "",
+    @ColumnInfo(name = "content") val content: String = ""
 )

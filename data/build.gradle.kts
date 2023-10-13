@@ -41,7 +41,8 @@ dependencies {
     implementation(Dependency.HILT)
     kapt(Dependency.HILT_COMPILER)
     // Test dependencies
-    testImplementation(TestDependency.testRunner)
+    testImplementation(TestDependency.TEST_RUNNER)
     testImplementation(TestDependency.J_UNIT)
-    androidTestImplementation(TestDependency.androidJUnit)
+    testImplementation(TestDependency.MOCKITO)
+    androidTestImplementation(TestDependency.ANDROID_JUNIT)
 }

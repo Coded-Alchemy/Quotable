@@ -6,8 +6,16 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
 
+/**
+ * RemoteKeyDao.kt
+ *
+ * This interface provides [QuoteEntity] database functionality.
+ *
+ * @author Taji Abdullah
+ */
 @Dao
 interface QuoteDao {
     /**
@@ -20,7 +28,7 @@ interface QuoteDao {
      * Retrieve a [QuoteEntity] from the database.
      * */
     @Query("SELECT * FROM quoteEntity WHERE quoteId = :id")
-    suspend fun getQuoteById(id: Long): QuoteEntity
+    suspend fun getQuoteById(id: String): QuoteEntity
 
     @Query("SELECT * FROM quoteEntity")
     suspend fun getQuotes(): List<QuoteEntity>

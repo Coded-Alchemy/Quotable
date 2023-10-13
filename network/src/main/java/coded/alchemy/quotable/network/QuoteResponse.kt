@@ -16,10 +16,10 @@ import coded.alchemy.qoutable.database.data.QuoteEntity
  * @property results is a list of [QuoteEntity] objects
  * */
 data class QuoteResponse(
-    val count: Int,
-    val totalCount: Int,
-    val page: Int,
-    val totalPages: Int,
-    val lastItemIndex: Int,
-    val results: List<Quote>
+    val count: Int = Int.MIN_VALUE,
+    val totalCount: Int = Int.MIN_VALUE,
+    val page: Int = Int.MIN_VALUE,
+    val totalPages: Int = Int.MIN_VALUE,
+    val lastItemIndex: Int = Int.MIN_VALUE,
+    val results: List<Quote> = mutableListOf()
 )

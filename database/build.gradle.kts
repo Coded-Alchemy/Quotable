@@ -39,17 +39,18 @@ android {
 }
 
 dependencies {
-    annotationProcessor(Dependency.roomCompiler)
-    implementation(Dependency.roomRuntime)
-    implementation(Dependency.roomKtx)
-    implementation(Dependency.roomPaging)
-    implementation(Dependency.serialization)
-    ksp(Dependency.roomCompiler)
+    annotationProcessor(Dependency.ROOM_COMPILER)
+    implementation(Dependency.ROOM_RUNTIME)
+    implementation(Dependency.ROOM_KTX)
+    implementation(Dependency.ROOM_PAGING)
+    implementation(Dependency.SERIALIZATION)
+    ksp(Dependency.ROOM_COMPILER)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.TEST_NG)
-    testImplementation(TestDependency.room)
-    testImplementation(TestDependency.coroutines)
-    androidTestImplementation(TestDependency.androidJUnit)
-    androidTestImplementation(TestDependency.testRunner)
+    testImplementation(TestDependency.ROOM)
+    testImplementation(TestDependency.TEST_COROUTINES)
+    androidTestImplementation(TestDependency.CORE_TESTING)
+    androidTestImplementation(TestDependency.ANDROID_JUNIT)
+    androidTestImplementation(TestDependency.TEST_RUNNER)
 }

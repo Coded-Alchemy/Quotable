@@ -3,10 +3,10 @@
  * */
 object DebugDependency {
     object Version {
-        const val composeUiTooling = "ui-tooling"
-        const val composeTestManifest = "ui-test-manifest"
+        const val COMPOSE_UI_TOOLING = "ui-tooling"
+        const val COMPOSE_TEST_MANIFEST = "ui-test-manifest"
     }
 
-    const val composeUiTooling = "androidx.compose.ui:${Version.composeUiTooling}"
-    const val composeTestManifest = "androidx.compose.ui:${Version.composeTestManifest}"
+    const val COMPOSE_UI_TOOLING = "androidx.compose.ui:${Version.COMPOSE_UI_TOOLING}"
+    const val COMPOSE_TEST_MANIFEST = "androidx.compose.ui:${Version.COMPOSE_TEST_MANIFEST}"
 }

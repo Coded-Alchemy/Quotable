@@ -23,6 +23,11 @@ test:
 localUi:
 	./gradlew connectedAndroidTest
 
+#: Run unit and connected tests locally
+testAll:
+	./gradlew test
+	./gradlew connectedAndroidTest
+
 #: Run UI tests on gradle managed phone device
 uiTestPhone:
 	./gradlew pixel2api30DebugAndroidTest

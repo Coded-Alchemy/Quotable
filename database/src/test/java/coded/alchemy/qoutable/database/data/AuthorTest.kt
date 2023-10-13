@@ -6,7 +6,7 @@ import org.junit.Test
 /**
  * Unit test for the [Author] class.
  *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * @author Taji Abdullah
  */
 class AuthorTest {
     @Test
