@@ -1,20 +1,24 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id(Plugin.ANDROID_APP)
+    id(Plugin.kotlinAndroid)
+    id(Plugin.KT_LINT)
+//    id(Plugin.ksp)
+    id(Plugin.HILT)
+    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
-    namespace = "coded.alchemy.quotable"
-    compileSdk = 33
+    namespace = Config.nameSpace
+    compileSdk = Config.compileSdk
 
     defaultConfig {
-        applicationId = "coded.alchemy.quotable"
-        minSdk = 24
+        applicationId = Config.nameSpace
+        minSdk = Config.minSdk
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = Config.versionCode
+        versionName = Config.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.testInstrumentationRunner
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -24,46 +28,87 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(Config.proGuardFile),
+                Config.proGuardRules
             )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Config.jvmTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = Config.kotlinCompilerExtensionVersion
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += Config.excludes
+        }
+    }
+    testOptions {
+        managedDevices {
+            devices {
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api30").apply {
+                    device = "Pixel 2" // Use device profiles you typically see in Android Studio.
+                    apiLevel = 30 // Use only API levels 27 and higher.
+                    systemImageSource = "aosp" // To include Google services, use "google".
+                }
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("nexus9api30").apply {
+                    device = "Nexus 9"
+                    apiLevel = 30
+                    systemImageSource = "aosp"
+                }
+                groups {
+                    maybeCreate("phoneAndTablet").apply {
+                        targetDevices.add(devices["pixel2api30"])
+                        targetDevices.add(devices["nexus9api30"])
+                    }
+                }
+            }
         }
     }
 }
 
 dependencies {
+    // Module dependencies
+    implementation(project(mapOf("path" to ":data")))
+    implementation(project(mapOf("path" to ":database")))
+    implementation(project(mapOf("path" to ":network")))
+    // Default app dependencies
+    implementation(Dependency.CORE_KTX)
+    implementation(Dependency.LIFECYCLE_RUNTIME_KTX)
+    implementation(Dependency.COMPOSE_ACTIVITY)
+    implementation(platform(Dependency.COMPOSE_BOM))
+    implementation(Dependency.COMPOSE_UI)
+    implementation(Dependency.COMPOSE_GRAPHICS)
+    implementation(Dependency.COMPOSE_UI_PREVIEW)
+    implementation(Dependency.COMPOSE_MATERIAL)
+    // Added app dependencies
+    implementation(Dependency.ROOM_KTX)
+    implementation(Dependency.NAVIGATION)
+    implementation(Dependency.NAVIGATION_RUNTIME)
+    implementation(Dependency.HILT)
+    implementation(Dependency.HILT_COMPOSE)
+    kapt(Dependency.HILT_COMPILER)
+    implementation(Dependency.PAGING_COMPOSE)
+    // Test Dependencies
+    testImplementation(TestDependency.J_UNIT)
+    androidTestImplementation(TestDependency.ANDROID_JUNIT)
+    androidTestImplementation(TestDependency.ESPRESSO_CORE)
+    androidTestImplementation(platform(TestDependency.COMPOSE_BOM))
+    androidTestImplementation(TestDependency.COMPOSE_UI)
+    debugImplementation(DebugDependency.COMPOSE_UI_TOOLING)
+    debugImplementation(DebugDependency.COMPOSE_TEST_MANIFEST)
+    kaptTest(TestDependency.HILT_COMPILER)
+    kaptAndroidTest(TestDependency.HILT_COMPILER)
+}
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+kapt {
+    correctErrorTypes = true
 }
