@@ -48,9 +48,9 @@ dependencies {
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.TEST_NG)
-    testImplementation(TestDependency.room)
-    testImplementation(TestDependency.coroutines)
+    testImplementation(TestDependency.ROOM)
+    testImplementation(TestDependency.TEST_COROUTINES)
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
-    androidTestImplementation(TestDependency.androidJUnit)
-    androidTestImplementation(TestDependency.testRunner)
+    androidTestImplementation(TestDependency.ANDROID_JUNIT)
+    androidTestImplementation(TestDependency.TEST_RUNNER)
 }

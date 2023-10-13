@@ -19,7 +19,7 @@ object Dependency {
         const val logInterceptor = "4.10.0"
         const val HILT = "2.44.2"
         const val HILT_COMPOSE = "1.0.0"
-        const val room = "2.5.2"
+        const val ROOM = "2.5.2"
     }
 
     const val appCompat = "androidx.appcompat:appcompat:${Version.appCompat}"
@@ -54,8 +54,8 @@ object Dependency {
     const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Version.HILT_COMPOSE}"
 
     // Room
-    const val roomRuntime = "androidx.room:room-runtime:${Version.room}"
-    const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
-    const val roomKtx = "androidx.room:room-ktx:${Version.room}"
-    const val roomPaging = "androidx.room:room-paging:${Version.room}"
+    const val roomRuntime = "androidx.room:room-runtime:${Version.ROOM}"
+    const val roomCompiler = "androidx.room:room-compiler:${Version.ROOM}"
+    const val roomKtx = "androidx.room:room-ktx:${Version.ROOM}"
+    const val roomPaging = "androidx.room:room-paging:${Version.ROOM}"
 }

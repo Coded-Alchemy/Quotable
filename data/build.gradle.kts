@@ -41,8 +41,8 @@ dependencies {
     implementation(Dependency.HILT)
     kapt(Dependency.HILT_COMPILER)
     // Test dependencies
-    testImplementation(TestDependency.testRunner)
+    testImplementation(TestDependency.TEST_RUNNER)
     testImplementation(TestDependency.J_UNIT)
     testImplementation("org.mockito:mockito-core:4.2.0")
-    androidTestImplementation(TestDependency.androidJUnit)
+    androidTestImplementation(TestDependency.ANDROID_JUNIT)
 }

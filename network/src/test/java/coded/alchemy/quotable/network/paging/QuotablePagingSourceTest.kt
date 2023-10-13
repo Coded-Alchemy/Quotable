@@ -18,6 +18,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
+/**
+ * Unit tests for the [QuotablePagingSource] class.
+ *
+ * @author Taji Abdullah
+ */
 class QuotablePagingSourceTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var quotablePagingSource: QuotablePagingSource

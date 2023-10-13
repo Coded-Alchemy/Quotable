@@ -6,23 +6,23 @@ object TestDependency {
     object Version {
         const val J_UNIT = "4.12"
         const val TEST_NG = "6.9.6"
-        const val androidJUnit = "1.1.5"
-        const val espressoCore = "3.5.1"
-        const val composeUiTest = "ui-test-junit4"
-        const val mockWebServer = "4.9.1"
-        const val testCoroutines = "1.6.4"
-        const val testRunner = "1.5.2"
+        const val ANDROID_JUNIT = "1.1.5"
+        const val ESPRESSO_CORE = "3.5.1"
+        const val COMPOSE_UI_TEST = "ui-test-junit4"
+        const val MOCK_WEB_SERVER = "4.9.1"
+        const val TEST_COROUTINES = "1.6.4"
+        const val TEST_RUNNER = "1.5.2"
     }
 
     const val J_UNIT = "junit:junit:${Version.J_UNIT}"
     const val TEST_NG = "org.testng:testng:${Version.TEST_NG}"
-    const val androidJUnit = "androidx.test.ext:junit:${Version.androidJUnit}"
-    const val espressoCore = "androidx.test.espresso:espresso-core:${Version.espressoCore}"
-    const val composeBom = Dependency.composeBom
-    const val composeUi = "androidx.compose.ui:${Version.composeUiTest}"
-    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer}"
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.testCoroutines}"
-    const val room = "androidx.room:room-testing:${Dependency.Version.room}"
-    const val testRunner = "androidx.test:runner:${Version.testRunner}"
+    const val ANDROID_JUNIT = "androidx.test.ext:junit:${Version.ANDROID_JUNIT}"
+    const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Version.ESPRESSO_CORE}"
+    const val COMPOSE_BOM = Dependency.composeBom
+    const val COMPOSE_UI = "androidx.compose.ui:${Version.COMPOSE_UI_TEST}"
+    const val MOCK_WEB_SERVER = "com.squareup.okhttp3:mockwebserver:${Version.MOCK_WEB_SERVER}"
+    const val TEST_COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.TEST_COROUTINES}"
+    const val ROOM = "androidx.room:room-testing:${Dependency.Version.ROOM}"
+    const val TEST_RUNNER = "androidx.test:runner:${Version.TEST_RUNNER}"
     const val HILT_COMPILER = Dependency.HILT_COMPILER
 }
