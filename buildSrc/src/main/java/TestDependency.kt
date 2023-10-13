@@ -18,7 +18,7 @@ object TestDependency {
     const val TEST_NG = "org.testng:testng:${Version.TEST_NG}"
     const val ANDROID_JUNIT = "androidx.test.ext:junit:${Version.ANDROID_JUNIT}"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Version.ESPRESSO_CORE}"
-    const val COMPOSE_BOM = Dependency.composeBom
+    const val COMPOSE_BOM = Dependency.COMPOSE_BOM
     const val COMPOSE_UI = "androidx.compose.ui:${Version.COMPOSE_UI_TEST}"
     const val MOCK_WEB_SERVER = "com.squareup.okhttp3:mockwebserver:${Version.MOCK_WEB_SERVER}"
     const val TEST_COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.TEST_COROUTINES}"

@@ -3,50 +3,50 @@
  * */
 object Dependency {
     object Version {
-        const val appCompat = "1.6.1"
-        const val coreKtx = "1.12.0"
-        const val lifecycleRuntimeKtx = "2.6.2"
-        const val serialization = "1.3.0"
-        const val composeActivity = "1.7.2"
-        const val composeBom = "2023.03.00"
-        const val composeUi = "ui"
-        const val composeGraphics = "ui-graphics"
-        const val composeUiPreview = "ui-tooling-preview"
-        const val composeMaterial = "material3"
-        const val navigation = "2.7.1"
-        const val navRunTime = "2.7.3"
-        const val retrofit = "2.9.0"
-        const val logInterceptor = "4.10.0"
+        const val APP_COMPAT = "1.6.1"
+        const val CORE_KTX = "1.12.0"
+        const val LIFECYCLE_RUNTIME_KTX = "2.6.2"
+        const val SERIALIZATION = "1.3.0"
+        const val COMPOSE_ACTIVITY = "1.7.2"
+        const val COMPOSE_BOM = "2023.03.00"
+        const val COMPOSE_UI = "ui"
+        const val COMPOSE_GRAPHICS = "ui-graphics"
+        const val COMPOSE_UI_PREVIEW = "ui-tooling-preview"
+        const val COMPOSE_MATERIAL = "material3"
+        const val NAVIGATION = "2.7.1"
+        const val NAVIGATION_RUNTIME = "2.7.3"
+        const val RETROFIT = "2.9.0"
+        const val LOG_INTERCEPTOR = "4.10.0"
         const val HILT = "2.44.2"
         const val HILT_COMPOSE = "1.0.0"
         const val ROOM = "2.5.2"
     }
 
-    const val appCompat = "androidx.appcompat:appcompat:${Version.appCompat}"
+    const val APP_COMPAT = "androidx.appcompat:appcompat:${Version.APP_COMPAT}"
 
     // ktx
-    const val coreKtx = "androidx.core:core-ktx:${Version.coreKtx}"
-    const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycleRuntimeKtx}"
+    const val CORE_KTX = "androidx.core:core-ktx:${Version.CORE_KTX}"
+    const val LIFECYCLE_RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.LIFECYCLE_RUNTIME_KTX}"
 
     // Kotlin Json Serialization
-    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Version.serialization}"
+    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Version.SERIALIZATION}"
 
     // Compose
-    const val composeActivity = "androidx.activity:activity-compose:${Version.composeActivity}"
-    const val composeBom = "androidx.compose:compose-bom:${Version.composeBom}"
-    const val composeUi = "androidx.compose.ui:${Version.composeUi}"
-    const val composeGraphics = "androidx.compose.ui:${Version.composeGraphics}"
-    const val composeUiPreview = "androidx.compose.ui:${Version.composeUiPreview}"
-    const val composeMaterial = "androidx.compose.material3:${Version.composeMaterial}"
+    const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${Version.COMPOSE_ACTIVITY}"
+    const val COMPOSE_BOM = "androidx.compose:compose-bom:${Version.COMPOSE_BOM}"
+    const val COMPOSE_UI = "androidx.compose.ui:${Version.COMPOSE_UI}"
+    const val COMPOSE_GRAPHICS = "androidx.compose.ui:${Version.COMPOSE_GRAPHICS}"
+    const val COMPOSE_UI_PREVIEW = "androidx.compose.ui:${Version.COMPOSE_UI_PREVIEW}"
+    const val COMPOSE_MATERIAL = "androidx.compose.material3:${Version.COMPOSE_MATERIAL}"
 
     // Navigation
-    const val navigation = "androidx.navigation:navigation-compose:${Version.navigation}"
-    const val navRunTime = "androidx.navigation:navigation-runtime-ktx:${Version.navRunTime}"
+    const val NAVIGATION = "androidx.navigation:navigation-compose:${Version.NAVIGATION}"
+    const val NAVIGATION_RUNTIME = "androidx.navigation:navigation-runtime-ktx:${Version.NAVIGATION_RUNTIME}"
 
     // Retrofit
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
-    const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.logInterceptor}"
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Version.RETROFIT}"
+    const val GSON_CONVERTER = "com.squareup.retrofit2:converter-gson:${Version.RETROFIT}"
+    const val LOG_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Version.LOG_INTERCEPTOR}"
 
     // Hilt
     const val HILT = "com.google.dagger:hilt-android:${Version.HILT}"
@@ -54,8 +54,8 @@ object Dependency {
     const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Version.HILT_COMPOSE}"
 
     // Room
-    const val roomRuntime = "androidx.room:room-runtime:${Version.ROOM}"
-    const val roomCompiler = "androidx.room:room-compiler:${Version.ROOM}"
-    const val roomKtx = "androidx.room:room-ktx:${Version.ROOM}"
-    const val roomPaging = "androidx.room:room-paging:${Version.ROOM}"
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:${Version.ROOM}"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:${Version.ROOM}"
+    const val ROOM_KTX = "androidx.room:room-ktx:${Version.ROOM}"
+    const val ROOM_PAGING = "androidx.room:room-paging:${Version.ROOM}"
 }

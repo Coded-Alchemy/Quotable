@@ -39,12 +39,12 @@ android {
 }
 
 dependencies {
-    annotationProcessor(Dependency.roomCompiler)
-    implementation(Dependency.roomRuntime)
-    implementation(Dependency.roomKtx)
-    implementation(Dependency.roomPaging)
-    implementation(Dependency.serialization)
-    ksp(Dependency.roomCompiler)
+    annotationProcessor(Dependency.ROOM_COMPILER)
+    implementation(Dependency.ROOM_RUNTIME)
+    implementation(Dependency.ROOM_KTX)
+    implementation(Dependency.ROOM_PAGING)
+    implementation(Dependency.SERIALIZATION)
+    ksp(Dependency.ROOM_COMPILER)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.TEST_NG)

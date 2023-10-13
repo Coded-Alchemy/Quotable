@@ -38,12 +38,12 @@ dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":database")))
     // Retrofit
-    implementation(Dependency.retrofit)
-    implementation(Dependency.gsonConverter)
-    implementation(Dependency.logInterceptor)
-    implementation(Dependency.roomRuntime)
-    implementation(Dependency.roomKtx)
-    ksp(Dependency.roomCompiler)
+    implementation(Dependency.RETROFIT)
+    implementation(Dependency.GSON_CONVERTER)
+    implementation(Dependency.LOG_INTERCEPTOR)
+    implementation(Dependency.ROOM_RUNTIME)
+    implementation(Dependency.ROOM_KTX)
+    ksp(Dependency.ROOM_COMPILER)
     implementation("androidx.paging:paging-runtime:3.2.1")
 
     // Test dependencies
