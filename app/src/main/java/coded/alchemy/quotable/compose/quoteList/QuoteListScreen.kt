@@ -7,15 +7,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -23,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +41,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.quotable.R
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
 
@@ -56,16 +65,15 @@ fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
 fun Scaffolding(articleList: LazyPagingItems<Quote>) {
     var presses by remember { mutableIntStateOf(0) }
 
+
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-//                colors = topAppBarColors(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-//                    titleContentColor = MaterialTheme.colorScheme.primary,
-//                ),
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
                 title = {
                     Text(
-                        "Quotable",
+                        stringResource(id = R.string.app_name),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -73,10 +81,14 @@ fun Scaffolding(articleList: LazyPagingItems<Quote>) {
             )
         },
         bottomBar = {
-            BottomAppBar(
+            NavigationBar(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.primary,
+
             ) {
+                IconButton(onClick = { /* do something */ }) {
+                    Icon(Icons.Filled.Check, contentDescription = "Localized description")
+                }
                 Text(
                     modifier = Modifier
                         .fillMaxWidth(),
