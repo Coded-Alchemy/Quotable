@@ -23,7 +23,7 @@ import javax.inject.Inject
 class QuoteListViewModel @Inject constructor() : ViewModel() {
     private val logTag = this.javaClass.simpleName
 
-    fun getFlow(): Flow<PagingData<Quote>> {
+    fun getQuoteFlow(): Flow<PagingData<Quote>> {
         Log.d(logTag, "getFlow:")
         val pagingQuoteData = Pager(
             config = PagingConfig(

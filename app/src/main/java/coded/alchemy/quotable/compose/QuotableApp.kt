@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -19,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coded.alchemy.quotable.R
+import coded.alchemy.quotable.compose.authorList.AuthorListScreen
 import coded.alchemy.quotable.compose.quoteDetail.QuoteDetailScreen
 import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
 
@@ -46,6 +48,9 @@ fun QuotableNavHost(
         ) {
             QuoteDetailScreen()
         }
+        composable(Screen.QuoteAuthor.route) {
+            AuthorListScreen()
+        }
     }
 }
 
@@ -68,7 +73,7 @@ fun QuotableAppbar() {
 fun QuotableBottomNavigation(navController: NavController = rememberNavController()) {
     val screens = listOf(
         Screen.QuoteList,
-        Screen.QuoteDetail
+        Screen.QuoteAuthor
     )
 
     NavigationBar(
@@ -82,6 +87,10 @@ fun QuotableBottomNavigation(navController: NavController = rememberNavControlle
         screens.forEach { screen ->
             NavigationBarItem(
                 selected = currentRoute == screen.route,
+                label = {
+                        Text(text = stringResource(id = screen.resourceId),
+                            fontWeight = FontWeight.SemiBold)
+                },
                 onClick = {
                     navController.navigate(screen.route) {
                         navController.graph.startDestinationRoute?.let { route ->

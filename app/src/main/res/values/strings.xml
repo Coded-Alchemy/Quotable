@@ -3,4 +3,5 @@
 
     <string name="quoteList">Quotes</string>
     <string name="quoteDetail">Quote</string>
+    <string name="quoteAuthors">Authors</string>
 </resources>
