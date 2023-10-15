@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -21,11 +20,9 @@ import javax.inject.Inject
  * */
 @HiltViewModel
 class QuoteListViewModel @Inject constructor() : ViewModel() {
-    private val logTag = this.javaClass.simpleName
 
     fun getQuoteFlow(): Flow<PagingData<Quote>> {
-        Log.d(logTag, "getFlow:")
-        val pagingQuoteData = Pager(
+        return Pager(
             config = PagingConfig(
                 pageSize = QuotablePagingSource.networkPageSize,
                 initialLoadSize = QuotablePagingSource.initialLoad,
@@ -36,7 +33,5 @@ class QuoteListViewModel @Inject constructor() : ViewModel() {
             pagingSourceFactory = { QuotablePagingSource(QuotableApi.create()) }
         ).flow
             .cachedIn(viewModelScope)
-        Log.d(logTag, "getFlow: $pagingQuoteData")
-        return pagingQuoteData
     }
 }

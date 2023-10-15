@@ -40,7 +40,6 @@ const val TAG = "QuoteListScreen"
 fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel(), navHostController: NavHostController = rememberNavController()) {
     val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
-//    Log.d(TAG, "QuoteListScreen: $articleList")
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
