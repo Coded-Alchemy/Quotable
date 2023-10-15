@@ -106,7 +106,7 @@ dependencies {
     debugImplementation(DebugDependency.COMPOSE_TEST_MANIFEST)
     kaptTest(TestDependency.HILT_COMPILER)
     kaptAndroidTest(TestDependency.HILT_COMPILER)
-//    androidTestImplementation("androidx.navigation:navigation-testing:${Dependency.Version.NAVIGATION}")
+    androidTestImplementation("androidx.navigation:navigation-testing:${Dependency.Version.NAVIGATION}")
 //    androidTestImplementation("androidx.hilt:hilt-navigation-compose:1.1.0-beta01")
 }
 
