@@ -1,19 +1,11 @@
 package coded.alchemy.quotable.network.paging
 
-import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.QuoteResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Test
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
-import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -65,7 +57,12 @@ class QuotablePagingSourceTest {
 
     private fun createMockResponse(): QuoteResponse {
         return QuoteResponse(
-            count = 10, totalCount = 100, page = 1, totalPages = 5, lastItemIndex = 10, emptyList()
+            count = 10,
+            totalCount = 100,
+            page = 1,
+            totalPages = 5,
+            lastItemIndex = 10,
+            emptyList()
         )
     }
 }

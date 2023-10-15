@@ -6,5 +6,4 @@ import coded.alchemy.quotable.viewModel.QuoteListViewModel
 
 @Composable
 fun QuoteDetailScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
-
 }

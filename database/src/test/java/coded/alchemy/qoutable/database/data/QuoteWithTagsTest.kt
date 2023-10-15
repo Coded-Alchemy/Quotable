@@ -26,4 +26,3 @@ class QuoteWithTagsTest {
         assertEquals(tags, quoteWithTags.tags)
     }
 }
-

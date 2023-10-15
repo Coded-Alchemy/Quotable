@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -36,7 +37,7 @@ import coded.alchemy.quotable.viewModel.QuoteListViewModel
 const val TAG = "QuoteListScreen"
 
 @Composable
-fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
+fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel(), navHostController: NavHostController = rememberNavController()) {
     val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
 //    Log.d(TAG, "QuoteListScreen: $articleList")
@@ -44,13 +45,13 @@ fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Scaffolding(articleList)
+        Scaffolding(articleList, navHostController)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Scaffolding(articleList: LazyPagingItems<Quote>) {
+fun Scaffolding(articleList: LazyPagingItems<Quote>, navHostController: NavHostController) {
     var presses by remember { mutableIntStateOf(0) }
     val navController = rememberNavController()
 
@@ -59,8 +60,8 @@ fun Scaffolding(articleList: LazyPagingItems<Quote>) {
             QuotableAppbar()
         },
         bottomBar = {
-            QuotableBottomNavigation()
-        },
+            QuotableBottomNavigation(navHostController)
+        }
 //        floatingActionButton = {
 //            FloatingActionButton(onClick = { presses++ }) {
 //                Icon(Icons.Default.Add, contentDescription = "Add")
@@ -70,7 +71,7 @@ fun Scaffolding(articleList: LazyPagingItems<Quote>) {
         Column(
             modifier = Modifier
                 .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             QuoteList(articleList)
         }
@@ -111,8 +112,6 @@ fun QuoteListItem(quoteEntity: Quote) {
         }
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable

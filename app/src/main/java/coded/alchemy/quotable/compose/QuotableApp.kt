@@ -26,7 +26,8 @@ import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
 
 @Composable
 fun QuotableApp() {
-    QuotableNavHost()
+    val navController = rememberNavController()
+    QuotableNavHost(navController = navController)
 }
 
 @Composable
@@ -41,10 +42,10 @@ fun QuotableNavHost(
         startDestination = startDestination
     ) {
         composable(startDestination) {
-            QuoteListScreen()
+            QuoteListScreen(navHostController = navController)
         }
         composable(
-            Screen.QuoteDetail.route + "/{quoteId}",
+            Screen.QuoteDetail.route + "/{quoteId}"
         ) {
             QuoteDetailScreen()
         }
@@ -70,7 +71,7 @@ fun QuotableAppbar() {
 }
 
 @Composable
-fun QuotableBottomNavigation(navController: NavController = rememberNavController()) {
+fun QuotableBottomNavigation(navController: NavController) {
     val screens = listOf(
         Screen.QuoteList,
         Screen.QuoteAuthor
@@ -78,9 +79,9 @@ fun QuotableBottomNavigation(navController: NavController = rememberNavControlle
 
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.primary
 
-        ) {
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -88,33 +89,32 @@ fun QuotableBottomNavigation(navController: NavController = rememberNavControlle
             NavigationBarItem(
                 selected = currentRoute == screen.route,
                 label = {
-                        Text(text = stringResource(id = screen.resourceId),
-                            fontWeight = FontWeight.SemiBold)
+                    Text(
+                        text = stringResource(id = screen.resourceId),
+                        fontWeight = FontWeight.SemiBold
+                    )
                 },
                 onClick = {
-                    navController.navigate(screen.route) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
-                            }
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                    navController.navigate(screen.route) /*{
+//                        navController.graph.startDestinationRoute?.let { route ->
+//                            popUpTo(route) {
+//                                saveState = true
+//                            }
+//                        }
+//                        launchSingleTop = true
+//                        restoreState = true
+                    }*/
                 },
-                icon = { /*TODO*/ })
+                icon = { /*TODO*/ }
+            )
         }
 
-
-
 //        IconButton(onClick = { /* do something */ }) {
 //            Icon(Icons.Filled.Check, contentDescription = "Localized description")
 //        }
 //        IconButton(onClick = { /* do something */ }) {
 //            Icon(Icons.Filled.Check, contentDescription = "Localized description")
 //        }
-
-
 
 //                Text(
 //                    modifier = Modifier
