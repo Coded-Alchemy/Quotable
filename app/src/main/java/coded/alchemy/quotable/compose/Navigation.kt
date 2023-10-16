@@ -43,12 +43,12 @@ fun QuotableNavHost(
             QuoteListScreen(selectedQuote = actions.selectedQuote)
         }
         composable(
-            Screen.QuoteDetail.route + CAT_DETAIL_ID_KEY,
-            arguments = listOf(
+            Screen.QuoteDetail.route /*+ CAT_DETAIL_ID_KEY*/,
+            /*arguments = listOf(
                 navArgument(CAT_DETAIL_ID_KEY) {
                     type = NavType.StringType
                 }
-            )
+            )*/
         ) {
             QuoteDetailScreen()
         }
@@ -62,7 +62,7 @@ class AppActions(
     navController: NavHostController
 ) {
     val selectedQuote: (String) -> Unit = { quoteId: String ->
-        navController.navigate("${AppDestinations.QUOTE_DETAIL}/$quoteId")
+        navController.navigate("${AppDestinations.QUOTE_DETAIL}") // /$quoteId
     }
     val navigateUp: () -> Unit = {
         navController.navigateUp()
