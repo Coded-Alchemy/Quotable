@@ -87,7 +87,7 @@ class QuoteDaoTest {
     fun testGetAllQuotes() = runBlocking {
         // Arrange
         val quote1 = QuoteEntity("1", Long.MAX_VALUE, "Quote 1")
-        val quote2 = QuoteEntity("2",  content = "blah blah blah")
+        val quote2 = QuoteEntity("2", content = "blah blah blah")
 
         // Act
         quoteDao.insertQuote(quote1, quote2)

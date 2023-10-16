@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coded.alchemy.qoutable.database.dao.QuoteDao
-import coded.alchemy.qoutable.database.dao.RemoteKeyDao
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag

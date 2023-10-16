@@ -21,7 +21,9 @@ import androidx.room.PrimaryKey
  * */
 @Entity
 data class QuoteEntity(
-    @PrimaryKey @ColumnInfo(name = "quoteId") val quoteId: String = "",
+    @PrimaryKey
+    @ColumnInfo(name = "quoteId")
+    val quoteId: String = "",
     @ColumnInfo(name = "authorId") val authorId: Long = Long.MIN_VALUE,
     @ColumnInfo(name = "content") val content: String = "",
     @ColumnInfo(name = "author_slug") val author_slug: String = "",
