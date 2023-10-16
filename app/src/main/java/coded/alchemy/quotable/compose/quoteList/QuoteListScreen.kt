@@ -1,31 +1,19 @@
 package coded.alchemy.quotable.compose.quoteList
 
-import android.util.Log
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,103 +27,78 @@ import coded.alchemy.quotable.viewModel.QuoteListViewModel
 const val TAG = "QuoteListScreen"
 
 @Composable
-fun QuoteListScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
-    val articleList = viewModel.getFlow().collectAsLazyPagingItems()
+fun QuoteListScreen(
+    selectedQuote: (String) -> Unit,
+    viewModel: QuoteListViewModel = hiltViewModel()
+) {
+    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
-//    Log.d(TAG, "QuoteListScreen: $articleList")
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Scaffolding(articleList)
+        QuoteList(articleList = articleList, selectedQuote = selectedQuote)
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Display a list of quotes.
+ * */
 @Composable
-fun Scaffolding(articleList: LazyPagingItems<Quote>) {
-    var presses by remember { mutableIntStateOf(0) }
-
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-//                colors = topAppBarColors(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-//                    titleContentColor = MaterialTheme.colorScheme.primary,
-//                ),
-                title = {
-                    Text(
-                        "Quotable",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            )
-        },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    text = "Bottom app bar",
-                )
-            }
-        },
-//        floatingActionButton = {
-//            FloatingActionButton(onClick = { presses++ }) {
-//                Icon(Icons.Default.Add, contentDescription = "Add")
-//            }
-//        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            QuoteList(articleList)
-        }
-    }
-}
-
-@Composable
-fun QuoteList(articleList: LazyPagingItems<Quote>) {
+fun QuoteList(
+    articleList: LazyPagingItems<Quote>,
+    selectedQuote: (String) -> Unit
+) {
     LazyColumn {
         items(
             count = articleList.itemCount
         ) { index ->
             val article = articleList[index]
             article?.let { item ->
-                QuoteListItem(item)
+                QuoteListItem(item, selectedQuote)
             }
         }
     }
 }
 
+/**
+ * Display a single quote in the list.
+ * */
 @Composable
-fun QuoteListItem(quoteEntity: Quote) {
+fun QuoteListItem(
+    quoteEntity: Quote,
+    selectedQuote: (String) -> Unit
+) {
     Card(
         modifier =
         Modifier
             .padding(all = 10.dp)
             .fillMaxWidth()
+            .clickable(onClick = { selectedQuote(quoteEntity._id) })
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
-            Text(quoteEntity.content, fontSize = 25.sp, color = Color.Black, fontWeight = FontWeight.W700, modifier = Modifier.padding(10.dp))
-            quoteEntity.author?.let { Text(it, color = Color.Gray, modifier = Modifier.padding(10.dp)) }
+            Text(
+                quoteEntity.content,
+                fontSize = 25.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.W700,
+                modifier = Modifier.padding(10.dp)
+            )
+            quoteEntity.author?.let {
+                Text(
+                    it,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
         }
     }
 }
 
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    QuotableTheme {
-//        Scaffolding()
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    QuotableTheme {
+//        QuoteListScreen()
+    }
+}

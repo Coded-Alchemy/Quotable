@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coded.alchemy.qoutable.database.QuotableDatabase
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.RemoteKey
 import kotlinx.coroutines.runBlocking
 import org.junit.After
