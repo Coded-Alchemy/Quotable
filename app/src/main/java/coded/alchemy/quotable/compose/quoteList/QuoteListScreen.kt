@@ -28,7 +28,7 @@ const val TAG = "QuoteListScreen"
 
 @Composable
 fun QuoteListScreen(
-    selectedQuote: (String) -> Unit,
+    onQuoteClick: (String) -> Unit,
     viewModel: QuoteListViewModel = hiltViewModel()
 ) {
     val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
@@ -37,7 +37,7 @@ fun QuoteListScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(articleList = articleList, selectedQuote = selectedQuote)
+        QuoteList(articleList = articleList, onQuoteClick = onQuoteClick)
     }
 }
 
@@ -47,7 +47,7 @@ fun QuoteListScreen(
 @Composable
 fun QuoteList(
     articleList: LazyPagingItems<Quote>,
-    selectedQuote: (String) -> Unit
+    onQuoteClick: (String) -> Unit
 ) {
     LazyColumn {
         items(
@@ -55,7 +55,7 @@ fun QuoteList(
         ) { index ->
             val article = articleList[index]
             article?.let { item ->
-                QuoteListItem(item, selectedQuote)
+                QuoteListItem(item, onQuoteClick)
             }
         }
     }

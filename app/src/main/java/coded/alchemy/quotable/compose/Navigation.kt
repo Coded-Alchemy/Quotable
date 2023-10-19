@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.compose
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -19,12 +20,7 @@ import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
 /**
  *
  */
-object AppDestinations {
-    const val QUOTE_LIST = "quoteList"
-    const val QUOTE_DETAIL = "quoteDetail"
-    const val QUOTE_AUTHOR = "quoteAuthor"
-    const val CAT_DETAIL_ID_KEY = "quoteId"
-}
+
 
 @Composable
 fun QuotableNavHost(
@@ -40,16 +36,16 @@ fun QuotableNavHost(
         startDestination = startDestination
     ) {
         composable(startDestination) {
-            QuoteListScreen(selectedQuote = actions.selectedQuote)
+            QuoteListScreen(onQuoteClick = {navController.navigate("${AppDestinations.QUOTE_DETAIL}/${CAT_DETAIL_ID_KEY}")})
         }
         composable(
-            Screen.QuoteDetail.route, /*+ CAT_DETAIL_ID_KEY*/
-//            arguments = listOf(
-//                navArgument(CAT_DETAIL_ID_KEY) {
-//                    type = NavType.StringType
-//                }
-//            )
-        ) { backStack ->
+            "${AppDestinations.QUOTE_DETAIL}/{${CAT_DETAIL_ID_KEY}}",
+            arguments = listOf(
+                navArgument(CAT_DETAIL_ID_KEY) {
+                    type = NavType.StringType
+                }
+            )
+        ) { /*backStack ->
             val arguments = requireNotNull(backStack.arguments)
             arguments.getString(CAT_DETAIL_ID_KEY)
                 ?.let { quoteId ->
@@ -57,7 +53,11 @@ fun QuotableNavHost(
                         quoteId = quoteId,
                         navigateUp = actions.navigateUp
                     )
-                }
+                }*/
+            QuoteDetailScreen(
+                quoteId = CAT_DETAIL_ID_KEY,
+                navigateUp = actions.navigateUp
+            )
         }
         composable(Screen.QuoteAuthor.route) {
             AuthorListScreen()
@@ -69,7 +69,9 @@ class AppActions(
     navController: NavHostController
 ) {
     val selectedQuote: (String) -> Unit = { quoteId: String ->
-        navController.navigate("${AppDestinations.QUOTE_DETAIL}") // /$quoteId
+        Log.d("TAG", "Yooooooooooooo: ")
+        CAT_DETAIL_ID_KEY = quoteId
+        navController.navigate("${AppDestinations.QUOTE_DETAIL}/${quoteId}")
     }
     val navigateUp: () -> Unit = {
         navController.navigateUp()
@@ -80,4 +82,11 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     data object QuoteList : Screen(AppDestinations.QUOTE_LIST, R.string.quoteList)
     data object QuoteDetail : Screen(AppDestinations.QUOTE_DETAIL, R.string.quoteDetail)
     data object QuoteAuthor : Screen(AppDestinations.QUOTE_AUTHOR, R.string.quoteAuthors)
+}
+
+object AppDestinations {
+    const val QUOTE_LIST = "quoteList"
+    const val QUOTE_DETAIL = "quoteDetail"
+    const val QUOTE_AUTHOR = "quoteAuthor"
+    var CAT_DETAIL_ID_KEY = "quoteId"
 }
