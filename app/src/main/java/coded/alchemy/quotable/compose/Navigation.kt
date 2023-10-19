@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.compose
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -36,28 +35,30 @@ fun QuotableNavHost(
         startDestination = startDestination
     ) {
         composable(startDestination) {
-            QuoteListScreen(onQuoteClick = {navController.navigate("${AppDestinations.QUOTE_DETAIL}/${CAT_DETAIL_ID_KEY}")})
+//            QuoteListScreen(onQuoteClick = {navController.navigate("${AppDestinations.QUOTE_DETAIL}/${CAT_DETAIL_ID_KEY}")})
+            QuoteListScreen(onQuoteClick = actions.displayQuote)
         }
         composable(
-            "${AppDestinations.QUOTE_DETAIL}/{${CAT_DETAIL_ID_KEY}}",
+            "${AppDestinations.QUOTE_DETAIL}/{$CAT_DETAIL_ID_KEY}",
             arguments = listOf(
                 navArgument(CAT_DETAIL_ID_KEY) {
                     type = NavType.StringType
                 }
             )
-        ) { /*backStack ->
+        ) { backStack ->
             val arguments = requireNotNull(backStack.arguments)
-            arguments.getString(CAT_DETAIL_ID_KEY)
-                ?.let { quoteId ->
-                    QuoteDetailScreen(
-                        quoteId = quoteId,
-                        navigateUp = actions.navigateUp
-                    )
-                }*/
-            QuoteDetailScreen(
-                quoteId = CAT_DETAIL_ID_KEY,
-                navigateUp = actions.navigateUp
-            )
+            arguments.getString(CAT_DETAIL_ID_KEY)?.let {
+                QuoteDetailScreen(
+                    quoteId = it,
+                    navigateUp = actions.navigateUp
+                )
+            }
+//            QuoteDetailScreen(
+//                quoteId = CAT_DETAIL_ID_KEY,
+//                navigateUp = actions.navigateUp
+//            )
+
+
         }
         composable(Screen.QuoteAuthor.route) {
             AuthorListScreen()
@@ -68,10 +69,8 @@ fun QuotableNavHost(
 class AppActions(
     navController: NavHostController
 ) {
-    val selectedQuote: (String) -> Unit = { quoteId: String ->
-        Log.d("TAG", "Yooooooooooooo: ")
-        CAT_DETAIL_ID_KEY = quoteId
-        navController.navigate("${AppDestinations.QUOTE_DETAIL}/${quoteId}")
+    val displayQuote: (String) -> Unit = { quoteId: String ->
+        navController.navigate("${AppDestinations.QUOTE_DETAIL}/$quoteId")
     }
     val navigateUp: () -> Unit = {
         navController.navigateUp()
