@@ -35,11 +35,15 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     // Module dependency
     implementation(project(mapOf("path" to ":database")))
     implementation(Dependency.HILT)
-    kapt(Dependency.HILT_COMPILER)
+    annotationProcessor(Dependency.HILT_COMPILER)
     // Test dependencies
     testImplementation(TestDependency.TEST_RUNNER)
     testImplementation(TestDependency.J_UNIT)

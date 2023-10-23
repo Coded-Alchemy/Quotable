@@ -13,11 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
 
 @Composable
 fun QuoteDetailScreen(
-    viewModel: QuoteListViewModel = hiltViewModel(),
+    viewModel: QuoteDetailViewModel = hiltViewModel(),
     quoteId: String,
     navigateUp: () -> Unit
 ) {
