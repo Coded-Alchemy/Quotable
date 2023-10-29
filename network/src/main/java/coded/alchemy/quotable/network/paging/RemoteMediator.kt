@@ -11,6 +11,9 @@ import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
+import coded.alchemy.quotable.data.AuthorRepository
+import coded.alchemy.quotable.data.QuoteRepository
+import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -24,7 +27,9 @@ class RemoteMediator(
     private val quotableApi: QuotableApi
 ) : RemoteMediator<Int, QuoteEntity>() {
 
-    private val quoteDao = database.quoteDao()
+    //    private val quoteDao = database.quoteDao()
+//    private val tagDao = database.tagDao()
+//    private val authorDao = database.authorDao()
     private val remoteKeyDao = database.remoteKeyDao()
 
 //    override suspend fun initialize(): InitializeAction {
@@ -122,14 +127,15 @@ class RemoteMediator(
                     date_added = quote.dateAdded,
                     date_modified = quote.dateModified
                 )
-            quoteDao.insertQuote(quoteEntity)
+            QuoteRepository.getInstance(database.quoteDao()).insertQuote(quoteEntity)
 
             val author =
                 Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
-            quoteDao.insertAuthor(author)
+            AuthorRepository.getInstance(database.authorDao()).insertAuthor(author)
 
             for (content in quote.tags) {
-                quoteDao.insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
+                TagRepository.getInstance(database.tagDao())
+                    .insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
             }
         }
     }
