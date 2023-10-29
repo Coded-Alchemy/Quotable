@@ -24,7 +24,7 @@ class RemoteMediator(
     private val quotableApi: QuotableApi
 ) : RemoteMediator<Int, QuoteEntity>() {
 
-    private val dao = database.quoteDao()
+    private val quoteDao = database.quoteDao()
     private val remoteKeyDao = database.remoteKeyDao()
 
 //    override suspend fun initialize(): InitializeAction {
@@ -122,14 +122,14 @@ class RemoteMediator(
                     date_added = quote.dateAdded,
                     date_modified = quote.dateModified
                 )
-            dao.insertQuote(quoteEntity)
+            quoteDao.insertQuote(quoteEntity)
 
             val author =
                 Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
-            dao.insertAuthor(author)
+            quoteDao.insertAuthor(author)
 
             for (content in quote.tags) {
-                dao.insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
+                quoteDao.insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
             }
         }
     }
