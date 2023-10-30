@@ -49,7 +49,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
-      - run: ./gradlew build --no-daemon
+      - run: |
+          ./gradlew ktlintFormat
+          ./gradlew build --no-daemon
 
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
