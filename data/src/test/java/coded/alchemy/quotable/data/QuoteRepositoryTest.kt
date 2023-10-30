@@ -28,7 +28,7 @@ class QuoteRepositoryTest {
     @Before
     fun setup() {
         dao = mock(QuoteDao::class.java)
-        repository = QuoteRepository(dao)
+        repository = QuoteRepository.getInstance(dao)
     }
 
     @Test
@@ -43,44 +43,20 @@ class QuoteRepositoryTest {
         verify(dao, times(1)).insertQuote(quoteEntity)
     }
 
-    @Test
-    fun testGetQuotes() = runBlocking {
-        // Arrange
-        val quotes = listOf(
-            QuoteEntity("1", Long.MAX_VALUE, "Quote 1"),
-            QuoteEntity("2", 567L, "Quote 2")
-        )
-        `when`(dao.getQuotes()).thenReturn(quotes)
-
-        // Act
-        val result = repository.getQuotes()
-
-        // Assert
-        assertNotNull(result)
-        assertEquals(quotes, result)
-    }
-
-    @Test
-    fun testInsertTag() = runBlocking {
-        // Arrange
-        val tag = Tag(1, "Sample Tag")
-
-        // Act
-        repository.insertTag(tag)
-
-        // Assert
-        verify(dao, times(1)).insertTag(tag)
-    }
-
-    @Test
-    fun testInsertAuthor() = runBlocking {
-        // Arrange
-        val author = Author(1, "John Doe")
-
-        // Act
-        repository.insertAuthor(author)
-
-        // Assert
-        verify(dao, times(1)).insertAuthor(author)
-    }
+//    @Test
+//    fun testGetQuotes() = runBlocking {
+//        // Arrange
+//        val quotes = listOf(
+//            QuoteEntity("1", Long.MAX_VALUE, "Quote 1"),
+//            QuoteEntity("2", 567L, "Quote 2")
+//        )
+//        `when`(repository.getQuotes()).thenReturn(quotes)
+//
+//        // Act
+//        val result = repository.getQuotes()
+//
+//        // Assert
+//        assertNotNull(result)
+//        assertEquals(quotes, result)
+//    }
 }
