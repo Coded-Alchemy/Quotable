@@ -15,16 +15,16 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # and sets up Java 17 and caches gradle dependencies
+      - name: checkout
       - uses: actions/checkout@v3
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -39,12 +39,23 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
-      # Run emulator
-      - name: 🧪 Run integration test on emulator
+  instrumented_test:
+    runs-on: macos-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedAndroidTest --stacktrace
+      - run: ./gradlew connectedCheck
+
+#      # Run emulator
+#      - name: Run integration test on emulator
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 29
+#          script: ./gradlew connectedCheck
 
       # Run Instrumented Tests on phone managed by gradle
 #      - name: Run UI Tests
