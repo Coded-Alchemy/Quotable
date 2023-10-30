@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import coded.alchemy.quotable.compose.AppDestinations
 import coded.alchemy.quotable.compose.QuotableNavHost
 import org.junit.Before
 import org.junit.Rule
@@ -28,7 +29,7 @@ class NavigationTest {
     @Test
     fun appNavHost_verifyStartDestination() {
         composeTestRule
-            .onNodeWithContentDescription("Quotes")
+            .onNodeWithContentDescription(AppDestinations.QUOTE_LIST)
             .assertIsDisplayed()
     }
 }
