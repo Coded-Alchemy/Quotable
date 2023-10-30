@@ -39,6 +39,13 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
+      # Run emulator
+      - name: 🧪 Run integration test on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedAndroidTest --stacktrace
+
       # Run Instrumented Tests on phone managed by gradle
 #      - name: Run UI Tests
 #        run: ./gradlew pixel2api30DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
