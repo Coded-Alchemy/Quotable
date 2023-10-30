@@ -4,9 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.qoutable.database.data.Tag
 
 /**
  * RemoteKeyDao.kt
@@ -31,30 +29,6 @@ interface QuoteDao {
 
     @Query("SELECT * FROM quoteEntity")
     suspend fun getQuotes(): List<QuoteEntity>
-
-    /**
-     * Add a [Tag] to the database.
-     * */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTag(vararg tag: Tag)
-
-    /**
-     * Retrieve a [Tag] from the database.
-     * */
-    @Query("SELECT * FROM tag WHERE tagId = :id")
-    suspend fun getTagById(id: Long): Tag
-
-    /**
-     * Add a [Author] to the database.
-     * */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAuthor(vararg author: Author)
-
-    /**
-     * Retrieve a [Author] from the database.
-     * */
-    @Query("SELECT * FROM author WHERE authorId = :id")
-    suspend fun getAuthorById(id: Long): Author
 
 //    @Transaction
 //    @Query("SELECT * FROM QuoteEntity")

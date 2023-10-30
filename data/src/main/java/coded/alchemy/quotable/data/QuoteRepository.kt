@@ -1,9 +1,7 @@
 package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.QuoteDao
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.qoutable.database.data.Tag
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,27 +10,17 @@ import javax.inject.Singleton
  *
  * This class is for handling data operations.
  *
- * @param dao
+ * @param quoteDao
  * @author Taji Abdullah
  * */
 @Singleton
-class QuoteRepository @Inject constructor(private val dao: QuoteDao) {
+class QuoteRepository @Inject constructor(private val quoteDao: QuoteDao) {
     /**
      * Insert a [QuoteEntity] into the database.
      * */
-    suspend fun insertQuote(quoteEntity: QuoteEntity) = dao.insertQuote(quoteEntity)
+    suspend fun insertQuote(quoteEntity: QuoteEntity) = quoteDao.insertQuote(quoteEntity)
 
-    suspend fun getQuotes() = dao.getQuotes()
-
-    /**
-     * Insert a [Tag] into the database.
-     * */
-    suspend fun insertTag(tag: Tag) = dao.insertTag(tag)
-
-    /**
-     * Insert a [Author] into the database.
-     * */
-    suspend fun insertAuthor(author: Author) = dao.insertAuthor(author)
+    suspend fun getQuotes() = quoteDao.getQuotes()
 
     companion object {
         // For Singleton instantiation
