@@ -11,6 +11,10 @@ import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
+import coded.alchemy.quotable.data.AuthorRepository
+import coded.alchemy.quotable.data.QuoteRepository
+import coded.alchemy.quotable.data.RemoteKeyRepository
+import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -24,8 +28,10 @@ class RemoteMediator(
     private val quotableApi: QuotableApi
 ) : RemoteMediator<Int, QuoteEntity>() {
 
-    private val dao = database.quoteDao()
-    private val remoteKeyDao = database.remoteKeyDao()
+    //    private val quoteDao = database.quoteDao()
+//    private val tagDao = database.tagDao()
+//    private val authorDao = database.authorDao()
+//    private val remoteKeyDao = RemoteKeyRepository.getInstance(database.remoteKeyDao())
 
 //    override suspend fun initialize(): InitializeAction {
 //        val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
@@ -62,7 +68,8 @@ class RemoteMediator(
                 LoadType.APPEND -> {
                     // Query remoteKeyDao for the next RemoteKey.
                     val remoteKey = database.withTransaction {
-                        remoteKeyDao.remoteKeyByQuery(query)
+                        RemoteKeyRepository.getInstance(database.remoteKeyDao()).query(query)
+//                        remoteKeyDao.remoteKeyByQuery(query)
                     }
 
                     // You must explicitly check if the page key is null when
@@ -88,14 +95,16 @@ class RemoteMediator(
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    remoteKeyDao.deleteByQuery(query)
-//                    dao.deleteByQuery(query)
+                    RemoteKeyRepository.getInstance(database.remoteKeyDao()).delete(query)
+//                    quoteDao.deleteByQuery(query)
                 }
 
                 // Update RemoteKey for this query.
-                remoteKeyDao.insertOrReplace(
-                    RemoteKey(query, response.page)
-                )
+                RemoteKeyRepository.getInstance(database.remoteKeyDao())
+                    .insert(RemoteKey(query, response.page))
+//                remoteKeyDao.insertOrReplace(
+//                    RemoteKey(query, response.page)
+//                )
 
                 // Insert into database, which invalidates the
                 // current PagingData, allowing Paging to present the updates
@@ -122,14 +131,15 @@ class RemoteMediator(
                     date_added = quote.dateAdded,
                     date_modified = quote.dateModified
                 )
-            dao.insertQuote(quoteEntity)
+            QuoteRepository.getInstance(database.quoteDao()).insertQuote(quoteEntity)
 
             val author =
                 Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
-            dao.insertAuthor(author)
+            AuthorRepository.getInstance(database.authorDao()).insertAuthor(author)
 
             for (content in quote.tags) {
-                dao.insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
+                TagRepository.getInstance(database.tagDao())
+                    .insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
             }
         }
     }
