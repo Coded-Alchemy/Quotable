@@ -14,6 +14,5 @@ fun AuthorListScreen(viewModel: QuoteListViewModel = hiltViewModel()) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-
     }
 }
