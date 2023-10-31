@@ -1,3 +1,5 @@
+import org.gradle.api.JavaVersion
+
 /**
  * Object to store project configuration data.
  * */
@@ -15,4 +17,5 @@ object Config {
     const val jvmTarget = "17"
     const val kotlinCompilerExtensionVersion = "1.5.3"
     const val excludes = "/META-INF/{AL2.0,LGPL2.1}"
+    val JAVA_VERSION = JavaVersion.VERSION_17
 }
