@@ -1,18 +1,13 @@
 package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.QuoteDao
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
-import coded.alchemy.qoutable.database.data.Tag
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 
 /**
  * QuoteRepositoryTest.kt

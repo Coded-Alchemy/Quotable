@@ -1,8 +1,6 @@
 package coded.alchemy.quotable.data
 
-import coded.alchemy.qoutable.database.dao.AuthorDao
 import coded.alchemy.qoutable.database.dao.RemoteKeyDao
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.RemoteKey
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import coded.alchemy.qoutable.database.dao.AuthorDao
 import coded.alchemy.qoutable.database.dao.QuoteDao
+import coded.alchemy.qoutable.database.dao.TagDao
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.Tag
@@ -27,24 +29,28 @@ import java.io.IOException
  */
 @RunWith(AndroidJUnit4::class)
 class QuotableDatabaseTest {
-    private lateinit var dao: QuoteDao
-    private lateinit var db: QuotableDatabase
+    private lateinit var quoteDao: QuoteDao
+    private lateinit var tagDao: TagDao
+    private lateinit var authorDao: AuthorDao
+    private lateinit var database: QuotableDatabase
 
     @Before
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db =
+        database =
             Room.inMemoryDatabaseBuilder(
                 context,
                 QuotableDatabase::class.java
             ).build()
-        dao = db.quoteDao()
+        quoteDao = database.quoteDao()
+        tagDao = database.tagDao()
+        authorDao = database.authorDao()
     }
 
     @After
     @Throws(IOException::class)
     fun closeDb() {
-        db.close()
+        database.close()
     }
 
     /**
@@ -67,10 +73,10 @@ class QuotableDatabaseTest {
                     date_added = "10/23/1970",
                     date_modified = "12/05/2025"
                 )
-            dao.insertQuote(quoteEntity)
+            quoteDao.insertQuote(quoteEntity)
 
             // Test the stored QuoteEntity object is the same as expected.
-            val storedQuote = dao.getQuoteById(id)
+            val storedQuote = quoteDao.getQuoteById(id)
             assertThat(storedQuote, equalTo(quoteEntity))
         }
 
@@ -85,10 +91,10 @@ class QuotableDatabaseTest {
 
             // Create a Tag object and store it in the database.
             val tag = Tag(tagId = id, content = "TestTag", quoteId = "45654")
-            dao.insertTag(tag)
+            tagDao.insertTag(tag)
 
             // Test the stored Tag object is the same as expected.
-            val storedTag = dao.getTagById(id)
+            val storedTag = tagDao.getTagById(id)
             assertThat(storedTag, equalTo(tag))
         }
 
@@ -103,10 +109,10 @@ class QuotableDatabaseTest {
 
             // Create a Tag object and store it in the database.
             val author = Author(authorId = id, name = "Test Driven", slug = "test_driven")
-            dao.insertAuthor(author)
+            authorDao.insertAuthor(author)
 
             // Test the stored Tag object is the same as expected.
-            val storedAuthor = dao.getAuthorById(id)
+            val storedAuthor = authorDao.getAuthorById(id)
             assertThat(storedAuthor, equalTo(author))
         }
 
@@ -114,7 +120,7 @@ class QuotableDatabaseTest {
     @Throws(Exception::class)
     fun getQuotes() =
         runBlocking {
-            val list = dao.getQuotes()
+            val list = quoteDao.getQuotes()
 
             Assert.assertNotNull(list)
             Assert.assertNotNull(list.isNotEmpty())

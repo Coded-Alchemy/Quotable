@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coded.alchemy.qoutable.database.QuotableDatabase
-import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.Author
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -21,9 +21,9 @@ import org.junit.runner.RunWith
  * @author Taji Abdullah
  */
 @RunWith(AndroidJUnit4::class)
-class QuoteDaoTest {
+class AuthorDaoTest {
     private lateinit var database: QuotableDatabase
-    private lateinit var quoteDao: QuoteDao
+    private lateinit var authorDao: AuthorDao
 
     @Before
     fun setup() {
@@ -31,7 +31,7 @@ class QuoteDaoTest {
             ApplicationProvider.getApplicationContext(),
             QuotableDatabase::class.java
         ).allowMainThreadQueries().build()
-        quoteDao = database.quoteDao()
+        authorDao = database.authorDao()
     }
 
     @After
@@ -40,32 +40,16 @@ class QuoteDaoTest {
     }
 
     @Test
-    fun testInsertQuoteAndRetrieveById() = runBlocking {
+    fun testInsertAuthorAndRetrieveById() = runBlocking {
         // Arrange
-        val quoteEntity = QuoteEntity("123", Long.MAX_VALUE, "Sample Quote")
+        val author = Author(1, "John Doe")
 
         // Act
-        quoteDao.insertQuote(quoteEntity)
-        val retrievedQuote = quoteDao.getQuoteById("123")
+        authorDao.insertAuthor(author)
+        val retrievedAuthor = authorDao.getAuthorById(1)
 
         // Assert
-        assertNotNull(retrievedQuote)
-        assertEquals(quoteEntity, retrievedQuote)
-    }
-
-    @Test
-    fun testGetAllQuotes() = runBlocking {
-        // Arrange
-        val quote1 = QuoteEntity("1", Long.MAX_VALUE, "Quote 1")
-        val quote2 = QuoteEntity("2", content = "blah blah blah")
-
-        // Act
-        quoteDao.insertQuote(quote1, quote2)
-        val quotes = quoteDao.getQuotes()
-
-        // Assert
-        assertEquals(2, quotes.size)
-        assertEquals(quote1, quotes[0])
-        assertEquals(quote2, quotes[1])
+        assertNotNull(retrievedAuthor)
+        assertEquals(author, retrievedAuthor)
     }
 }
