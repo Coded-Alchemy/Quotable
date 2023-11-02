@@ -22,6 +22,7 @@ object Dependency {
         const val ROOM = "2.5.2"
         const val PAGING = "3.2.1"
         const val PAGING_COMPOSE = "3.3.0-alpha02"
+        const val KOIN = "3.5.0"
     }
 
     const val APP_COMPAT = "androidx.appcompat:appcompat:${Version.APP_COMPAT}"
@@ -54,6 +55,10 @@ object Dependency {
     const val HILT = "com.google.dagger:hilt-android:${Version.HILT}"
     const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Version.HILT}"
     const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Version.HILT_COMPOSE}"
+
+    // Koin
+    const val KOIN = "io.insert-koin:koin-android:${Version.KOIN}"
+    const val KOIN_COMPOSE = "io.insert-koin:koin-androidx-compose:${Version.KOIN}"
 
     // Room
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Version.ROOM}"

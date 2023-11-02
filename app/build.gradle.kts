@@ -2,6 +2,7 @@ plugins {
     id(Plugin.ANDROID_APP)
     id(Plugin.kotlinAndroid)
     id(Plugin.KT_LINT)
+    // TODO Remove Hilt and KAPT
     id(Plugin.HILT)
     kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
@@ -74,6 +75,12 @@ android {
     }
 }
 
+
+// TODO Remove KAPT with HILT
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     // Module dependencies
     implementation(project(mapOf("path" to ":data")))
@@ -92,9 +99,14 @@ dependencies {
     implementation(Dependency.ROOM_KTX)
     implementation(Dependency.NAVIGATION)
     implementation(Dependency.NAVIGATION_RUNTIME)
+    implementation(Dependency.KOIN)
+    implementation(Dependency.KOIN_COMPOSE)
+
+    // TODO Remove Hilt
     implementation(Dependency.HILT)
     implementation(Dependency.HILT_COMPOSE)
     kapt(Dependency.HILT_COMPILER)
+
     implementation(Dependency.PAGING_COMPOSE)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
@@ -110,6 +122,3 @@ dependencies {
 //    androidTestImplementation("androidx.hilt:hilt-navigation-compose:1.1.0-beta01")
 }
 
-kapt {
-    correctErrorTypes = true
-}
