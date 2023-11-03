@@ -6,12 +6,10 @@ import androidx.activity.compose.setContent
 import coded.alchemy.quotable.compose.QuotableApp
 import coded.alchemy.quotable.di.appModule
 import coded.alchemy.quotable.ui.theme.QuotableTheme
-import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
