@@ -20,6 +20,8 @@ class QuoteRepository @Inject constructor(private val quoteDao: QuoteDao) {
      * */
     suspend fun insertQuote(quoteEntity: QuoteEntity) = quoteDao.insertQuote(quoteEntity)
 
+    suspend fun getQuote(quoteId: String) = quoteDao.getQuoteById(quoteId)
+
     suspend fun getQuotes() = quoteDao.getQuotes()
 
     companion object {

@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.compose.quoteDetail
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -18,20 +19,23 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun QuoteDetailScreen(
-    viewModel: QuoteListViewModel = koinViewModel(),
+    viewModel: QuoteDetailViewModel = koinViewModel(),
     quoteId: String,
     navigateUp: () -> Unit
 ) {
-    IconButton(onClick = navigateUp) {
-        Icon(
-            imageVector = Icons.Rounded.ArrowBack,
-            contentDescription = null
-        )
+    Column {
+        IconButton(onClick = navigateUp) {
+            Icon(
+                imageVector = Icons.Rounded.ArrowBack,
+                contentDescription = null
+            )
+        }
+
+        Text(text = viewModel.displayQuote(quoteId),
+            fontSize = 25.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.W700,
+            modifier = Modifier.padding(10.dp))
     }
 
-    Text(text = quoteId,
-        fontSize = 25.sp,
-        color = Color.Black,
-        fontWeight = FontWeight.W700,
-        modifier = Modifier.padding(10.dp))
 }
