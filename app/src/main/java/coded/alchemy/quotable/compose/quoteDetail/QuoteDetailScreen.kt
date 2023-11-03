@@ -5,12 +5,12 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun QuoteDetailScreen(
-    viewModel: QuoteListViewModel = hiltViewModel(),
+    viewModel: QuoteListViewModel = koinViewModel(),
     quoteId: String,
     navigateUp: () -> Unit
 ) {
