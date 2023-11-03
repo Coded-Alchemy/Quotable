@@ -45,8 +45,8 @@ dependencies {
     implementation(Dependency.HILT)
     annotationProcessor(Dependency.HILT_COMPILER)
     // Test dependencies
-    testImplementation(TestDependency.TEST_RUNNER)
     testImplementation(TestDependency.J_UNIT)
     testImplementation(TestDependency.MOCKITO)
     androidTestImplementation(TestDependency.ANDROID_JUNIT)
+    androidTestImplementation(TestDependency.TEST_RUNNER)
 }

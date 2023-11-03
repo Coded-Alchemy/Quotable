@@ -1,7 +1,6 @@
 package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.AuthorDao
-import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.Author
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

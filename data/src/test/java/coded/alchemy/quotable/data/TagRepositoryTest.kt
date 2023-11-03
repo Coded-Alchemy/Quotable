@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.data
 
-import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.dao.TagDao
 import coded.alchemy.qoutable.database.data.Tag
 import kotlinx.coroutines.runBlocking

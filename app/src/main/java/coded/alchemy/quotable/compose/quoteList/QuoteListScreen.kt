@@ -17,19 +17,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
+import org.koin.androidx.compose.koinViewModel
 
 const val TAG = "QuoteListScreen"
 
 @Composable
 fun QuoteListScreen(
     onQuoteClick: (String) -> Unit,
-    viewModel: QuoteListViewModel = hiltViewModel()
+    viewModel: QuoteListViewModel = koinViewModel()
 ) {
     val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
