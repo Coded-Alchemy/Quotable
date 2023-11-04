@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.data
 
+import android.util.Log
 import coded.alchemy.qoutable.database.dao.AuthorDao
 import coded.alchemy.qoutable.database.data.Author
 import javax.inject.Inject
@@ -15,11 +16,15 @@ import javax.inject.Singleton
  * */
 @Singleton
 class AuthorRepository @Inject constructor(private val authorDao: AuthorDao) {
+    private val TAG = this.javaClass.simpleName
 
     /**
      * Insert a [Author] into the database.
      * */
-    suspend fun insertAuthor(author: Author) = authorDao.insertAuthor(author)
+    suspend fun insertAuthor(author: Author) {
+        Log.d(TAG, "insertAuthor: $author")
+        authorDao.insertAuthor(author)
+    }
 
     companion object {
         // For Singleton instantiation
