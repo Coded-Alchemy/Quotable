@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.data
 
+import android.util.Log
 import coded.alchemy.qoutable.database.dao.RemoteKeyDao
 import coded.alchemy.qoutable.database.data.RemoteKey
 import javax.inject.Inject
@@ -15,12 +16,22 @@ import javax.inject.Singleton
  * */
 @Singleton
 class RemoteKeyRepository @Inject constructor(private val remoteKeyDao: RemoteKeyDao) {
+    private val TAG = this.javaClass.simpleName
 
-    suspend fun insert(remoteKey: RemoteKey) = remoteKeyDao.insertOrReplace(remoteKey)
+    suspend fun insert(remoteKey: RemoteKey) {
+        Log.d(TAG, "insert: $remoteKey")
+        remoteKeyDao.insertOrReplace(remoteKey)
+    }
 
-    suspend fun query(query: String) = remoteKeyDao.remoteKeyByQuery(query = query)
+    suspend fun query(query: String) {
+        Log.d(TAG, "query: $query")
+        remoteKeyDao.remoteKeyByQuery(query = query)
+    }
 
-    suspend fun delete(query: String) = remoteKeyDao.deleteByQuery(query = query)
+    suspend fun delete(query: String) {
+        Log.d(TAG, "delete: $query")
+        remoteKeyDao.deleteByQuery(query = query)
+    }
 
     companion object {
         // For Singleton instantiation
