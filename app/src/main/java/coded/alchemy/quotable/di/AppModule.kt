@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModelOf(::QuoteListViewModel)
-    viewModel { QuoteDetailViewModel(get()) }
+    viewModel { parameters -> QuoteDetailViewModel(quoteRepository = get()) }
 
     single {
         Room.databaseBuilder(

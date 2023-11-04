@@ -24,6 +24,7 @@ fun QuoteDetailScreen(
     navigateUp: () -> Unit
 ) {
     Column {
+
         IconButton(onClick = navigateUp) {
             Icon(
                 imageVector = Icons.Rounded.ArrowBack,
@@ -31,7 +32,13 @@ fun QuoteDetailScreen(
             )
         }
 
-        Text(text = viewModel.displayQuote(quoteId),
+        Text(text = quoteId,
+            fontSize = 25.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.W700,
+            modifier = Modifier.padding(10.dp))
+
+        Text(text = viewModel.getQuote(quoteId).content,
             fontSize = 25.sp,
             color = Color.Black,
             fontWeight = FontWeight.W700,
