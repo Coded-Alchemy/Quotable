@@ -19,9 +19,9 @@ class QuoteDetailViewModel(
     private  var quoteEntity = QuoteEntity()
 
     fun getQuote(quoteId: String): QuoteEntity {
-       viewModelScope.launch {
-           quoteEntity.content = quoteRepository.getQuote(quoteId).content
-        }
+//       viewModelScope.launch {
+//           quoteEntity.content = quoteRepository.getQuote(quoteId).
+//        }
         return quoteEntity
     }
 

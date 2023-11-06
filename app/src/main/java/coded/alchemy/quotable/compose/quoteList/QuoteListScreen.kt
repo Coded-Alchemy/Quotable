@@ -19,9 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.koinViewModel
 
 const val TAG = "QuoteListScreen"
@@ -33,11 +34,13 @@ fun QuoteListScreen(
 ) {
     val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
+    val list = viewModel.yo(get()).collectAsLazyPagingItems()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(articleList = articleList, onQuoteClick = onQuoteClick)
+        QuoteList(articleList = list, onQuoteClick = onQuoteClick)
     }
 }
 
@@ -46,7 +49,7 @@ fun QuoteListScreen(
  * */
 @Composable
 fun QuoteList(
-    articleList: LazyPagingItems<Quote>,
+    articleList: LazyPagingItems<QuoteEntity>,
     onQuoteClick: (String) -> Unit
 ) {
     LazyColumn {
@@ -66,7 +69,7 @@ fun QuoteList(
  * */
 @Composable
 fun QuoteListItem(
-    quoteEntity: Quote,
+    quoteEntity: QuoteEntity,
     selectedQuote: (String) -> Unit
 ) {
     Card(
@@ -74,7 +77,7 @@ fun QuoteListItem(
         Modifier
             .padding(all = 10.dp)
             .fillMaxWidth()
-            .clickable(onClick = { selectedQuote(quoteEntity._id) })
+//            .clickable(onClick = { selectedQuote(quoteEntity._id) })
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
             Text(
@@ -84,13 +87,13 @@ fun QuoteListItem(
                 fontWeight = FontWeight.W700,
                 modifier = Modifier.padding(10.dp)
             )
-            quoteEntity.author?.let {
-                Text(
-                    it,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(10.dp)
-                )
-            }
+//            quoteEntity.author?.let {
+//                Text(
+//                    it,
+//                    color = Color.Gray,
+//                    modifier = Modifier.padding(10.dp)
+//                )
+//            }
         }
     }
 }

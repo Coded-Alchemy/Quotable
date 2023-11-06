@@ -1,5 +1,6 @@
 package coded.alchemy.qoutable.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -29,6 +30,12 @@ interface QuoteDao {
 
     @Query("SELECT * FROM quoteEntity")
     suspend fun getQuotes(): List<QuoteEntity>
+
+    @Query("DELETE FROM quoteEntity")
+    suspend fun deleteAll(): Int
+
+    @Query("SELECT * FROM quoteEntity")
+    fun pagingSource(): PagingSource<Int, QuoteEntity>
 
 //    @Transaction
 //    @Query("SELECT * FROM QuoteEntity")

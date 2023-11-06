@@ -23,14 +23,14 @@ class RemoteKeyRepository @Inject constructor(private val remoteKeyDao: RemoteKe
         remoteKeyDao.insertOrReplace(remoteKey)
     }
 
-    suspend fun query(query: String) {
-        Log.d(TAG, "query: $query")
-        remoteKeyDao.remoteKeyByQuery(query = query)
+    suspend fun getKey(): RemoteKey? {
+        Log.d(TAG, "getKey: ")
+        return remoteKeyDao.get()
     }
 
-    suspend fun delete(query: String) {
-        Log.d(TAG, "delete: $query")
-        remoteKeyDao.deleteByQuery(query = query)
+    suspend fun delete() {
+        Log.d(TAG, "deleteAll: ")
+        remoteKeyDao.deleteAll()
     }
 
     companion object {
