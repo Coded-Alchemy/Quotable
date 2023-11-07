@@ -26,7 +26,6 @@ import org.koin.androidx.compose.KoinAndroidContext
 fun QuotableApp() {
     // Set current Koin instance to Compose context
     KoinAndroidContext() {
-
         val navController = rememberNavController()
 
         Scaffold(

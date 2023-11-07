@@ -12,10 +12,6 @@ import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
-import coded.alchemy.quotable.data.AuthorRepository
-import coded.alchemy.quotable.data.QuoteRepository
-import coded.alchemy.quotable.data.RemoteKeyRepository
-import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -39,7 +35,7 @@ class RemoteMediator(
     override suspend fun initialize(): InitializeAction {
         Log.d(TAG, "initialize: ")
         val remoteKey = remoteKeyDao.get()
-        return if (remoteKey == null){
+        return if (remoteKey == null) {
             InitializeAction.LAUNCH_INITIAL_REFRESH
         } else {
             InitializeAction.SKIP_INITIAL_REFRESH
@@ -85,17 +81,17 @@ class RemoteMediator(
             val response = loadKey?.let { key -> quotableApi.getQuotes(key) }
 
             database.withTransaction {
-               response?.let { responseData ->
+                response?.let { responseData ->
 
-                   remoteKeyDao.insertOrReplace(
-                       RemoteKey(
-                           currentPage = responseData.page,
-                           lastPage = responseData.totalPages
-                       )
-                   )
+                    remoteKeyDao.insertOrReplace(
+                        RemoteKey(
+                            currentPage = responseData.page,
+                            lastPage = responseData.totalPages
+                        )
+                    )
 
-                   loadDatabase(responseData.results)
-               }
+                    loadDatabase(responseData.results)
+                }
             }
 
             MediatorResult.Success(endOfPaginationReached = false)
@@ -116,7 +112,8 @@ class RemoteMediator(
                     author_slug = quote.authorSlug,
                     length = quote.length.toLong(),
                     date_added = quote.dateAdded,
-                    date_modified = quote.dateModified
+                    date_modified = quote.dateModified,
+                    authorId = quote._id.toLong()
                 )
             quoteDao.insertQuote(quoteEntity)
             Log.d(TAG, "Insert Quote: ")

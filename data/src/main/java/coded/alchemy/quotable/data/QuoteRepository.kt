@@ -1,11 +1,6 @@
 package coded.alchemy.quotable.data
 
 import android.util.Log
-//import androidx.paging.ExperimentalPagingApi
-//import androidx.paging.Pager
-//import androidx.paging.PagingConfig
-//import androidx.paging.RemoteMediator
-//import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import javax.inject.Inject
@@ -27,13 +22,11 @@ class QuoteRepository @Inject constructor(private val quoteDao: QuoteDao) {
      * Insert a [QuoteEntity] into the database.
      * */
     suspend fun insertQuote(quoteEntity: QuoteEntity) {
-        Log.d(TAG, "insertQuote: $quoteEntity")
         quoteDao.insertQuote(quoteEntity)
     }
 
-    suspend fun getQuote(quoteId: String) {
-        Log.d(TAG, "getQuote: $quoteId")
-        quoteDao.getQuoteById(quoteId)
+    suspend fun getQuote(quoteId: String): QuoteEntity {
+        return quoteDao.getQuoteById(quoteId)
     }
 
     suspend fun getQuotes() {

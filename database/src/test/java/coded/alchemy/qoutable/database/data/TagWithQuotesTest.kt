@@ -14,8 +14,24 @@ class TagWithQuotesTest {
         // Arrange
         val tag = Tag()
         val quoteEntities = listOf(
-            QuoteEntity("101"),
-            QuoteEntity("102")
+            QuoteEntity(
+                quoteId = "101",
+                authorId = 58L,
+                author_slug = "slug",
+                content = "content",
+                date_added = "date",
+                date_modified = "moded",
+                length = 56L
+            ),
+            QuoteEntity(
+                quoteId = "105",
+                authorId = 58L,
+                author_slug = "slug",
+                content = "content",
+                date_added = "date",
+                date_modified = "moded",
+                length = 56L
+            )
         )
 
         // Act

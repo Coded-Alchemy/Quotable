@@ -105,4 +105,3 @@ dependencies {
     debugImplementation(DebugDependency.COMPOSE_TEST_MANIFEST)
     androidTestImplementation("androidx.navigation:navigation-testing:${Dependency.Version.NAVIGATION}")
 }
-

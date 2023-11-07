@@ -45,17 +45,19 @@ class RemoteKeyDaoTest {
     @Test
     fun testInsertAndReplaceRemoteKey() = runBlocking {
         // Arrange
-        val label = "page_1"
-        val nextKey = 2
-        val remoteKey = RemoteKey(label, nextKey)
+        val id = 47
+        val currentPage = 2
+        val lastPage = 56
+        val remoteKey = RemoteKey(id = id, currentPage = currentPage, lastPage = lastPage)
 
         // Act
         remoteKeyDao.insertOrReplace(remoteKey)
 
         // Assert
-        val storedRemoteKey = remoteKeyDao.remoteKeyByQuery(label)
-        assertEquals(label, storedRemoteKey.label)
-        assertEquals(nextKey, storedRemoteKey.nextKey)
+        val storedRemoteKey = remoteKeyDao.get()
+        assertEquals(id, storedRemoteKey?.id)
+        assertEquals(currentPage, storedRemoteKey?.currentPage)
+        assertEquals(lastPage, storedRemoteKey?.lastPage)
     }
 
     @Test
@@ -63,14 +65,14 @@ class RemoteKeyDaoTest {
         // Arrange
         val label = "page_1"
         val nextKey = 2
-        val remoteKey = RemoteKey(label, nextKey)
+        val remoteKey = RemoteKey(id = 45, currentPage = 34, lastPage = 89)
 
         // Act
         remoteKeyDao.insertOrReplace(remoteKey)
-        remoteKeyDao.deleteByQuery(label)
+        remoteKeyDao.deleteAll()
 
         // Assert
-        val storedRemoteKey = remoteKeyDao.remoteKeyByQuery(label)
+        val storedRemoteKey = remoteKeyDao.get()
         assertNull(storedRemoteKey)
     }
 }

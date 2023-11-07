@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.data
 
-import android.util.Log
 import coded.alchemy.qoutable.database.dao.TagDao
 import coded.alchemy.qoutable.database.data.Tag
 import javax.inject.Inject
@@ -22,7 +21,6 @@ class TagRepository @Inject constructor(private val tagDao: TagDao) {
      * Insert a [Tag] into the database.
      * */
     suspend fun insertTag(tag: Tag) {
-        Log.d(TAG, "insertTag: $tag")
         tagDao.insertTag(tag)
     }
 

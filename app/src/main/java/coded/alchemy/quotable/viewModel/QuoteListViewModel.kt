@@ -40,7 +40,7 @@ class QuoteListViewModel() : ViewModel() {
     fun yo(database: QuotableDatabase): Flow<PagingData<QuoteEntity>> {
         return Pager(
             config = PagingConfig(pageSize = 50),
-            remoteMediator = RemoteMediator (query = "null", database, QuotableApi.create())
+            remoteMediator = RemoteMediator(query = "null", database, QuotableApi.create())
         ) {
             database.quoteDao().pagingSource()
         }.flow.cachedIn(viewModelScope)

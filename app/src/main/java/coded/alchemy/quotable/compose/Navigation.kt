@@ -20,7 +20,6 @@ import coded.alchemy.quotable.compose.quoteList.QuoteListScreen
  *
  */
 
-
 @Composable
 fun QuotableNavHost(
     modifier: Modifier = Modifier,
@@ -57,8 +56,6 @@ fun QuotableNavHost(
 //                quoteId = CAT_DETAIL_ID_KEY,
 //                navigateUp = actions.navigateUp
 //            )
-
-
         }
         composable(Screen.QuoteAuthor.route) {
             AuthorListScreen()

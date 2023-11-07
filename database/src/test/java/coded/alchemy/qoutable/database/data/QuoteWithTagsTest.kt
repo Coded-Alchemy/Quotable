@@ -12,7 +12,15 @@ class QuoteWithTagsTest {
     @Test
     fun testQuoteWithTagsProperties() {
         // Arrange
-        val quoteEntity = QuoteEntity(quoteId = "dkjfdkjf", authorId = Long.MAX_VALUE)
+        val quoteEntity = QuoteEntity(
+            quoteId = "101",
+            authorId = 58L,
+            author_slug = "slug",
+            content = "content",
+            date_added = "date",
+            date_modified = "moded",
+            length = 56L
+        )
         val tags = listOf(
             Tag(tagId = 101, quoteId = "Tag A"),
             Tag(tagId = 102, quoteId = "Tag B")

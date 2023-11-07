@@ -77,7 +77,7 @@ fun QuoteListItem(
         Modifier
             .padding(all = 10.dp)
             .fillMaxWidth()
-//            .clickable(onClick = { selectedQuote(quoteEntity._id) })
+            .clickable(onClick = { selectedQuote(quoteEntity.quoteId) })
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
             Text(

@@ -2,7 +2,6 @@ package coded.alchemy.quotable.di
 
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
-import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
 import coded.alchemy.quotable.viewModel.QuoteListViewModel

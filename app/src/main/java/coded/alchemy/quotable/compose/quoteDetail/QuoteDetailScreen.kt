@@ -14,7 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
-import coded.alchemy.quotable.viewModel.QuoteListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -24,7 +23,6 @@ fun QuoteDetailScreen(
     navigateUp: () -> Unit
 ) {
     Column {
-
         IconButton(onClick = navigateUp) {
             Icon(
                 imageVector = Icons.Rounded.ArrowBack,
@@ -32,17 +30,22 @@ fun QuoteDetailScreen(
             )
         }
 
-        Text(text = quoteId,
+        Text(
+            text = quoteId,
             fontSize = 25.sp,
             color = Color.Black,
             fontWeight = FontWeight.W700,
-            modifier = Modifier.padding(10.dp))
+            modifier = Modifier.padding(10.dp)
+        )
 
-        Text(text = viewModel.getQuote(quoteId).content,
-            fontSize = 25.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.W700,
-            modifier = Modifier.padding(10.dp))
+        viewModel.getQuote(quoteId)?.content?.let {
+            Text(
+                text = it,
+                fontSize = 25.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.W700,
+                modifier = Modifier.padding(10.dp)
+            )
+        }
     }
-
 }

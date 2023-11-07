@@ -16,13 +16,15 @@ class QuoteDetailViewModel(
     private val quoteRepository: QuoteRepository
 ) : ViewModel() {
 
-    private  var quoteEntity = QuoteEntity()
+    private lateinit var quoteEntity: QuoteEntity
 
-    fun getQuote(quoteId: String): QuoteEntity {
-//       viewModelScope.launch {
-//           quoteEntity.content = quoteRepository.getQuote(quoteId).
-//        }
-        return quoteEntity
+    fun getQuote(quoteId: String): QuoteEntity? {
+        viewModelScope.launch {
+            quoteEntity = quoteRepository.getQuote(quoteId)
+        }
+        if (::quoteEntity.isInitialized) {
+            return quoteEntity
+        }
+        return null
     }
-
 }
