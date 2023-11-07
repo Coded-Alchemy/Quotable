@@ -16,11 +16,27 @@ class AuthorWithTaggedQuotesTest {
         val author = Author(1, "John Doe")
         val quotes = listOf(
             QuoteWithTags(
-                QuoteEntity(quoteId = "101"),
+                QuoteEntity(
+                    quoteId = "101",
+                    authorId = 58L,
+                    author_slug = "slug",
+                    content = "content",
+                    date_added = "date",
+                    date_modified = "moded",
+                    length = 56L
+                ),
                 listOf(Tag(tagId = 201, quoteId = "Tag A"), Tag(tagId = 202, quoteId = "Tag B"))
             ),
             QuoteWithTags(
-                QuoteEntity(quoteId = "102", authorId = Long.MAX_VALUE),
+                QuoteEntity(
+                    quoteId = "156",
+                    authorId = 58L,
+                    author_slug = "slug",
+                    content = "content",
+                    date_added = "date",
+                    date_modified = "moded",
+                    length = 56L
+                ),
                 listOf(Tag(tagId = 203, quoteId = "Tag C"))
             )
         )

@@ -42,11 +42,19 @@ class QuoteDaoTest {
     @Test
     fun testInsertQuoteAndRetrieveById() = runBlocking {
         // Arrange
-        val quoteEntity = QuoteEntity("123", Long.MAX_VALUE, "Sample Quote")
+        val quoteEntity = QuoteEntity(
+            quoteId = "101",
+            authorId = 58L,
+            author_slug = "slug",
+            content = "content",
+            date_added = "date",
+            date_modified = "moded",
+            length = 56L
+        )
 
         // Act
         quoteDao.insertQuote(quoteEntity)
-        val retrievedQuote = quoteDao.getQuoteById("123")
+        val retrievedQuote = quoteDao.getQuoteById("101")
 
         // Assert
         assertNotNull(retrievedQuote)
@@ -56,8 +64,24 @@ class QuoteDaoTest {
     @Test
     fun testGetAllQuotes() = runBlocking {
         // Arrange
-        val quote1 = QuoteEntity("1", Long.MAX_VALUE, "Quote 1")
-        val quote2 = QuoteEntity("2", content = "blah blah blah")
+        val quote1 = QuoteEntity(
+            quoteId = "101",
+            authorId = 58L,
+            author_slug = "slug",
+            content = "content",
+            date_added = "date",
+            date_modified = "moded",
+            length = 56L
+        )
+        val quote2 = QuoteEntity(
+            quoteId = "102",
+            authorId = 58L,
+            author_slug = "slug",
+            content = "content",
+            date_added = "date",
+            date_modified = "moded",
+            length = 56L
+        )
 
         // Act
         quoteDao.insertQuote(quote1, quote2)

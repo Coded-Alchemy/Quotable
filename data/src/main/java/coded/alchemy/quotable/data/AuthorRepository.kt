@@ -15,11 +15,14 @@ import javax.inject.Singleton
  * */
 @Singleton
 class AuthorRepository @Inject constructor(private val authorDao: AuthorDao) {
+    private val TAG = this.javaClass.simpleName
 
     /**
      * Insert a [Author] into the database.
      * */
-    suspend fun insertAuthor(author: Author) = authorDao.insertAuthor(author)
+    suspend fun insertAuthor(author: Author) {
+        authorDao.insertAuthor(author)
+    }
 
     companion object {
         // For Singleton instantiation

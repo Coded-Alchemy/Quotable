@@ -12,14 +12,16 @@ class RemoteKeyTest {
     @Test
     fun testRemoteKeyProperties() {
         // Arrange
-        val label = "page_1"
-        val nextKey = 2
+        val id = 67
+        val currentPage = 2
+        val lastPage = 56
 
         // Act
-        val remoteKey = RemoteKey(label, nextKey)
+        val remoteKey = RemoteKey(id = id, currentPage = currentPage, lastPage = lastPage)
 
         // Assert
-        assertEquals(label, remoteKey.label)
-        assertEquals(nextKey, remoteKey.nextKey)
+        assertEquals(id, remoteKey.id)
+        assertEquals(currentPage, remoteKey.currentPage)
+        assertEquals(lastPage, remoteKey.lastPage)
     }
 }

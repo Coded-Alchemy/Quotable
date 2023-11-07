@@ -19,21 +19,25 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coded.alchemy.quotable.R
+import org.koin.androidx.compose.KoinAndroidContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuotableApp() {
-    val navController = rememberNavController()
+    // Set current Koin instance to Compose context
+    KoinAndroidContext() {
+        val navController = rememberNavController()
 
-    Scaffold(
-        topBar = {
-            QuotableAppbar()
-        },
-        bottomBar = {
-            QuotableBottomNavigation(navController)
+        Scaffold(
+            topBar = {
+                QuotableAppbar()
+            },
+            bottomBar = {
+                QuotableBottomNavigation(navController)
+            }
+        ) { innerPadding ->
+            QuotableNavHost(navController = navController, modifier = Modifier.padding(innerPadding))
         }
-    ) { innerPadding ->
-        QuotableNavHost(navController = navController, modifier = Modifier.padding(innerPadding))
     }
 }
 

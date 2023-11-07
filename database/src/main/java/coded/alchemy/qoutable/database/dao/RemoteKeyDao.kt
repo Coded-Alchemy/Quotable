@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.RemoteKey
+import kotlinx.coroutines.flow.Flow
 
 /**
  * RemoteKeyDao.kt
@@ -18,9 +19,12 @@ interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrReplace(remoteKey: RemoteKey)
 
-    @Query("SELECT * FROM remote_keys WHERE label = :query")
-    suspend fun remoteKeyByQuery(query: String): RemoteKey
+    @Query("SELECT * FROM remote_keys LIMIT 1")
+    suspend fun get(): RemoteKey?
 
-    @Query("DELETE FROM remote_keys WHERE label = :query")
-    suspend fun deleteByQuery(query: String)
+    @Query("DELETE FROM remote_keys")
+    suspend fun deleteAll(): Int
+
+    @Query("SELECT * FROM remote_keys LIMIT 1")
+    fun getKeyFlow(): Flow<RemoteKey?>
 }

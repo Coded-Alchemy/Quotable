@@ -17,27 +17,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coded.alchemy.qoutable.database.data.Quote
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
+import org.koin.androidx.compose.get
+import org.koin.androidx.compose.koinViewModel
 
 const val TAG = "QuoteListScreen"
 
 @Composable
 fun QuoteListScreen(
-    selectedQuote: (String) -> Unit,
-    viewModel: QuoteListViewModel = hiltViewModel()
+    onQuoteClick: (String) -> Unit,
+    viewModel: QuoteListViewModel = koinViewModel()
 ) {
-    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
+//    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
+
+    val quoteList = viewModel.yo(get()).collectAsLazyPagingItems()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(articleList = articleList, selectedQuote = selectedQuote)
+        QuoteList(articleList = quoteList, onQuoteClick = onQuoteClick)
     }
 }
 
@@ -46,8 +49,8 @@ fun QuoteListScreen(
  * */
 @Composable
 fun QuoteList(
-    articleList: LazyPagingItems<Quote>,
-    selectedQuote: (String) -> Unit
+    articleList: LazyPagingItems<QuoteEntity>,
+    onQuoteClick: (String) -> Unit
 ) {
     LazyColumn {
         items(
@@ -55,7 +58,7 @@ fun QuoteList(
         ) { index ->
             val article = articleList[index]
             article?.let { item ->
-                QuoteListItem(item, selectedQuote)
+                QuoteListItem(item, onQuoteClick)
             }
         }
     }
@@ -66,7 +69,7 @@ fun QuoteList(
  * */
 @Composable
 fun QuoteListItem(
-    quoteEntity: Quote,
+    quoteEntity: QuoteEntity,
     selectedQuote: (String) -> Unit
 ) {
     Card(
@@ -74,7 +77,7 @@ fun QuoteListItem(
         Modifier
             .padding(all = 10.dp)
             .fillMaxWidth()
-            .clickable(onClick = { selectedQuote(quoteEntity._id) })
+            .clickable(onClick = { selectedQuote(quoteEntity.quoteId) })
     ) {
         Column(modifier = Modifier.padding(all = 10.dp)) {
             Text(
@@ -84,13 +87,13 @@ fun QuoteListItem(
                 fontWeight = FontWeight.W700,
                 modifier = Modifier.padding(10.dp)
             )
-            quoteEntity.author?.let {
-                Text(
-                    it,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(10.dp)
-                )
-            }
+//            quoteEntity.author?.let {
+//                Text(
+//                    it,
+//                    color = Color.Gray,
+//                    modifier = Modifier.padding(10.dp)
+//                )
+//            }
         }
     }
 }

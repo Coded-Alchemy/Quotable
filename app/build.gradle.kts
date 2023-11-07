@@ -2,8 +2,6 @@ plugins {
     id(Plugin.ANDROID_APP)
     id(Plugin.kotlinAndroid)
     id(Plugin.KT_LINT)
-    id(Plugin.HILT)
-    kotlin(Plugin.KAPT) version Plugin.Version.KAPT
 }
 
 android {
@@ -92,9 +90,10 @@ dependencies {
     implementation(Dependency.ROOM_KTX)
     implementation(Dependency.NAVIGATION)
     implementation(Dependency.NAVIGATION_RUNTIME)
-    implementation(Dependency.HILT)
-    implementation(Dependency.HILT_COMPOSE)
-    kapt(Dependency.HILT_COMPILER)
+    // Koin
+    implementation(Dependency.KOIN)
+    implementation(Dependency.KOIN_COMPOSE)
+
     implementation(Dependency.PAGING_COMPOSE)
     // Test Dependencies
     testImplementation(TestDependency.J_UNIT)
@@ -104,12 +103,5 @@ dependencies {
     androidTestImplementation(TestDependency.COMPOSE_UI)
     debugImplementation(DebugDependency.COMPOSE_UI_TOOLING)
     debugImplementation(DebugDependency.COMPOSE_TEST_MANIFEST)
-    kaptTest(TestDependency.HILT_COMPILER)
-    kaptAndroidTest(TestDependency.HILT_COMPILER)
     androidTestImplementation("androidx.navigation:navigation-testing:${Dependency.Version.NAVIGATION}")
-//    androidTestImplementation("androidx.hilt:hilt-navigation-compose:1.1.0-beta01")
-}
-
-kapt {
-    correctErrorTypes = true
 }

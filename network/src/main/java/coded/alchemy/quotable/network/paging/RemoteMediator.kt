@@ -1,5 +1,6 @@
 package coded.alchemy.quotable.network.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -11,10 +12,6 @@ import coded.alchemy.qoutable.database.data.Quote
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.qoutable.database.data.RemoteKey
 import coded.alchemy.qoutable.database.data.Tag
-import coded.alchemy.quotable.data.AuthorRepository
-import coded.alchemy.quotable.data.QuoteRepository
-import coded.alchemy.quotable.data.RemoteKeyRepository
-import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.network.QuotableApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,29 +25,28 @@ class RemoteMediator(
     private val quotableApi: QuotableApi
 ) : RemoteMediator<Int, QuoteEntity>() {
 
-    //    private val quoteDao = database.quoteDao()
-//    private val tagDao = database.tagDao()
-//    private val authorDao = database.authorDao()
-//    private val remoteKeyDao = RemoteKeyRepository.getInstance(database.remoteKeyDao())
+    private val TAG = this.javaClass.simpleName
 
-//    override suspend fun initialize(): InitializeAction {
-//        val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
-//        return if (System.currentTimeMillis() - database.lastUpdated() <= cacheTimeout) {
-//            // Cached data is up-to-date, so there is no need to re-fetch
-//            // from the network.
-//            InitializeAction.SKIP_INITIAL_REFRESH
-//        } else {
-//            // Need to refresh cached data from network; returning
-//            // LAUNCH_INITIAL_REFRESH here will also block RemoteMediator's
-//            // APPEND and PREPEND from running until REFRESH succeeds.
-//            InitializeAction.LAUNCH_INITIAL_REFRESH
-//        }
-//    }
+    private val quoteDao = database.quoteDao()
+    private val tagDao = database.tagDao()
+    private val authorDao = database.authorDao()
+    private val remoteKeyDao = database.remoteKeyDao()
+
+    override suspend fun initialize(): InitializeAction {
+        Log.d(TAG, "initialize: ")
+        val remoteKey = remoteKeyDao.get()
+        return if (remoteKey == null) {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        } else {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, QuoteEntity>
     ): MediatorResult {
+        Log.d(TAG, "load: ")
         return try {
             // The network load method takes an optional String
             // parameter. For every page after the first, pass the String
@@ -58,58 +54,44 @@ class RemoteMediator(
             // from where it left off. For REFRESH, pass null to load the
             // first page.
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> null
-                // In this example, you never need to prepend, since REFRESH
-                // will always load the first page in the list. Immediately
-                // return, reporting end of pagination.
-                LoadType.PREPEND ->
+                LoadType.REFRESH -> {
+                    Log.d(TAG, "Refresh: ")
+                    quoteDao.deleteAll()
+                    STARTING_PAGE_INDEX
+                }
+                LoadType.PREPEND -> {
+                    Log.d(TAG, "Prepend: ")
                     return MediatorResult.Success(endOfPaginationReached = true)
+                }
 
                 LoadType.APPEND -> {
-                    // Query remoteKeyDao for the next RemoteKey.
-                    val remoteKey = database.withTransaction {
-                        RemoteKeyRepository.getInstance(database.remoteKeyDao()).query(query)
-//                        remoteKeyDao.remoteKeyByQuery(query)
-                    }
+                    Log.d(TAG, "Append: ")
+                    val remoteKey = remoteKeyDao.get()
 
-                    // You must explicitly check if the page key is null when
-                    // appending, since null is only valid for initial load.
-                    // If you receive null for APPEND, that means you have
-                    // reached the end of pagination and there are no more
-                    // items to load.
-                    if (remoteKey.nextKey == null) {
+                    if (remoteKey?.currentPage == remoteKey?.lastPage) {
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
                     }
 
-                    remoteKey.nextKey
+                    remoteKey?.currentPage?.plus(1)
                 }
             }
 
-            // Suspending network load via Retrofit. This doesn't need to be
-            // wrapped in a withContext(Dispatcher.IO) { ... } block since
-            // Retrofit's Coroutine CallAdapter dispatches on a worker
-            // thread.
-            val response = quotableApi.getQuotes(STARTING_PAGE_INDEX)
+            val response = loadKey?.let { key -> quotableApi.getQuotes(key) }
 
             database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    RemoteKeyRepository.getInstance(database.remoteKeyDao()).delete(query)
-//                    quoteDao.deleteByQuery(query)
+                response?.let { responseData ->
+
+                    remoteKeyDao.insertOrReplace(
+                        RemoteKey(
+                            currentPage = responseData.page,
+                            lastPage = responseData.totalPages
+                        )
+                    )
+
+                    loadDatabase(responseData.results)
                 }
-
-                // Update RemoteKey for this query.
-                RemoteKeyRepository.getInstance(database.remoteKeyDao())
-                    .insert(RemoteKey(query, response.page))
-//                remoteKeyDao.insertOrReplace(
-//                    RemoteKey(query, response.page)
-//                )
-
-                // Insert into database, which invalidates the
-                // current PagingData, allowing Paging to present the updates
-                // in the DB.
-                loadDatabase(response.results)
             }
 
             MediatorResult.Success(endOfPaginationReached = false)
@@ -121,6 +103,7 @@ class RemoteMediator(
     }
 
     private suspend fun loadDatabase(quoteList: List<Quote>) {
+        Log.d(TAG, "loadDatabase: ")
         for (quote in quoteList) {
             val quoteEntity =
                 QuoteEntity(
@@ -129,16 +112,20 @@ class RemoteMediator(
                     author_slug = quote.authorSlug,
                     length = quote.length.toLong(),
                     date_added = quote.dateAdded,
-                    date_modified = quote.dateModified
+                    date_modified = quote.dateModified,
+                    authorId = quote._id.toLong()
                 )
-            QuoteRepository.getInstance(database.quoteDao()).insertQuote(quoteEntity)
+            quoteDao.insertQuote(quoteEntity)
+            Log.d(TAG, "Insert Quote: ")
 
             val author =
                 Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
-            AuthorRepository.getInstance(database.authorDao()).insertAuthor(author)
+            Log.d(TAG, "Insert Author: ")
+            authorDao.insertAuthor(author)
 
             for (content in quote.tags) {
-                TagRepository.getInstance(database.tagDao())
+                Log.d(TAG, "Insert Tag: ")
+                tagDao
                     .insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
             }
         }
