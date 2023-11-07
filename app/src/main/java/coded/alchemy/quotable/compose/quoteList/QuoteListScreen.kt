@@ -24,6 +24,7 @@ import coded.alchemy.quotable.ui.theme.QuotableTheme
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 const val TAG = "QuoteListScreen"
 
@@ -32,9 +33,7 @@ fun QuoteListScreen(
     onQuoteClick: (String) -> Unit,
     viewModel: QuoteListViewModel = koinViewModel()
 ) {
-//    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
-
-    val quoteList = viewModel.yo(get()).collectAsLazyPagingItems()
+    val quoteList = viewModel.pagingQuoteFlow(koinInject()).collectAsLazyPagingItems()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
