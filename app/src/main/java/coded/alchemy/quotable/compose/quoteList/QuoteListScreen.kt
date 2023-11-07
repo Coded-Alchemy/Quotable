@@ -32,15 +32,15 @@ fun QuoteListScreen(
     onQuoteClick: (String) -> Unit,
     viewModel: QuoteListViewModel = koinViewModel()
 ) {
-    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
+//    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
 
-    val list = viewModel.yo(get()).collectAsLazyPagingItems()
+    val quoteList = viewModel.yo(get()).collectAsLazyPagingItems()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(articleList = list, onQuoteClick = onQuoteClick)
+        QuoteList(articleList = quoteList, onQuoteClick = onQuoteClick)
     }
 }
 

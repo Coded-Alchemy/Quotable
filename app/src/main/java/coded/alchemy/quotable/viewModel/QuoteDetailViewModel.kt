@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.data.QuoteRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -15,16 +17,15 @@ class QuoteDetailViewModel(
     /*private val quoteId: String,*/
     private val quoteRepository: QuoteRepository
 ) : ViewModel() {
+    private val _quote = MutableStateFlow<QuoteEntity?>(null)
+    val quote: StateFlow<QuoteEntity?> = _quote
 
-    private lateinit var quoteEntity: QuoteEntity
-
-    fun getQuote(quoteId: String): QuoteEntity? {
+    fun getQuote(quoteId: String) {
         viewModelScope.launch {
-            quoteEntity = quoteRepository.getQuote(quoteId)
+            val quoteFlow = quoteRepository.getQuoteFlow(quoteId)
+            quoteFlow.collect { quote ->
+                _quote.value = quote
+            }
         }
-        if (::quoteEntity.isInitialized) {
-            return quoteEntity
-        }
-        return null
     }
 }

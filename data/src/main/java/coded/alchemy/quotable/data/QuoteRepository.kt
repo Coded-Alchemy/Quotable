@@ -3,6 +3,8 @@ package coded.alchemy.quotable.data
 import android.util.Log
 import coded.alchemy.qoutable.database.dao.QuoteDao
 import coded.alchemy.qoutable.database.data.QuoteEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,6 +39,11 @@ class QuoteRepository @Inject constructor(private val quoteDao: QuoteDao) {
     suspend fun deleteQuotes() {
         Log.d(TAG, "deleteQuotes: ")
         quoteDao.deleteAll()
+    }
+
+    fun getQuoteFlow(quoteId: String): Flow<QuoteEntity> = flow {
+        val quote = getQuote(quoteId)
+        emit(quote)
     }
 
     companion object {
