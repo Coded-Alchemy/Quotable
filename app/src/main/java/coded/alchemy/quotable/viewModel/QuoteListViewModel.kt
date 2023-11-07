@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.Flow
  * */
 class QuoteListViewModel() : ViewModel() {
     @OptIn(ExperimentalPagingApi::class)
-    fun pagingQuoteFlow(database: QuotableDatabase): Flow<PagingData<QuoteEntity>> {
+    fun getPagingQuoteFlow(database: QuotableDatabase): Flow<PagingData<QuoteEntity>> {
         return Pager(
             config = PagingConfig(pageSize = 50),
             remoteMediator = RemoteMediator(query = "null", database, QuotableApi.create())

@@ -11,9 +11,6 @@ import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModelOf(::QuoteListViewModel)
-    viewModel { parameters -> QuoteDetailViewModel(quoteRepository = get()) }
-
     single {
         Room.databaseBuilder(
             androidApplication(),
@@ -22,10 +19,16 @@ val appModule = module {
         ).build()
     }
 
-    single { QuoteRepository(get()) }
     single {
         val database = get<QuotableDatabase>()
         database.quoteDao()
     }
+
+    viewModelOf(::QuoteListViewModel)
+    single { QuoteRepository(get()) }
+
+    viewModel { QuoteDetailViewModel(quoteRepository = get()) }
+
+
 //    factory { UserPresenter(get()) }
 }
