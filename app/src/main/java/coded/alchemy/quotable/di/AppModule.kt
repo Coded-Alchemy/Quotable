@@ -8,10 +8,10 @@ import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.ui.authorList.AuthorListViewModel
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailViewModel
 import coded.alchemy.quotable.ui.quoteList.QuoteListViewModel
+import coded.alchemy.quotable.ui.tagList.TagListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
-import coded.alchemy.quotable.ui.tagList.TagListViewModel
 
 val appModule = module {
     single {

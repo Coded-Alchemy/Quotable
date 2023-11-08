@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.Tag
+import kotlinx.coroutines.flow.Flow
 
 /**
  * RemoteKeyDao.kt
@@ -27,6 +28,9 @@ interface TagDao {
      * */
     @Query("SELECT * FROM tag WHERE tagId = :id")
     suspend fun getTagById(id: Long): Tag
+
+    @Query("SELECT * FROM tag")
+    fun getAllTags(): Flow<List<Tag>>
 
     @Query("DELETE FROM tag")
     suspend fun deleteAll(): Int

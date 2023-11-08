@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.ui.authorList
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.quotable.data.AuthorRepository

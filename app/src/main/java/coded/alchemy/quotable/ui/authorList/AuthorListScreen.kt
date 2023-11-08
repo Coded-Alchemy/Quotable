@@ -56,7 +56,7 @@ fun AuthorList(
 ) {
     LazyColumn {
         items(authors) { author ->
-            AuthorListItem(author, onAuthorClick)
+            TagListItem(author, onAuthorClick)
         }
     }
 }
@@ -67,7 +67,7 @@ fun AuthorList(
  * @param selectedAuthor callback to hoist up the selected [Author] in the [Composable] hierarchy.
  * */
 @Composable
-fun AuthorListItem(
+fun TagListItem(
     author: Author,
     selectedAuthor: (Long) -> Unit
 ) {

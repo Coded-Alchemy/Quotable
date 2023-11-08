@@ -20,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coded.alchemy.quotable.R
 import coded.alchemy.quotable.ui.navigation.QuotableNavHost
-import coded.alchemy.quotable.ui.navigation.Screen
+import coded.alchemy.quotable.ui.navigation.navbarAccessibleScreens
 import org.koin.androidx.compose.KoinAndroidContext
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,11 +60,6 @@ fun QuotableAppbar() {
 
 @Composable
 fun QuotableBottomNavigation(navController: NavHostController) {
-    val screens = listOf(
-        Screen.QuoteList,
-        Screen.AuthorList,
-        Screen.TagList
-    )
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.primary
@@ -72,7 +67,7 @@ fun QuotableBottomNavigation(navController: NavHostController) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
-        screens.forEach { screen ->
+        navbarAccessibleScreens().forEach { screen ->
             NavigationBarItem(
                 selected = currentRoute == screen.route,
                 label = {
