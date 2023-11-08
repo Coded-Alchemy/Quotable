@@ -3,5 +3,6 @@
 
     <string name="quoteList">Quotes</string>
     <string name="quoteDetail">Quote</string>
-    <string name="quoteAuthors">Authors</string>
+    <string name="authorList">Authors</string>
+    <string name="tagList">Tags</string>
 </resources>

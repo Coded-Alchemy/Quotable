@@ -62,7 +62,8 @@ fun QuotableAppbar() {
 fun QuotableBottomNavigation(navController: NavHostController) {
     val screens = listOf(
         Screen.QuoteList,
-        Screen.QuoteAuthor
+        Screen.AuthorList,
+        Screen.TagList
     )
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primaryContainer,

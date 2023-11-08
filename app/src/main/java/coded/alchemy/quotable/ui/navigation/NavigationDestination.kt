@@ -5,13 +5,16 @@ import androidx.navigation.NavHostController
 internal class NavigationDestination(
     navController: NavHostController
 ) {
-    val quoteDetail: (String) -> Unit = { quoteId: String ->
-        navController.navigate("${Route.QUOTE_DETAIL}/$quoteId")
+    val toQuoteDetail: (String) -> Unit = { quoteId: String ->
+        navController.navigate("${Screen.QuoteDetail.route}/$quoteId")
     }
-    val authorQuotes: (Long) -> Unit = { authorID: Long ->
-        navController.navigate("${Route.QUOTE_AUTHOR}/$authorID")
+    val toAuthorList: (Long) -> Unit = { authorId: Long ->
+        navController.navigate("${Screen.AuthorList.route}/$authorId")
     }
-    val navigateUp: () -> Unit = {
+    val toTagList: (String) -> Unit = { tagId: String ->
+        navController.navigate("${Screen.TagList.route}/$tagId")
+    }
+    val up: () -> Unit = {
         navController.navigateUp()
     }
 }
