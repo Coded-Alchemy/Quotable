@@ -10,13 +10,30 @@ import kotlinx.coroutines.launch
 
 class AuthorListViewModel(private val authorRepository: AuthorRepository) : ViewModel() {
     private val _authors = MutableStateFlow<List<Author>>(emptyList())
-    val authorsList: StateFlow<List<Author>> = _authors
+    val authors: StateFlow<List<Author>> = _authors
 
-    fun getAuthors() {
+    private val _loading = MutableStateFlow(false)
+    val loading: StateFlow<Boolean> = _loading
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error
+
+    init {
+        getAllAuthors()
+    }
+
+    private fun getAllAuthors() {
         viewModelScope.launch {
-            val quotesFlow = authorRepository.getAllAuthorsFlow()
-            quotesFlow.collect { authors ->
-                _authors.value = listOf(authors)
+            try {
+                _loading.value = true
+                authorRepository.getAllAuthors().collect { authors ->
+                    _authors.value = authors
+                    _error.value = null
+                }
+            } catch (e: Exception) {
+                _error.value = "Failed to fetch authors: ${e.message}"
+            } finally {
+                _loading.value = false
             }
         }
     }

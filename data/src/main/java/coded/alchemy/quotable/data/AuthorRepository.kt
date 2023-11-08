@@ -3,7 +3,6 @@ package coded.alchemy.quotable.data
 import coded.alchemy.qoutable.database.dao.AuthorDao
 import coded.alchemy.qoutable.database.data.Author
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,8 +25,8 @@ class AuthorRepository @Inject constructor(private val authorDao: AuthorDao) {
         authorDao.insertAuthor(author)
     }
 
-    suspend fun getAllAuthorsFlow(): Flow<Author> {
-        return authorDao.getAllAuthors().asFlow()
+    fun getAllAuthors(): Flow<List<Author>> {
+        return authorDao.getAllAuthors()
     }
 
     companion object {

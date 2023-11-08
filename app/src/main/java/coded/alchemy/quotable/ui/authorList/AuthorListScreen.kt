@@ -29,17 +29,18 @@ fun AuthorListScreen(
     onAuthorClick: (Long) -> Unit,
     viewModel: AuthorListViewModel = koinViewModel()
 ) {
-    val authorList by viewModel.authorsList.collectAsState()
+    val authors by viewModel.authors.collectAsState(emptyList())
+    val loading by viewModel.loading.collectAsState(false)
+    val error by viewModel.error.collectAsState(null)
 
     LaunchedEffect(viewModel) {
-        viewModel.getAuthors()
     }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        AuthorList(authors = authorList, onAuthorClick = onAuthorClick)
+        AuthorList(authors = authors, onAuthorClick = onAuthorClick)
     }
 }
 

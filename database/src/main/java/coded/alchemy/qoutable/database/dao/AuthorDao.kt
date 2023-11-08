@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.Author
+import kotlinx.coroutines.flow.Flow
 
 /**
  * RemoteKeyDao.kt
@@ -32,5 +33,8 @@ interface AuthorDao {
      * Retrieve all [Author] from the database.
      * */
     @Query("SELECT * FROM author")
-    suspend fun getAllAuthors(): List<Author>
+    fun getAllAuthors(): Flow<List<Author>>
+
+    @Query("DELETE FROM author")
+    suspend fun deleteAll(): Int
 }
