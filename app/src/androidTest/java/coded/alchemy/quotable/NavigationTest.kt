@@ -6,7 +6,7 @@ package coded.alchemy.quotable
 // import androidx.compose.ui.test.onNodeWithContentDescription
 // import androidx.navigation.compose.ComposeNavigator
 // import androidx.navigation.testing.TestNavHostController
-// import coded.alchemy.quotable.compose.AppDestinations
+// import coded.alchemy.quotable.compose.Route
 // import coded.alchemy.quotable.compose.QuotableNavHost
 // import org.junit.Before
 // import org.junit.Rule
@@ -29,7 +29,7 @@ package coded.alchemy.quotable
 //    @Test
 //    fun appNavHost_verifyStartDestination() {
 //        composeTestRule
-//            .onNodeWithContentDescription(AppDestinations.QUOTE_LIST)
+//            .onNodeWithContentDescription(Route.QUOTE_LIST)
 //            .assertIsDisplayed()
 //    }
 // }

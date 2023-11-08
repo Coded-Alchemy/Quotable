@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.compose.quoteDetail
+package coded.alchemy.quotable.ui.quoteDetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

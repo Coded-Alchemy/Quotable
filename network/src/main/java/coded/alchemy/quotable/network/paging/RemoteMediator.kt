@@ -57,6 +57,9 @@ class RemoteMediator(
                 LoadType.REFRESH -> {
                     Log.d(TAG, "Refresh: ")
                     quoteDao.deleteAll()
+                    remoteKeyDao.deleteAll()
+                    authorDao.deleteAll()
+                    tagDao.deleteAll()
                     STARTING_PAGE_INDEX
                 }
                 LoadType.PREPEND -> {
@@ -105,6 +108,11 @@ class RemoteMediator(
     private suspend fun loadDatabase(quoteList: List<Quote>) {
         Log.d(TAG, "loadDatabase: ")
         for (quote in quoteList) {
+            val author =
+                Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
+            Log.d(TAG, "Insert Author: ")
+            authorDao.insertAuthor(author)
+
             val quoteEntity =
                 QuoteEntity(
                     quoteId = quote._id,
@@ -113,15 +121,10 @@ class RemoteMediator(
                     length = quote.length.toLong(),
                     date_added = quote.dateAdded,
                     date_modified = quote.dateModified,
-                    authorId = quote._id.toLong()
+                    authorId = author.authorId
                 )
             quoteDao.insertQuote(quoteEntity)
             Log.d(TAG, "Insert Quote: ")
-
-            val author =
-                Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
-            Log.d(TAG, "Insert Author: ")
-            authorDao.insertAuthor(author)
 
             for (content in quote.tags) {
                 Log.d(TAG, "Insert Tag: ")

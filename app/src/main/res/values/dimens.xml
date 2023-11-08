@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_10">10dp</dimen>
+
+
+    <dimen name="default_padding">@dimen/dp_10</dimen>
+
+
+
+
+    <dimen name="card_tile_text_size">25sp</dimen>
+</resources>

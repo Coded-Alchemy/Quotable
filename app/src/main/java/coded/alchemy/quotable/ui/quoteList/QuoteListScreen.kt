@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.compose.quoteList
+package coded.alchemy.quotable.ui.quoteList
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,17 +13,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.quotable.R
 import coded.alchemy.quotable.ui.theme.QuotableTheme
-import coded.alchemy.quotable.viewModel.QuoteListViewModel
-import org.koin.androidx.compose.get
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 const val TAG = "QuoteListScreen"
 
@@ -32,9 +32,7 @@ fun QuoteListScreen(
     onQuoteClick: (String) -> Unit,
     viewModel: QuoteListViewModel = koinViewModel()
 ) {
-//    val articleList = viewModel.getQuoteFlow().collectAsLazyPagingItems()
-
-    val quoteList = viewModel.yo(get()).collectAsLazyPagingItems()
+    val quoteList = viewModel.getPagingQuoteFlow(koinInject()).collectAsLazyPagingItems()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -75,17 +73,17 @@ fun QuoteListItem(
     Card(
         modifier =
         Modifier
-            .padding(all = 10.dp)
+            .padding(all = dimensionResource(id = R.dimen.default_padding))
             .fillMaxWidth()
             .clickable(onClick = { selectedQuote(quoteEntity.quoteId) })
     ) {
-        Column(modifier = Modifier.padding(all = 10.dp)) {
+        Column(modifier = Modifier.padding(all = dimensionResource(id = R.dimen.default_padding))) {
             Text(
                 quoteEntity.content,
                 fontSize = 25.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.W700,
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.default_padding))
             )
 //            quoteEntity.author?.let {
 //                Text(
