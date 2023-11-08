@@ -1,6 +1,8 @@
 package coded.alchemy.quotable.compose
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -33,8 +35,31 @@ fun QuotableNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(startDestination) {
-//            QuoteListScreen(onQuoteClick = {navController.navigate("${AppDestinations.QUOTE_DETAIL}/${CAT_DETAIL_ID_KEY}")})
+        composable(startDestination,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                    animationSpec = tween(700)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                    animationSpec = tween(700)
+                )
+            }) {
             QuoteListScreen(onQuoteClick = actions.displayQuote)
         }
         composable(
@@ -43,7 +68,31 @@ fun QuotableNavHost(
                 navArgument(CAT_DETAIL_ID_KEY) {
                     type = NavType.StringType
                 }
-            )
+            ),
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                    animationSpec = tween(700)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                    animationSpec = tween(700)
+                )
+            }
         ) { backStack ->
             val arguments = requireNotNull(backStack.arguments)
             arguments.getString(CAT_DETAIL_ID_KEY)?.let {
@@ -52,10 +101,6 @@ fun QuotableNavHost(
                     navigateUp = actions.navigateUp
                 )
             }
-//            QuoteDetailScreen(
-//                quoteId = CAT_DETAIL_ID_KEY,
-//                navigateUp = actions.navigateUp
-//            )
         }
         composable(Screen.QuoteAuthor.route) {
             AuthorListScreen()
