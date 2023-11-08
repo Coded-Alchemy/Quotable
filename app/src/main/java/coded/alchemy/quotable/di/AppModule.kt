@@ -4,11 +4,10 @@ import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.quotable.data.AuthorRepository
 import coded.alchemy.quotable.data.QuoteRepository
-import coded.alchemy.quotable.viewModel.AuthorListViewModel
-import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
-import coded.alchemy.quotable.viewModel.QuoteListViewModel
+import coded.alchemy.quotable.ui.authorList.AuthorListViewModel
+import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailViewModel
+import coded.alchemy.quotable.ui.quoteList.QuoteListViewModel
 import org.koin.android.ext.koin.androidApplication
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 

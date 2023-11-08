@@ -27,4 +27,10 @@ interface AuthorDao {
      * */
     @Query("SELECT * FROM author WHERE authorId = :id")
     suspend fun getAuthorById(id: Long): Author
+
+    /**
+     * Retrieve all [Author] from the database.
+     * */
+    @Query("SELECT * FROM author")
+    suspend fun getAllAuthors(): List<Author>
 }

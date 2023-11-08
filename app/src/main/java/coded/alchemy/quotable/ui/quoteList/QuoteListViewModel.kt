@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.viewModel
+package coded.alchemy.quotable.ui.quoteList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

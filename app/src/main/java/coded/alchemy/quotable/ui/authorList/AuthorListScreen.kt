@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.compose.quoteList
+package coded.alchemy.quotable.ui.authorList
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -6,82 +6,80 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
-import coded.alchemy.qoutable.database.data.QuoteEntity
+import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.quotable.R
-import coded.alchemy.quotable.ui.theme.QuotableTheme
-import coded.alchemy.quotable.viewModel.QuoteListViewModel
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
-
-const val TAG = "QuoteListScreen"
 
 @Composable
-fun QuoteListScreen(
-    onQuoteClick: (String) -> Unit,
-    viewModel: QuoteListViewModel = koinViewModel()
+fun AuthorListScreen(
+    onAuthorClick: (Long) -> Unit,
+    viewModel: AuthorListViewModel = koinViewModel()
 ) {
-    val quoteList = viewModel.getPagingQuoteFlow(koinInject()).collectAsLazyPagingItems()
+    val authorList by viewModel.authorsList.collectAsState()
+
+    LaunchedEffect(viewModel) {
+        viewModel.getAuthors()
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        QuoteList(articleList = quoteList, onQuoteClick = onQuoteClick)
+        AuthorList(authors = authorList, onAuthorClick = onAuthorClick)
     }
 }
 
 /**
- * Display a list of quotes.
+ * Display a list of [Author] objects.
+ * @param authors the list of [Author] objects to populate the list.
+ * @param onAuthorClick callback to hoist up the selected [Author] in the [Composable] hierarchy.
  * */
 @Composable
-fun QuoteList(
-    articleList: LazyPagingItems<QuoteEntity>,
-    onQuoteClick: (String) -> Unit
+fun AuthorList(
+    authors: List<Author>,
+    onAuthorClick: (Long) -> Unit
 ) {
     LazyColumn {
-        items(
-            count = articleList.itemCount
-        ) { index ->
-            val article = articleList[index]
-            article?.let { item ->
-                QuoteListItem(item, onQuoteClick)
-            }
+        items(authors) { author ->
+            AuthorListItem(author, onAuthorClick)
         }
     }
 }
 
 /**
- * Display a single quote in the list.
+ * Display a single [Author] in the list.
+ * @param author the object to be displayed in the list.
+ * @param selectedAuthor callback to hoist up the selected [Author] in the [Composable] hierarchy.
  * */
 @Composable
-fun QuoteListItem(
-    quoteEntity: QuoteEntity,
-    selectedQuote: (String) -> Unit
+fun AuthorListItem(
+    author: Author,
+    selectedAuthor: (Long) -> Unit
 ) {
     Card(
         modifier =
         Modifier
             .padding(all = dimensionResource(id = R.dimen.default_padding))
             .fillMaxWidth()
-            .clickable(onClick = { selectedQuote(quoteEntity.quoteId) })
+            .clickable(onClick = { selectedAuthor(author.authorId) })
     ) {
         Column(modifier = Modifier.padding(all = dimensionResource(id = R.dimen.default_padding))) {
             Text(
-                quoteEntity.content,
+                author.name,
                 fontSize = 25.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.W700,
@@ -95,13 +93,5 @@ fun QuoteListItem(
 //                )
 //            }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    QuotableTheme {
-//        QuoteListScreen()
     }
 }

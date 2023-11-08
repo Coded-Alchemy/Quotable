@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.compose
+package coded.alchemy.quotable.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -19,6 +19,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coded.alchemy.quotable.R
+import coded.alchemy.quotable.ui.navigation.QuotableNavHost
+import coded.alchemy.quotable.ui.navigation.Screen
 import org.koin.androidx.compose.KoinAndroidContext
 
 @OptIn(ExperimentalMaterial3Api::class)
