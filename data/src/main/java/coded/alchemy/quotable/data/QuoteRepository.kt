@@ -31,11 +31,6 @@ class QuoteRepository @Inject constructor(private val quoteDao: QuoteDao) {
         return quoteDao.getQuoteById(quoteId)
     }
 
-    suspend fun getQuotes() {
-        Log.d(TAG, "getQuotes: ")
-        quoteDao.getQuotes()
-    }
-
     suspend fun deleteQuotes() {
         Log.d(TAG, "deleteQuotes: ")
         quoteDao.deleteAll()

@@ -2,7 +2,9 @@ package coded.alchemy.quotable.di
 
 import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
+import coded.alchemy.quotable.data.AuthorRepository
 import coded.alchemy.quotable.data.QuoteRepository
+import coded.alchemy.quotable.viewModel.AuthorListViewModel
 import coded.alchemy.quotable.viewModel.QuoteDetailViewModel
 import coded.alchemy.quotable.viewModel.QuoteListViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -19,16 +21,19 @@ val appModule = module {
         ).build()
     }
 
+    viewModelOf(::QuoteListViewModel)
+    single { QuoteRepository(get()) }
     single {
         val database = get<QuotableDatabase>()
         database.quoteDao()
     }
 
-    viewModelOf(::QuoteListViewModel)
-    single { QuoteRepository(get()) }
+    viewModelOf(::QuoteDetailViewModel)
 
-    viewModel { QuoteDetailViewModel(quoteRepository = get()) }
-
-
-//    factory { UserPresenter(get()) }
+    viewModelOf(::AuthorListViewModel)
+    single { AuthorRepository(get()) }
+    single {
+        val database = get<QuotableDatabase>()
+        database.authorDao()
+    }
 }
