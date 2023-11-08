@@ -4,19 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.quotable.data.AuthorRepository
+import coded.alchemy.quotable.ui.app.QuotableViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class AuthorListViewModel(private val authorRepository: AuthorRepository) : ViewModel() {
+class AuthorListViewModel(private val authorRepository: AuthorRepository) : QuotableViewModel() {
     private val _authors = MutableStateFlow<List<Author>>(emptyList())
     val authors: StateFlow<List<Author>> = _authors
 
-    private val _loading = MutableStateFlow(false)
-    val loading: StateFlow<Boolean> = _loading
-
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error
+//    private val _loading = MutableStateFlow(false)
+//    val loading: StateFlow<Boolean> = _loading
+//
+//    private val _error = MutableStateFlow<String?>(null)
+//    val error: StateFlow<String?> = _error
 
     init {
         getAllAuthors()

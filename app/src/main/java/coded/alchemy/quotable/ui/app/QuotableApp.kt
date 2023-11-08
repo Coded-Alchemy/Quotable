@@ -1,4 +1,4 @@
-package coded.alchemy.quotable.ui
+package coded.alchemy.quotable.ui.app
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
