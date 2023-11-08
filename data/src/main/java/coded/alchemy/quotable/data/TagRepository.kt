@@ -2,6 +2,7 @@ package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.TagDao
 import coded.alchemy.qoutable.database.data.Tag
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,6 +23,10 @@ class TagRepository @Inject constructor(private val tagDao: TagDao) {
      * */
     suspend fun insertTag(tag: Tag) {
         tagDao.insertTag(tag)
+    }
+
+    fun getAllTags(): Flow<List<Tag>> {
+        return tagDao.getAllTags()
     }
 
     companion object {

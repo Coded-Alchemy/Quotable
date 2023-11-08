@@ -15,6 +15,7 @@ import coded.alchemy.quotable.ui.authorList.AuthorListScreen
 import coded.alchemy.quotable.ui.navigation.Route.Quote_ID
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailScreen
 import coded.alchemy.quotable.ui.quoteList.QuoteListScreen
+import coded.alchemy.quotable.ui.tagList.TagListScreen
 
 /**
  *
@@ -25,7 +26,7 @@ fun QuotableNavHost(
     navController: NavHostController = rememberNavController(),
     startDestination: String = Screen.QuoteList.route
 ) {
-    val navigateTo = remember(navController) { NavigationDestination(navController) }
+    val navigate = remember(navController) { NavigationDestination(navController) }
 
     NavHost(
         modifier = modifier,
@@ -59,10 +60,10 @@ fun QuotableNavHost(
                 )
             }
         ) {
-            QuoteListScreen(onQuoteClick = navigateTo.quoteDetail)
+            QuoteListScreen(onQuoteClick = navigate.toQuoteDetail)
         }
         composable(
-            "${Route.QUOTE_DETAIL}/{$Quote_ID}",
+            "${Screen.QuoteDetail.route}/{$Quote_ID}",
             arguments = listOf(
                 navArgument(Quote_ID) {
                     type = NavType.StringType
@@ -97,12 +98,15 @@ fun QuotableNavHost(
             arguments.getString(Quote_ID)?.let {
                 QuoteDetailScreen(
                     quoteId = it,
-                    navigateUp = navigateTo.navigateUp
+                    navigateUp = navigate.up
                 )
             }
         }
-        composable(Screen.QuoteAuthor.route) {
-            AuthorListScreen(onAuthorClick = navigateTo.authorQuotes)
+        composable(Screen.AuthorList.route) {
+            AuthorListScreen(onAuthorClick = navigate.toAuthorList)
+        }
+        composable(Screen.TagList.route) {
+            TagListScreen(onTagClick = navigate.toTagList)
         }
     }
 }

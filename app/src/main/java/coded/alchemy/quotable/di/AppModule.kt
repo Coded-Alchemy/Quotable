@@ -4,9 +4,11 @@ import androidx.room.Room
 import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.quotable.data.AuthorRepository
 import coded.alchemy.quotable.data.QuoteRepository
+import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.ui.authorList.AuthorListViewModel
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailViewModel
 import coded.alchemy.quotable.ui.quoteList.QuoteListViewModel
+import coded.alchemy.quotable.ui.tagList.TagListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
@@ -34,5 +36,12 @@ val appModule = module {
     single {
         val database = get<QuotableDatabase>()
         database.authorDao()
+    }
+
+    viewModelOf(::TagListViewModel)
+    single { TagRepository(get()) }
+    single {
+        val database = get<QuotableDatabase>()
+        database.tagDao()
     }
 }

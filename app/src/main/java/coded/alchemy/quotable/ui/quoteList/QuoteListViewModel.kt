@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  * @author Taji Abdullah
  * */
-class QuoteListViewModel() : ViewModel() {
+class QuoteListViewModel : ViewModel() {
     @OptIn(ExperimentalPagingApi::class)
     fun getPagingQuoteFlow(database: QuotableDatabase): Flow<PagingData<QuoteEntity>> {
         return Pager(
