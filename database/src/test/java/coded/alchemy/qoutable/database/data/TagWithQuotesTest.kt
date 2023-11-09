@@ -16,7 +16,6 @@ class TagWithQuotesTest {
         val quoteEntities = listOf(
             QuoteEntity(
                 quoteId = "101",
-                authorId = 58L,
                 author_slug = "slug",
                 content = "content",
                 date_added = "date",
@@ -25,7 +24,6 @@ class TagWithQuotesTest {
             ),
             QuoteEntity(
                 quoteId = "105",
-                authorId = 58L,
                 author_slug = "slug",
                 content = "content",
                 date_added = "date",

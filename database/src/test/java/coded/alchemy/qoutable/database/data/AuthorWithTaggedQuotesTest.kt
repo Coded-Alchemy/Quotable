@@ -13,31 +13,29 @@ class AuthorWithTaggedQuotesTest {
     @Test
     fun testAuthorWithTaggedQuotesProperties() {
         // Arrange
-        val author = Author(1, "John Doe")
+        val author = Author("John Doe", "John Doe")
         val quotes = listOf(
             QuoteWithTags(
                 QuoteEntity(
                     quoteId = "101",
-                    authorId = 58L,
                     author_slug = "slug",
                     content = "content",
                     date_added = "date",
                     date_modified = "moded",
                     length = 56L
                 ),
-                listOf(Tag(tagId = 201, quoteId = "Tag A"), Tag(tagId = 202, quoteId = "Tag B"))
+                listOf(Tag(quoteId = "Tag A"), Tag(quoteId = "Tag B"))
             ),
             QuoteWithTags(
                 QuoteEntity(
                     quoteId = "156",
-                    authorId = 58L,
                     author_slug = "slug",
                     content = "content",
                     date_added = "date",
                     date_modified = "moded",
                     length = 56L
                 ),
-                listOf(Tag(tagId = 203, quoteId = "Tag C"))
+                listOf(Tag(quoteId = "Tag C"))
             )
         )
 

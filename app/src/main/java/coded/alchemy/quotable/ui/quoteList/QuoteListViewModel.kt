@@ -1,6 +1,5 @@
 package coded.alchemy.quotable.ui.quoteList
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager

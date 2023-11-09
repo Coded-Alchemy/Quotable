@@ -20,7 +20,6 @@ class QuoteEntityUnitTest {
         quoteEntity1 =
             QuoteEntity(
                 quoteId = "1",
-                authorId = 1,
                 content = "Content 1",
                 author_slug = "author1-slug",
                 length = 100,
@@ -30,7 +29,6 @@ class QuoteEntityUnitTest {
         quoteEntity2 =
             QuoteEntity(
                 quoteId = "2",
-                authorId = 2,
                 content = "Content 2",
                 author_slug = "author2-slug",
                 length = 200,

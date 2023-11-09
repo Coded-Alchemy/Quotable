@@ -42,11 +42,11 @@ class AuthorDaoTest {
     @Test
     fun testInsertAuthorAndRetrieveById() = runBlocking {
         // Arrange
-        val author = Author(1, "John Doe")
+        val author = Author("John Doe")
 
         // Act
         authorDao.insertAuthor(author)
-        val retrievedAuthor = authorDao.getAuthorById(1)
+        val retrievedAuthor = authorDao.getAuthorByName("John Doe")
 
         // Assert
         assertNotNull(retrievedAuthor)
