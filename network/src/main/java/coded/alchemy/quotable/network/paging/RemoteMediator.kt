@@ -82,6 +82,7 @@ class RemoteMediator(
             }
 
             val response = loadKey?.let { key -> quotableApi.getQuotes(key) }
+            Log.d(TAG, "response: $response")
 
             database.withTransaction {
                 response?.let { responseData ->
@@ -109,7 +110,7 @@ class RemoteMediator(
         Log.d(TAG, "loadDatabase: ")
         for (quote in quoteList) {
             val author =
-                Author(name = quote.author, slug = quote.authorSlug, authorId = Long.MAX_VALUE)
+                Author(name = quote.author, slug = quote.authorSlug)
             Log.d(TAG, "Insert Author: ")
             authorDao.insertAuthor(author)
 
@@ -120,8 +121,7 @@ class RemoteMediator(
                     author_slug = quote.authorSlug,
                     length = quote.length.toLong(),
                     date_added = quote.dateAdded,
-                    date_modified = quote.dateModified,
-                    authorId = author.authorId
+                    date_modified = quote.dateModified
                 )
             quoteDao.insertQuote(quoteEntity)
             Log.d(TAG, "Insert Quote: ")
@@ -129,7 +129,7 @@ class RemoteMediator(
             for (content in quote.tags) {
                 Log.d(TAG, "Insert Tag: ")
                 tagDao
-                    .insertTag(Tag(tagId = Long.MAX_VALUE, quoteId = quote._id, content = content))
+                    .insertTag(Tag(quoteId = quote._id, content = content))
             }
         }
     }

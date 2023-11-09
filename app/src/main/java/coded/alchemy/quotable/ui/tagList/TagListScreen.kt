@@ -25,7 +25,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TagListScreen(
-    onTagClick: (Long) -> Unit,
+    onTagClick: (String) -> Unit,
     viewModel: TagListViewModel = koinViewModel()
 ) {
     val tagList by viewModel.tags.collectAsState(emptyList())
@@ -43,7 +43,7 @@ fun TagListScreen(
 @Composable
 fun TagList(
     tagList: List<Tag>,
-    onTagClick: (Long) -> Unit
+    onTagClick: (String) -> Unit
 ) {
     LazyColumn {
         items(tagList) { tag ->
@@ -55,14 +55,14 @@ fun TagList(
 @Composable
 fun TagListItem(
     tag: Tag,
-    selectedTag: (Long) -> Unit
+    selectedTag: (String) -> Unit
 ) {
     Card(
         modifier =
         Modifier
             .padding(all = dimensionResource(id = R.dimen.default_padding))
             .fillMaxWidth()
-            .clickable(onClick = { selectedTag(tag.tagId) })
+            .clickable(onClick = { selectedTag(tag.content) })
     ) {
         Column(modifier = Modifier.padding(all = dimensionResource(id = R.dimen.default_padding))) {
             Text(
