@@ -24,10 +24,9 @@ data class QuoteEntity(
     @PrimaryKey
     @ColumnInfo(name = "quoteId")
     var quoteId: String = "",
-    /*@ColumnInfo(name = "authorId") var authorId: Long *//*= Long.MIN_VALU*//*,*/
-    @ColumnInfo(name = "content") var content: String /*= ""*/,
-    @ColumnInfo(name = "author_slug") var author_slug: String /*= ""*/,
-    @ColumnInfo(name = "length") var length: Long /*= Long.MIN_VALUE*/,
-    @ColumnInfo(name = "date_added") var date_added: String /*= ""*/,
-    @ColumnInfo(name = "date_modified") var date_modified: String /*= ""*/
+    @ColumnInfo(name = "content") var content: String = "",
+    @ColumnInfo(name = "author_slug") var author_slug: String = "",
+    @ColumnInfo(name = "length") var length: Long = Long.MIN_VALUE,
+    @ColumnInfo(name = "date_added") var date_added: String = "",
+    @ColumnInfo(name = "date_modified") var date_modified: String = ""
 )
