@@ -26,7 +26,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AuthorListScreen(
-    onAuthorClick: (Long) -> Unit,
+    onAuthorClick: (String) -> Unit,
     viewModel: AuthorListViewModel = koinViewModel()
 ) {
     val authors by viewModel.authors.collectAsState(emptyList())
@@ -52,7 +52,7 @@ fun AuthorListScreen(
 @Composable
 fun AuthorList(
     authors: List<Author>,
-    onAuthorClick: (Long) -> Unit
+    onAuthorClick: (String) -> Unit
 ) {
     LazyColumn {
         items(authors) { author ->
@@ -69,14 +69,14 @@ fun AuthorList(
 @Composable
 fun TagListItem(
     author: Author,
-    selectedAuthor: (Long) -> Unit
+    selectedAuthor: (String) -> Unit
 ) {
     Card(
         modifier =
         Modifier
             .padding(all = dimensionResource(id = R.dimen.default_padding))
             .fillMaxWidth()
-            .clickable(onClick = { selectedAuthor(author.authorId) })
+            .clickable(onClick = { selectedAuthor(author.name) })
     ) {
         Column(modifier = Modifier.padding(all = dimensionResource(id = R.dimen.default_padding))) {
             Text(

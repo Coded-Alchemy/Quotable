@@ -24,7 +24,7 @@ data class QuoteEntity(
     @PrimaryKey
     @ColumnInfo(name = "quoteId")
     var quoteId: String = "",
-    @ColumnInfo(name = "authorId") var authorId: Long /*= Long.MIN_VALU*/,
+    /*@ColumnInfo(name = "authorId") var authorId: Long *//*= Long.MIN_VALU*//*,*/
     @ColumnInfo(name = "content") var content: String /*= ""*/,
     @ColumnInfo(name = "author_slug") var author_slug: String /*= ""*/,
     @ColumnInfo(name = "length") var length: Long /*= Long.MIN_VALUE*/,

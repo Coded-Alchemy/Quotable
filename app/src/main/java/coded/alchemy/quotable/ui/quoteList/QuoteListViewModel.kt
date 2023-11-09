@@ -11,21 +11,34 @@ import coded.alchemy.qoutable.database.QuotableDatabase
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.network.QuotableApi
 import coded.alchemy.quotable.network.paging.RemoteMediator
+import coded.alchemy.quotable.ui.app.QuotableViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * QuoteListViewModel.kt
  *
  * @author Taji Abdullah
  * */
-class QuoteListViewModel : ViewModel() {
+class QuoteListViewModel : QuotableViewModel() {
     @OptIn(ExperimentalPagingApi::class)
-    fun getPagingQuoteFlow(database: QuotableDatabase): Flow<PagingData<QuoteEntity>> {
+    fun getPagingQuoteFlow(
+        database: QuotableDatabase,
+        pageSize: Int = 50
+    ): Flow<PagingData<QuoteEntity>> {
         return Pager(
-            config = PagingConfig(pageSize = 50),
-            remoteMediator = RemoteMediator(query = "null", database, QuotableApi.create())
+            config = PagingConfig(pageSize),
+            remoteMediator = createRemoteMediator(database)
         ) {
             database.quoteDao().pagingSource()
         }.flow.cachedIn(viewModelScope)
+    }
+
+    private fun createRemoteMediator(database: QuotableDatabase): RemoteMediator {
+        return RemoteMediator(
+            query = "null",
+            database = database,
+            quotableApi = QuotableApi.create()
+        )
     }
 }
