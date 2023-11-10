@@ -11,6 +11,9 @@ internal class NavigationDestination(
     val toAuthorList: (String) -> Unit = { authorId: String ->
         navController.navigate("${Screen.AuthorList.route}/$authorId")
     }
+    val toAuthorQuotes: (String) -> Unit = { authorId: String ->
+        navController.navigate("${Screen.AuthorQuoteList.route}/$authorId")
+    }
     val toTagList: (String) -> Unit = { tagId: String ->
         navController.navigate("${Screen.TagList.route}/$tagId")
     }

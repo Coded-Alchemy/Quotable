@@ -72,7 +72,7 @@ fun QuotableBottomNavigation(navController: NavHostController) {
                 selected = currentRoute == screen.route,
                 label = {
                     Text(
-                        text = stringResource(id = screen.resourceId),
+                        text = stringResource(id = screen.caption),
                         fontWeight = FontWeight.SemiBold
                     )
                 },

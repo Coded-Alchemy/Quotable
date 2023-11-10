@@ -12,12 +12,6 @@ class AuthorListViewModel(private val authorRepository: AuthorRepository) : Quot
     private val _authors = MutableStateFlow<List<Author>>(emptyList())
     val authors: StateFlow<List<Author>> = _authors
 
-//    private val _loading = MutableStateFlow(false)
-//    val loading: StateFlow<Boolean> = _loading
-//
-//    private val _error = MutableStateFlow<String?>(null)
-//    val error: StateFlow<String?> = _error
-
     init {
         getAllAuthors()
     }
