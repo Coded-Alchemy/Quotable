@@ -36,7 +36,8 @@ fun QuotableNavHost(
         startDestination = startDestination
     ) {
         // Quote list screen
-        composable(route = startDestination,
+        composable(
+            route = startDestination,
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
@@ -65,7 +66,8 @@ fun QuotableNavHost(
             QuoteListScreen(onQuoteClick = navigate.toQuoteDetail)
         }
         // Quote detail screen
-        composable(route = "${Screen.QuoteDetail.route}/{$QUOTE_ID}",
+        composable(
+            route = "${Screen.QuoteDetail.route}/{$QUOTE_ID}",
             arguments = listOf(
                 navArgument(QUOTE_ID) {
                     type = NavType.StringType
@@ -105,7 +107,8 @@ fun QuotableNavHost(
             }
         }
         // Author screen
-        composable(route = Screen.AuthorList.route,
+        composable(
+            route = Screen.AuthorList.route,
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
@@ -129,11 +132,13 @@ fun QuotableNavHost(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
                     animationSpec = tween(700)
                 )
-            }) {
+            }
+        ) {
             AuthorListScreen(onAuthorClick = navigate.toAuthorList)
         }
         // Author quote list screen
-        composable(route = "${Screen.AuthorList.route}/{$AUTHOR_ID}",
+        composable(
+            route = "${Screen.AuthorList.route}/{$AUTHOR_ID}",
             arguments = listOf(
                 navArgument(AUTHOR_ID) {
                     type = NavType.StringType
@@ -162,16 +167,19 @@ fun QuotableNavHost(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
                     animationSpec = tween(700)
                 )
-            }) { backStack ->
+            }
+        ) { backStack ->
             val arguments = requireNotNull(backStack.arguments)
             arguments.getString(AUTHOR_ID)?.let { authorId ->
                 AuthorQuoteListScreen(
                     authorId = authorId,
-                    navigateUp = navigate.up)
+                    navigateUp = navigate.up
+                )
             }
         }
         // Tag list screen
-        composable(route = Screen.TagList.route,
+        composable(
+            route = Screen.TagList.route,
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
@@ -195,7 +203,8 @@ fun QuotableNavHost(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
                     animationSpec = tween(700)
                 )
-            }) {
+            }
+        ) {
             TagListScreen(onTagClick = navigate.toTagList)
         }
     }

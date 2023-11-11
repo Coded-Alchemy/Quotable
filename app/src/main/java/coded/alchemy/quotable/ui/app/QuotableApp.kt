@@ -1,7 +1,9 @@
 package coded.alchemy.quotable.ui.app
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -15,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -84,3 +87,10 @@ fun QuotableBottomNavigation(navController: NavHostController) {
         }
     }
 }
+
+@Composable
+fun QuotableProgress() = CircularProgressIndicator(
+    modifier = Modifier.width(64.dp),
+    color = MaterialTheme.colorScheme.surfaceVariant,
+    strokeWidth = 64.dp
+)

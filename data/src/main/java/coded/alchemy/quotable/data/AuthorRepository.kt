@@ -2,6 +2,7 @@ package coded.alchemy.quotable.data
 
 import coded.alchemy.qoutable.database.dao.AuthorDao
 import coded.alchemy.qoutable.database.data.Author
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,6 +28,10 @@ class AuthorRepository @Inject constructor(private val authorDao: AuthorDao) {
 
     fun getAllAuthors(): Flow<List<Author>> {
         return authorDao.getAllAuthors()
+    }
+
+    fun getAuthorWithQuotes(authorName: String): Map<Author, List<QuoteEntity>> {
+        return authorDao.getAuthorWithQuotes(authorName)
     }
 
     companion object {

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  *
  * This class represents QuoteEntity data.
  *
- * @property _id
+ * @property quoteId
  * @property author
  * @property content
  * @property tags
@@ -24,6 +24,7 @@ data class QuoteEntity(
     @PrimaryKey
     @ColumnInfo(name = "quoteId")
     var quoteId: String = "",
+    @ColumnInfo(name = "author") var author: String = "",
     @ColumnInfo(name = "content") var content: String = "",
     @ColumnInfo(name = "author_slug") var author_slug: String = "",
     @ColumnInfo(name = "length") var length: Long = Long.MIN_VALUE,

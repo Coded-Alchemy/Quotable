@@ -121,7 +121,8 @@ class RemoteMediator(
                     author_slug = quote.authorSlug,
                     length = quote.length.toLong(),
                     date_added = quote.dateAdded,
-                    date_modified = quote.dateModified
+                    date_modified = quote.dateModified,
+                    author = quote.author
                 )
             quoteDao.insertQuote(quoteEntity)
             Log.d(TAG, "Insert Quote: ")
