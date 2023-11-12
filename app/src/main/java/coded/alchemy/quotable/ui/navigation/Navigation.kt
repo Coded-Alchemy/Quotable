@@ -173,7 +173,8 @@ fun QuotableNavHost(
             arguments.getString(AUTHOR_ID)?.let { authorId ->
                 AuthorQuoteListScreen(
                     authorId = authorId,
-                    navigateUp = navigate.up
+                    navigateUp = navigate.up,
+                    onQuoteClick = navigate.toQuoteDetail
                 )
             }
         }

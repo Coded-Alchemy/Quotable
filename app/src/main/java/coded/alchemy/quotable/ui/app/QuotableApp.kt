@@ -1,10 +1,13 @@
 package coded.alchemy.quotable.ui.app
 
+import android.R.color
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -13,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,11 +30,12 @@ import coded.alchemy.quotable.ui.navigation.QuotableNavHost
 import coded.alchemy.quotable.ui.navigation.navbarAccessibleScreens
 import org.koin.androidx.compose.KoinAndroidContext
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuotableApp() {
     // Set current Koin instance to Compose context
-    KoinAndroidContext() {
+    KoinAndroidContext {
         val navController = rememberNavController()
 
         Scaffold(
@@ -89,8 +94,15 @@ fun QuotableBottomNavigation(navController: NavHostController) {
 }
 
 @Composable
-fun QuotableProgress() = CircularProgressIndicator(
-    modifier = Modifier.width(64.dp),
-    color = MaterialTheme.colorScheme.surfaceVariant,
-    strokeWidth = 64.dp
-)
+fun QuotableProgress() {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        LinearProgressIndicator(
+            modifier = Modifier.width(128.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            trackColor = MaterialTheme.colorScheme.secondary
+        )
+    }
+}
