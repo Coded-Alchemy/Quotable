@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -18,6 +19,7 @@ import coded.alchemy.quotable.ui.navigation.Route.QUOTE_ID
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailScreen
 import coded.alchemy.quotable.ui.quoteList.QuoteListScreen
 import coded.alchemy.quotable.ui.tagList.TagListScreen
+import coded.alchemy.quotable.R
 
 /**
  *
@@ -29,6 +31,7 @@ fun QuotableNavHost(
     startDestination: String = Screen.QuoteList.route
 ) {
     val navigate = remember(navController) { NavigationDestination(navController) }
+    val tweenTime = integerResource(id = R.integer.anini)
 
     NavHost(
         modifier = modifier,
@@ -41,25 +44,25 @@ fun QuotableNavHost(
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             }
         ) {
@@ -76,25 +79,25 @@ fun QuotableNavHost(
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween()
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             }
         ) { backStack ->
@@ -112,25 +115,25 @@ fun QuotableNavHost(
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             }
         ) {
@@ -147,25 +150,25 @@ fun QuotableNavHost(
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             }
         ) { backStack ->
@@ -184,25 +187,25 @@ fun QuotableNavHost(
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                    animationSpec = tween(700)
+                    animationSpec = tween(tweenTime)
                 )
             }
         ) {

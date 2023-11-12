@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -62,7 +63,10 @@ fun TagListItem(
         Modifier
             .padding(all = dimensionResource(id = R.dimen.default_padding))
             .fillMaxWidth()
-            .clickable(onClick = { selectedTag(tag.content) })
+            .clickable(onClick = { selectedTag(tag.content) }),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = dimensionResource(id = R.dimen.card_elevation)
+        )
     ) {
         Column(modifier = Modifier.padding(all = dimensionResource(id = R.dimen.default_padding))) {
             Text(
