@@ -11,10 +11,9 @@ import org.junit.Test
 class TagTest {
     @Test
     fun `test tag instantiation`() {
-        val tag = Tag(tagId = 56L, content = "TestTag", quoteId = "fhdhifd")
+        val tag = Tag(content = "TestTag", quoteId = "fhdhifd")
 
         Assert.assertNotNull(tag)
-        Assert.assertEquals(56L, tag.tagId)
         Assert.assertEquals("TestTag", tag.content)
     }
 }

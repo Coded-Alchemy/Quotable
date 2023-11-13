@@ -66,7 +66,6 @@ class QuotableDatabaseTest {
             val quoteEntity =
                 QuoteEntity(
                     quoteId = id,
-                    authorId = 345,
                     content = "yo yo yo",
                     author_slug = "author1-slug",
                     length = 45,
@@ -87,10 +86,10 @@ class QuotableDatabaseTest {
     @Throws(Exception::class)
     fun storeTag() =
         runBlocking {
-            val id = 546L
+            val id = "TestTag"
 
             // Create a Tag object and store it in the database.
-            val tag = Tag(tagId = id, content = "TestTag", quoteId = "45654")
+            val tag = Tag(content = "TestTag", quoteId = "45654")
             tagDao.insertTag(tag)
 
             // Test the stored Tag object is the same as expected.
@@ -105,14 +104,14 @@ class QuotableDatabaseTest {
     @Throws(Exception::class)
     fun storeAuthor() =
         runBlocking {
-            val id = 432L
+            val id = "Test Driven"
 
             // Create a Tag object and store it in the database.
-            val author = Author(authorId = id, name = "Test Driven", slug = "test_driven")
+            val author = Author(name = "Test Driven", slug = "test_driven")
             authorDao.insertAuthor(author)
 
             // Test the stored Tag object is the same as expected.
-            val storedAuthor = authorDao.getAuthorById(id)
+            val storedAuthor = authorDao.getAuthorByName(id)
             assertThat(storedAuthor, equalTo(author))
         }
 

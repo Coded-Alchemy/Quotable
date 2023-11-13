@@ -26,8 +26,8 @@ interface TagDao {
     /**
      * Retrieve a [Tag] from the database.
      * */
-    @Query("SELECT * FROM tag WHERE tagId = :id")
-    suspend fun getTagById(id: Long): Tag
+    @Query("SELECT * FROM tag WHERE content = :id")
+    suspend fun getTagById(id: String): Tag
 
     @Query("SELECT * FROM tag")
     fun getAllTags(): Flow<List<Tag>>

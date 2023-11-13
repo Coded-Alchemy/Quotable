@@ -20,7 +20,7 @@ class TagRepositoryTest {
     @Test
     fun testInsertTag() = runBlocking {
         // Arrange
-        val tag = Tag(1, "Sample Tag")
+        val tag = Tag("Sample Tag")
 
         // Act
         repository.insertTag(tag)

@@ -1,8 +1,13 @@
 package coded.alchemy.quotable.ui.app
 
+import android.R.color
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -11,10 +16,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -27,7 +34,7 @@ import org.koin.androidx.compose.KoinAndroidContext
 @Composable
 fun QuotableApp() {
     // Set current Koin instance to Compose context
-    KoinAndroidContext() {
+    KoinAndroidContext {
         val navController = rememberNavController()
 
         Scaffold(
@@ -72,7 +79,7 @@ fun QuotableBottomNavigation(navController: NavHostController) {
                 selected = currentRoute == screen.route,
                 label = {
                     Text(
-                        text = stringResource(id = screen.resourceId),
+                        text = stringResource(id = screen.caption),
                         fontWeight = FontWeight.SemiBold
                     )
                 },
@@ -82,5 +89,19 @@ fun QuotableBottomNavigation(navController: NavHostController) {
                 icon = { /*TODO*/ }
             )
         }
+    }
+}
+
+@Composable
+fun QuotableProgress() {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        LinearProgressIndicator(
+            modifier = Modifier.width(128.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            trackColor = MaterialTheme.colorScheme.secondary
+        )
     }
 }

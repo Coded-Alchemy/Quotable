@@ -44,7 +44,6 @@ class QuoteDaoTest {
         // Arrange
         val quoteEntity = QuoteEntity(
             quoteId = "101",
-            authorId = 58L,
             author_slug = "slug",
             content = "content",
             date_added = "date",
@@ -66,7 +65,6 @@ class QuoteDaoTest {
         // Arrange
         val quote1 = QuoteEntity(
             quoteId = "101",
-            authorId = 58L,
             author_slug = "slug",
             content = "content",
             date_added = "date",
@@ -75,7 +73,6 @@ class QuoteDaoTest {
         )
         val quote2 = QuoteEntity(
             quoteId = "102",
-            authorId = 58L,
             author_slug = "slug",
             content = "content",
             date_added = "date",

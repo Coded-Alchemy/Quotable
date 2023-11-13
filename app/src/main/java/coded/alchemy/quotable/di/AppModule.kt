@@ -6,6 +6,7 @@ import coded.alchemy.quotable.data.AuthorRepository
 import coded.alchemy.quotable.data.QuoteRepository
 import coded.alchemy.quotable.data.TagRepository
 import coded.alchemy.quotable.ui.authorList.AuthorListViewModel
+import coded.alchemy.quotable.ui.authorQuoteList.AuthorQuoteListViewModel
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailViewModel
 import coded.alchemy.quotable.ui.quoteList.QuoteListViewModel
 import coded.alchemy.quotable.ui.tagList.TagListViewModel
@@ -44,4 +45,6 @@ val appModule = module {
         val database = get<QuotableDatabase>()
         database.tagDao()
     }
+
+    viewModelOf(::AuthorQuoteListViewModel)
 }

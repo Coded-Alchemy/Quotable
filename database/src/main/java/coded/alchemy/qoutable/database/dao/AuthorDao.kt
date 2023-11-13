@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import coded.alchemy.qoutable.database.data.Author
+import coded.alchemy.qoutable.database.data.QuoteEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -26,14 +27,21 @@ interface AuthorDao {
     /**
      * Retrieve a [Author] from the database.
      * */
-    @Query("SELECT * FROM author WHERE authorId = :id")
-    suspend fun getAuthorById(id: Long): Author
+    @Query("SELECT * FROM author WHERE name = :name")
+    suspend fun getAuthorByName(name: String): Author
 
     /**
      * Retrieve all [Author] from the database.
      * */
     @Query("SELECT * FROM author")
     fun getAllAuthors(): Flow<List<Author>>
+
+    @Query(
+        "SELECT * FROM author " +
+            "JOIN quoteEntity ON author.name = quoteEntity.author " +
+            "WHERE author.name = :name"
+    )
+    fun getAuthorWithQuotes(name: String): Map<Author, List<QuoteEntity>>
 
     @Query("DELETE FROM author")
     suspend fun deleteAll(): Int

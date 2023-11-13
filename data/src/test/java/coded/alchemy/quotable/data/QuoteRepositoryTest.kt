@@ -30,7 +30,7 @@ class QuoteRepositoryTest {
     fun testInsertQuote() = runBlocking {
         // Arrange
         val quoteEntity =
-            QuoteEntity("123", Long.MAX_VALUE, "Sample Quote", "slug", 56L, "date", "modify")
+            QuoteEntity("123", "Sample Quote", "slug", "56L", 56L, "modify")
 
         // Act
         repository.insertQuote(quoteEntity)

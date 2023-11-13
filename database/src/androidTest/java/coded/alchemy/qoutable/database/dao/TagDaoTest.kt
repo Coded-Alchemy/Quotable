@@ -42,11 +42,11 @@ class TagDaoTest {
     @Test
     fun testInsertTagAndRetrieveById() = runBlocking {
         // Arrange
-        val tag = Tag(1, "Sample Tag")
+        val tag = Tag("Sample Tag")
 
         // Act
         tagDao.insertTag(tag)
-        val retrievedTag = tagDao.getTagById(1)
+        val retrievedTag = tagDao.getTagById("Sample Tag")
 
         // Assert
         assertNotNull(retrievedTag)

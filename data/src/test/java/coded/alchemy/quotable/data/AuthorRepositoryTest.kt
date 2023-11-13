@@ -27,7 +27,7 @@ class AuthorRepositoryTest {
     @Test
     fun testInsertAuthor() = runBlocking {
         // Arrange
-        val author = Author(1, "John Doe")
+        val author = Author("John Doe")
 
         // Act
         repository.insertAuthor(author)
