@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import coded.alchemy.quotable.R
 import coded.alchemy.quotable.ui.authorList.AuthorListScreen
 import coded.alchemy.quotable.ui.authorQuoteList.AuthorQuoteListScreen
 import coded.alchemy.quotable.ui.navigation.Route.AUTHOR_ID
@@ -19,7 +20,6 @@ import coded.alchemy.quotable.ui.navigation.Route.QUOTE_ID
 import coded.alchemy.quotable.ui.quoteDetail.QuoteDetailScreen
 import coded.alchemy.quotable.ui.quoteList.QuoteListScreen
 import coded.alchemy.quotable.ui.tagList.TagListScreen
-import coded.alchemy.quotable.R
 
 /**
  *

@@ -30,7 +30,6 @@ import coded.alchemy.quotable.ui.navigation.QuotableNavHost
 import coded.alchemy.quotable.ui.navigation.navbarAccessibleScreens
 import org.koin.androidx.compose.KoinAndroidContext
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuotableApp() {

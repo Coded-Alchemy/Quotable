@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -29,12 +28,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coded.alchemy.qoutable.database.data.Author
 import coded.alchemy.qoutable.database.data.QuoteEntity
 import coded.alchemy.quotable.R
 import coded.alchemy.quotable.ui.app.QuotableProgress
-import coded.alchemy.quotable.ui.authorList.TagListItem
-import coded.alchemy.quotable.ui.quoteList.QuoteListItem
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -130,5 +126,3 @@ fun AuthorQuoteListItem(
         }
     }
 }
-
-
